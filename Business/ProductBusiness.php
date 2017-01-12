@@ -12,10 +12,9 @@ class ProductBusiness {
     public function ProductBusiness(){
         $this->productData = new ProductData();
         
-    }
-    
-    public function saludar(){        
-        return $this->productData->saludar();
+    }    
+    public function insertProduct($product){
+        return $this->productData->insertProduct($product);
     }
     
 }
