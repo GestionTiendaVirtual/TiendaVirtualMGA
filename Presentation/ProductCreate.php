@@ -34,7 +34,7 @@
                                data-validation="alphanumeric" data-validation-allowing="-_"/></td
                 </tr>
                 <tr>
-                    <td><label id="txtPrice">Precio:</label></td>
+                    <td><label id="txtPrice">Precio ₡</label></td>
                     <td><input type="number" id="txtPrice" name="txtPrice" data-validation="number"/></td>                    
                 </tr>
                 <tr>

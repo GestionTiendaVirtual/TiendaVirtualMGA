@@ -29,7 +29,7 @@
         <table>
             <th>Marca</th>
             <th>Modelo</th>
-            <th>Precio</th>
+            <th>Precio ₡</th>
             <th>Color</th>           
             <?php
             foreach ($products as $currentProducts) {
