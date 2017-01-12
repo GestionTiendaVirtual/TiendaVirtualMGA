@@ -6,6 +6,7 @@
  * @author michael
  */
 class Product {
+    private $idProduct;
     private $brand;
     private $model;
     private $price;
@@ -18,28 +19,34 @@ class Product {
         $this->color = $color;
     }
     
-    function getBrand(){
+    public function getIdProduct(){
+        return $this->idProduct;
+    }
+    public function setIdProduct($id){
+        $this->idProduct = $id;
+    }
+    public function getBrand(){
         return $this->brand;
     }
-    function setBrand($brand){
+    public function setBrand($brand){
         $this->brand = $brand;
     }
-    function getModel(){
+    public function getModel(){
         return $this->model;
     }
-    function setModel($model){
+    public function setModel($model){
         $this->model = $model;
     }
-    function getPrice(){
+    public function getPrice(){
         return $this->price;
     }
-    function setPrice($price){
+    public function setPrice($price){
         $this->price = $price;
     }
-    function getColor(){
+    public function getColor(){
         return $this->color;
     }
-    function setColor($color){
+    public function setColor($color){
         $this->color = $color;
     }
     

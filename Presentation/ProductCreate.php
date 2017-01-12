@@ -3,8 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Registar Producto</title>  
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+        <title>Registar Producto</title>          
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     </head>
@@ -14,7 +13,7 @@
         <hr>
         <h1>Registar Producto</h1>
         <br>
-        <form id="createProduct" method="POST" action="../Business/ProductAction.php">
+        <form id="createProduct" method="POST" action="../Business/ProductInsertAction.php">
             <table>
                 <tr>
                     <td><label id="txtBrand" >Marca:</label></td>
@@ -40,26 +39,24 @@
             <input type="submit" id="btnAccept" name="btnAccept" value="Aceptar" />
         </form>
         <br>
-        <label id="txtMessage">Mensaje</label>
+        <label id="txtMessage"></label>
         <hr>
     </center>
 </body>
 <?php
 if (isset($_GET['success'])) {
-    echo '
-                    <script>                        
-                        document.getElementById("txtMessage").innerHTML = "Registro con éxito";
-                    </script>';
+    echo '<script>                        
+             document.getElementById("txtMessage").innerHTML = "Registro con éxito";
+          </script>';
 } else if (isset($_GET['errorInsert'])) {
-    echo '
-                    <script>                
-                        document.getElementById("txtMessage").innerHTML = "Registro fallido";
-                    </script>';
+    echo '<script>                
+              document.getElementById("txtMessage").innerHTML = "Registro fallido";
+          </script>';
+                    
 } else if (isset($_GET['errorData'])) {
-    echo '
-                    <script>                
-                        document.getElementById("txtMessage").innerHTML = "Error con los datos ingresados";
-                    </script>';
+    echo ' <script>                
+               document.getElementById("txtMessage").innerHTML = "Error con los datos ingresados";
+           </script>';                   
 }
 ?>
 <script>
