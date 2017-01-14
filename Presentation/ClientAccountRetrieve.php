@@ -10,6 +10,7 @@
         <b><a href="../index.php">Inicio</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
         <b><a href="#">Listado Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
         <b><a href="./ClientAccountInsert.php">Insertar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="./ClientAccountUpdate.php">Actualizar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
         <b><a href="./ClientAccountDelete.php">Eliminar Cuenta</a></b>
         <hr>
         <!-- Fin menu -->
