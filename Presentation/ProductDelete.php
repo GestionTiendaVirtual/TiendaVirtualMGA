@@ -15,10 +15,11 @@
         <br>
         <table>
             <tr>
-            <td><a href="ProductCreate.php">Registrar</a></td>
-            <td><a href="ProductRetrieve.php">Visualizar</a><td>
-            <td><a href="ProductUpdate.php">Actualizar</a><td>
-            <td><a href="ProductDelete.php">Eliminar</a><td>
+                <td><a href="../index.php">Inicio</a></td>
+                <td><a href="ProductCreate.php">Registrar</a></td>
+                <td><a href="ProductRetrieve.php">Visualizar</a><td>
+                <td><a href="ProductUpdate.php">Actualizar</a><td>
+                <td><a href="ProductDelete.php">Eliminar</a><td>
             </tr>
         </table>
         <hr>
@@ -38,7 +39,7 @@
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
                     <td><label><?php echo $currentProducts->getBrand(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php echo '₡ ' .$currentProducts->getPrice(); ?>&emsp;&emsp;&emsp;</label></td>
+                    <td><label><?php echo '₡ ' . $currentProducts->getPrice(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
                     <td><input type="submit" id="btnAccept" name="btnAccept" value="Eliminar" /></td>                
                     </tr>

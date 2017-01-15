@@ -12,10 +12,12 @@
         <br>
         <table>
             <tr>
-            <td><a href="ProductCreate.php">Registrar</a></td>
-            <td><a href="ProductRetrieve.php">Visualizar</a><td>
-            <td><a href="ProductUpdate.php">Actualizar</a><td>
-            <td><a href="ProductDelete.php">Eliminar</a><td>
+                <td><a href="../index.php">Inicio</a></td>
+                <td><a href="ProductCreate.php">Registrar</a></td>
+                <td><a href="ProductRetrieve.php">Visualizar</a><td>
+                <td><a href="ProductUpdate.php">Actualizar</a><td>
+                <td><a href="ProductDelete.php">Eliminar</a><td>
+
             </tr>
         </table>
         <hr>
@@ -48,7 +50,7 @@
         </form>
         <br>
         <label id="txtMessage"></label>
-        
+
     </center>
 </body>
 <?php
@@ -60,11 +62,10 @@ if (isset($_GET['success'])) {
     echo '<script>                
               document.getElementById("txtMessage").innerHTML = "Registro fallido";
           </script>';
-                    
 } else if (isset($_GET['errorData'])) {
     echo ' <script>                
                document.getElementById("txtMessage").innerHTML = "Error con los datos ingresados";
-           </script>';                   
+           </script>';
 }
 ?>
 <script>

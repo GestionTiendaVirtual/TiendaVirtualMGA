@@ -7,8 +7,12 @@
     </head>
     <body>
     	<h1>Inicio</h1>
+        <br>
+        <hr>
     	<a href="./Presentation/ClientAccountRetrieve.php">CRUD cuenta</a>
-        <?php
+        <a href="./Presentation/ProductCreate.php">CRUD Producto</a>
+        <hr>
+            <?php
             
         ?>
     </body>
