@@ -24,25 +24,12 @@
 
             #En caso de haber intentado una insercion verifica el resultado
             $resultInsert = array(
-                            "<blockquote id='close'>
-                                <table border='1px'>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <form>
-                                                <input type='button' onclick='miFuncion()' value='X'>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <blockquote>",
-                                        "-----MESSAGE-----",
-                                            "<blockquote>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </blockquote>");
+                            "<div id='close'>
+                                <b><input type='button' onclick='miFuncion()' value='X'> ",
+                                    "-----MESSAGE-----",
+                                    "</b><br>__________________________________________________________
+                                <br><br>
+                            </div>");
 
             #Si viene el idAccount quiere decir que se hizo la consulta el la BD
             if (isset($_GET['idAccount'])) {
@@ -69,11 +56,11 @@
         ?>
 
         <!-- Manu -->
-        <b><a href="../index.php">Inicio</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountRetrieve.php">Listado Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="#">Insertar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountUpdate.php">Actualizar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountDelete.php">Eliminar Cuenta</a></b>
+        <center><br><b><a href="../index.php">Inicio</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="./ClientAccountRetrieve.php">Listado</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="#">Insertar</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="./ClientAccountUpdate.php">Actualizar</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="./ClientAccountDelete.php">Eliminar</a></b>
         <hr>
         <!-- Fin menu -->
 
@@ -109,5 +96,6 @@
                 <input type="submit" value="Insertar" >
             </blockquote>
         </form>
+        </center>
     </body>
 </html>

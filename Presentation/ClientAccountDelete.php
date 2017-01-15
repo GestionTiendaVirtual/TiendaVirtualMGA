@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         <title>Eliminar Cuenta</title>
 
-
         <script type="text/javascript">
             function miFuncion()
             {
@@ -15,31 +14,17 @@
             }
         </script>
 
-
     </head>
     <body>
         <?php
             #En caso de haber intentado una insercion verifica el resultado
             $resultInsert = array(
-                            "<div id='close'><blockquote>
-                                <table border='1px'>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <form>
-                                                <input type='button' onclick='miFuncion()' value='X'>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <blockquote><b>",
-                                        "-----MESSAGE-----",
-                                            "</b><blockquote>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </blockquote></div>");
+                            "<div id='close'>
+                                <br><b><input type='button' onclick='miFuncion()' value='X'> ",
+                                    "-----MESSAGE-----",
+                                    "</b><br>__________________________________________________________
+                                <br><br><br><br>
+                            </div>");
 
 
             #Si viene el idAccount quiere decir que se hizo la consulta en la BD
@@ -56,11 +41,11 @@
 
 
         <!-- Menu -->
-        <b><a href="../index.php">Inicio</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountRetrieve.php">Listado Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountInsert.php">Insertar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountUpdate.php">Actualizar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="#">Eliminar Cuenta</a></b>
+        <center><br><b><a href="../index.php">Inicio</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="./ClientAccountRetrieve.php">Listado</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="./ClientAccountInsert.php">Insertar</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="./ClientAccountUpdate.php">Actualizar</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b><a href="#">Eliminar</a></b>
         <hr>
         <!-- Fin menu -->
 
@@ -112,5 +97,6 @@
             ?>
         </form>
         <!-- Fin del listado de cuentas para eliminarlas -->
+        </center>
     </body>
 </html>

@@ -18,25 +18,12 @@
         <?php
         #En caso de haber intentado una insercion verifica el resultado
             $resultInsert = array(
-                            "<blockquote id='close'>
-                                <table border='1px'>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <form>
-                                                <input type='button' onclick='miFuncion()' value='X'>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <blockquote>",
-                                        "-----MESSAGE-----",
-                                            "<blockquote>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </blockquote>");
+                            "<div id='close'>
+                                <b><input type='button' onclick='miFuncion()' value='X'> ",
+                                    "-----MESSAGE-----",
+                                    "</b><br>__________________________________________________________
+                                <br><br>
+                            </div>");
 
              #Si viene el idAccount quiere decir que se hizo la consulta en la BD
             if (isset($_GET['idAccount'])) {
@@ -56,58 +43,60 @@
 
 
         <!-- Menu -->
-        <b><a href="../index.php">Inicio</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountRetrieve.php">Listado Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountInsert.php">Insertar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="#">Actualizar Cuenta</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
-        <b><a href="./ClientAccountDelete.php">Eliminar Cuenta</a></b>
-        
-        <hr>
-        <!-- Fin menu -->
+        <center>
+            <br><b><a href="../index.php">Inicio</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+            <b><a href="./ClientAccountRetrieve.php">Listado</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+            <b><a href="./ClientAccountInsert.php">Insertar</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+            <b><a href="#">Actualizar</a></b>&nbsp;&nbsp;&nbsp;&nbsp;
+            <b><a href="./ClientAccountDelete.php">Eliminar</a></b>
+            
+            <hr>
+            <!-- Fin menu -->
 
-        <h1>Cuentas <small>&rarr;Actualizar</small></h1>
-        
+            <h1>Cuentas <small>&rarr;Actualizar</small></h1>
+            
 
-        <!-- Mensaje resultado del intento de actualizacion -->  
-        <?php
-            if ($resultInsert[1] != '-----MESSAGE-----') {
-                echo $resultInsert[0].$resultInsert[1].$resultInsert[2]; 
-             }
-        ?> 
-
-        <!-- Listado de cuentas para actualizarlas-->
+            <!-- Mensaje resultado del intento de actualizacion -->  
             <?php
-                include '../Business/ClientAccountBusiness.php';
-                $clientAccountBusiness = new ClientAccountBusiness();
-                $result = $clientAccountBusiness->getAllClientAccountBusiness();
-                foreach ($result as $tem) {
-                    echo '<form method="POST" action="../Business/updateAccount.php?idAccount='.$tem->idAccount.'">';
-                    ?>
-                    <!-- Form -->
-                        <blockquote>
-                            <label><b> &rArr; ID Cuenta </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?> readonly="readonly">
-                            <br><br>
+                if ($resultInsert[1] != '-----MESSAGE-----') {
+                    echo $resultInsert[0].$resultInsert[1].$resultInsert[2]; 
+                 }
+            ?> 
 
-                            <label><b> &rArr; ID Cliente </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" name="idClient" value= <?php echo "'".$tem->idClient."'"?>>
-                            <br><br>
+            <!-- Listado de cuentas para actualizarlas-->
+                <?php
+                    include '../Business/ClientAccountBusiness.php';
+                    $clientAccountBusiness = new ClientAccountBusiness();
+                    $result = $clientAccountBusiness->getAllClientAccountBusiness();
+                    foreach ($result as $tem) {
+                        echo '<form method="POST" action="../Business/updateAccount.php?idAccount='.$tem->idAccount.'">';
+                        ?>
+                        <!-- Form -->
+                            <blockquote>
+                                <label><b> &rArr; ID Cuenta </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?> readonly="readonly">
+                                <br><br>
 
-                            <label><b> &rArr; Banco </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" name="bank" value= <?php echo "'".$tem->bank."'"?>>
-                            <br><br>
+                                <label><b> &rArr; ID Cliente </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" name="idClient" value= <?php echo "'".$tem->idClient."'"?>>
+                                <br><br>
 
-                            <label><b> &rArr; Tipo Cuenta </b></label>&nbsp;
-                            <input type="text" name="typeAccount" value= <?php echo "'".$tem->typeAccount."'"?>>
-                            <br><br>
+                                <label><b> &rArr; Banco </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="text" name="bank" value= <?php echo "'".$tem->bank."'"?>>
+                                <br><br>
 
-                            <input type="submit" value="Actualizar" >
-                        </blockquote>
-                    </form>
+                                <label><b> &rArr; Tipo Cuenta </b></label>&nbsp;
+                                <input type="text" name="typeAccount" value= <?php echo "'".$tem->typeAccount."'"?>>
+                                <br><br>
 
-                    <?php  
-                        echo "____________________________________________";
-                }
-                    ?>
+                                <input type="submit" value="Actualizar" >
+                            </blockquote>
+                        </form>
+
+                        <?php  
+                            echo "____________________________________________";
+                    }
+                        ?>
+            </center>
     </body>
 </html>
