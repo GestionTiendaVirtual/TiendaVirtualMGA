@@ -12,10 +12,17 @@ class ProductBusiness {
     public function ProductBusiness(){
         $this->productData = new ProductData();
         
+    }    
+    public function insertProduct($product){
+        return $this->productData->insertProduct($product);
     }
-    
-    public function saludar(){        
-        return $this->productData->saludar();
+    public function getProducts(){
+        return $this->productData->getProducts();
     }
-    
+    public function updateProduct($product){
+        return $this->productData->updateProduct($product);
+    }
+    public function deleteProduct($idProduct){
+        return $this->productData->deleteProduct($idProduct);
+    }
 }

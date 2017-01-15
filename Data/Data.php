@@ -18,7 +18,11 @@ class Data {
         $this->server = "localhost";
         $this->user = "root";
         $this->password = "";
+<<<<<<< HEAD
         $this->db = "gestion";
+=======
+        $this->db = "Gestion";
+>>>>>>> Michael
     }
     
 }
