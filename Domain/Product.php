@@ -11,12 +11,15 @@ class Product {
     private $model;
     private $price;
     private $color;
+    private $description;
+    private $typeProduct;
     
-    public function Product($brand, $model, $price, $color){
+    public function Product($brand, $model, $price, $color, $description){
         $this->brand = $brand;
         $this->model = $model;
         $this->price = $price;
         $this->color = $color;
+        $this->description = $description;        
     }
     
     public function getIdProduct(){
@@ -49,6 +52,17 @@ class Product {
     public function setColor($color){
         $this->color = $color;
     }
-    
+    public function getDescription(){
+        return $this->description;
+    }
+    public function setDescription($description){
+        $this->description = $description;
+    }
+    public function getTypeProduct(){
+        return $this->typeProduct;
+    }
+    public function setTypeProduct($typeProduct){
+        $this->typeProduct = $typeProduct;
+    }
     
 }

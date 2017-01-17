@@ -30,6 +30,7 @@
             <th>Modelo</th>
             <th>Precio</th>
             <th>Color</th>           
+            <th>Descripción</th>           
             <?php
             foreach ($products as $currentProducts) {
                 ?>                
@@ -38,6 +39,7 @@
                     <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo '₡ ' . $currentProducts->getPrice(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
+                    <td><label><?php echo $currentProducts->getDescription(); ?>&emsp;&emsp;&emsp;</label></td>           
                 </tr>
                 <?php
             }

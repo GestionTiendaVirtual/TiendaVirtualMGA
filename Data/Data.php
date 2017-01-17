@@ -15,10 +15,10 @@ class Data {
     
     /* constructor */
     public function Data(){        
-        $this->server = "mysql.hostinger.es";
-        $this->user = "u269309626_mga";
-        $this->password = "MGA123";
-        $this->db = "u269309626_mgadb";
+        $this->server = "localhost";
+        $this->user = "root";
+        $this->password = "";
+        $this->db = "mgasolucionesdb";
     }
     
 }
