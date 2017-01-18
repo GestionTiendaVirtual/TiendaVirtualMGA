@@ -1,25 +1,28 @@
 <?php
-include "./ClientAccountBusiness.php";
+include "./AccountBusiness.php";
 
 /* Se obtienen los datos */
 $idAccount = $_POST['idAccount'];
 $idClient = $_POST['idClient'];
-$bank = $_POST['bank'];
+$CSC = $_POST['CSC'];
 $typeAccount = $_POST['typeAccount'];
+$expirationDate = $_POST['expirationDate'];
+$cardNumber = $_POST['cardNumber'];
 
-$instClientAccountBusiness = new ClientAccountBusiness();
+$instAccountBusiness = new AccountBusiness();
 
 /*Validamos*/
-$resultValidation = $instClientAccountBusiness->validateEmpty(array($idAccount,$idClient,$bank,$typeAccount));
+$resultValidation = $instAccountBusiness->validateEmpty(array($idAccount,$idClient,$typeAccount,$expirationDate,$cardNumber,$CSC));
 #Si existen campos vacios
 if($resultValidation == false){ 
 	header("location: ../presentation/ClientAccountInsert.php?error=Ningun campo debe quedar vacío.");
 } # Si es ingresado un dato no numerico en un campo de tipo numerico
-elseif ($instClientAccountBusiness->validateNumeric(array($idAccount,$idClient)) === false) {
+elseif ($instAccountBusiness->validateNumeric(array($idAccount,$idClient)) === false) {
 	header("location: ../presentation/ClientAccountInsert.php?error=Error de tipo numérico.");
 } #Si los datos son correctos entonces se hace la consulta en la BD
 else{
-	$result = $instClientAccountBusiness->insertAccountBusiness($idAccount, $idClient, $bank, $typeAccount);
+	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount);
+	$result = $instAccountBusiness->insertAccountBusiness($account);
 	header("location: ../presentation/ClientAccountInsert.php?idAccount=". $result);
 }
 

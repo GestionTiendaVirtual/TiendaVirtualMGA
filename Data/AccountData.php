@@ -14,7 +14,7 @@ class AccountData extends Data {
     public function getIDData(){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select max(idAccount) from tbCuenta";
+        $query = "select max(idCuenta) from tbCuenta";
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         $row = mysqli_fetch_array($result);
@@ -31,7 +31,7 @@ class AccountData extends Data {
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
             $myAccount = new  Account($row['CSC'], $row['FechaVencimiento'], $row['idCliente'],
-             $row['idCuenta'], $row['NumeroTarjeta'], $row['tipoCuenta']);
+             $row['idCuenta'], $row['NumeroTarjeta'], $row['TipoCuenta']);
 
             array_push($array, $myAccount);
         }
@@ -43,28 +43,32 @@ class AccountData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $query = "select * from tbCuenta where idCuenta = ". $idAccount;
+        
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
 
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
             $myAccount = new  Account($row['CSC'], $row['FechaVencimiento'], $row['idCliente'],
-             $row['idCuenta'], $row['NumeroTarjeta'], $row['tipoCuenta']);
+             $row['idCuenta'], $row['NumeroTarjeta'], $row['TipoCuenta']);
             array_push($array, $myAccount);
         }
         return $array;#si no hay resultados en la BD entonces devuelve nulo
     }
 
     /*Inserta la nueva cuenta en la BD*/
-    public function insertAccountData($idAccount, $idClient, $bank, $typeAccount){
+    public function insertAccountData($account){
         /* INSERT INTO `clientaccount` VALUES (3,3,'bank prueba','tipo cuenta prueba') */
 
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "INSERT INTO tbCuenta VALUES (".$idAccount.",".$idClient.",'". $bank."','".$typeAccount."')";
+
+        $query = "INSERT INTO `mgasolucionesdb`.`tbcuenta` (`idCuenta`, `TipoCuenta`, `NumeroTarjeta`, `FechaVencimiento`, `CSC`, `idCliente`) VALUES ('". $account->idAccount ."', '". $account->typeAccount. "', '".  $account->cardNumber ."', '". $account->expirationDate."', '". $account->CSC."', '". $account->idClient."');";
+        
+
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
-        return $idAccount;
+        return $account->idAccount;
     }
 
     /*Elimina una cuenta específica*/
@@ -72,19 +76,21 @@ class AccountData extends Data {
     public function deleteAccountData($idAccount){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "DELETE FROM tbCuenta WHERE idAccount = ".$idAccount;
+        $query = "DELETE FROM tbCuenta WHERE idCuenta = ".$idAccount;
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         return $result;
     }
 
     /* Actualiza la cuenta en la BD*/
-    public function updateAccountData($idAccount, $idClient, $bank, $typeAccount){
+    public function updateAccountData($account){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $query = "UPDATE tbCuenta SET idAccount=".$idAccount.", idClient=".$idClient.
-        ",bank='". $bank."',typeAccount='".$typeAccount."' where idAccount = ".$idAccount;
+        $query = "UPDATE tbCuenta SET idCuenta=".$account->idAccount.", TipoCuenta= '".$account->typeAccount.
+         "', NumeroTarjeta= '".$account->cardNumber."', FechaVencimiento= '".$account->expirationDate.
+         "', CSC='".$account->CSC."', idCliente= '".$account->idClient.
+         "' where idCuenta = ".$account->idAccount;
         
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);

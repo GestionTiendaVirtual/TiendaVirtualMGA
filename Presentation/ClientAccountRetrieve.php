@@ -18,15 +18,17 @@
 
         <h1>Cuentas <small>&rarr;listado</small></h1>
         <?php
-            include '../Business/ClientAccountBusiness.php';
-            $clientAccountBusiness = new ClientAccountBusiness();
-            $result = $clientAccountBusiness->getAllClientAccountBusiness();
+            include '../Business/accountBusiness.php';
+            $accountBusiness = new AccountBusiness();
+            $result = $accountBusiness->getAllAccountBusiness();
             foreach ($result as $tem) {
                 echo "<blockquote>
                         <b> &rArr; Id cuenta: </b>". $tem->idAccount.
                         "<br> <b> &rArr; Id cliente: </b>".$tem->idClient.
-                        "<br> <b> &rArr; Banco: </b>". $tem->bank.
                         "<br> <b> &rArr; Tipo cuenta: </b>". $tem->typeAccount.
+                        "<br> <b> &rArr; CSC: </b>".$tem->CSC.
+                        "<br> <b> &rArr; Fecha de expiración: </b>". $tem->expirationDate.
+                        "<br> <b> &rArr; Número de Tarjeta: </b>". $tem->cardNumber.
                     "</blockquote>
                     ____________________________________________";
             }

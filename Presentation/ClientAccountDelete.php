@@ -77,19 +77,21 @@
 
         <!-- Listado de cuentas para eliminarlas-->
             <?php
-                include '../Business/ClientAccountBusiness.php';
-                $clientAccountBusiness = new ClientAccountBusiness();
-                $result = $clientAccountBusiness->getAllClientAccountBusiness();
+                include '../Business/AccountBusiness.php';
+                $AccountBusiness = new AccountBusiness();
+                $result = $AccountBusiness->getAllAccountBusiness();
                 foreach ($result as $tem) {
                     echo '<form method="POST" action="../Business/deleteAccount.php?idAccount='.$tem->idAccount.'">';
                     echo "
                             <blockquote>
                                 <b> &rArr; Id cuenta: </b>". $tem->idAccount.
                                 "<br> <b> &rArr; Id cliente: </b>".$tem->idClient.
-                                "<br> <b> &rArr; Banco: </b>". $tem->bank.
                                 "<br> <b> &rArr; Tipo cuenta: </b>". $tem->typeAccount.
-                                "<br><br> <input type='submit' value='Eliminar'>
-                            </blockquote>
+                                "<br> <b> &rArr; CSC: </b>".$tem->CSC.
+                                "<br> <b> &rArr; Fecha de expiración: </b>". $tem->expirationDate.
+                                "<br> <b> &rArr; Número de Tarjeta: </b>". $tem->cardNumber.
+                                "<br><br> <input type='submit' value='Eliminar'>".
+                            "</blockquote>
                         
                         ____________________________________________";
                        echo "</form>";
