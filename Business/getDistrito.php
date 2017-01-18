@@ -3,6 +3,7 @@
 	require ('../Data/conexion.php');
 	
 	$id_municipio = $_GET['municipio_id'];
+
 	
 	echo 'Selecciona el distrito: <select name="cbx_localidad" id="cbx_localidad">';
 	
@@ -19,4 +20,5 @@
 		}
 	}
 	echo '</select>';
+
 ?>
