@@ -6,14 +6,14 @@
 	
 	echo 'Selecciona Localidad: <select name="cbx_localidad" id="cbx_localidad">';
 	
-	$query = "SELECT id_distrito, nombre_distrito FROM distrito WHERE id_canton = '$id_municipio' ORDER BY id_distrito";
+	$query = "SELECT idDistrito, nombreDistrito FROM tbdistrito WHERE idCanton = '$id_municipio' ORDER BY idDistrito";
 	
 	if($resultado=$mysqli->query($query))
 	{
 		while($row = $resultado->fetch_assoc())
 		{
 		?>
-		<option value="<?php echo $row['id_distrito']; ?>"><?php echo $row['nombre_distrito']; ?></option>
+		<option value="<?php echo $row['idDistrito']; ?>"><?php echo $row['nombreDistrito']; ?></option>
 		
 		<?php
 		}
