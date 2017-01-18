@@ -15,14 +15,14 @@ $instAccountBusiness = new AccountBusiness();
 $resultValidation = $instAccountBusiness->validateEmpty(array($idAccount,$idClient,$typeAccount,$expirationDate,$cardNumber,$CSC));
 #Si existen campos vacios
 if($resultValidation == false){ 
-	header("location: ../presentation/ClientAccountInsert.php?error=Ningun campo debe quedar vacío.");
+	header("location: ../presentation/ClientAccountRetrieve.php?msg=Ningun campo debe quedar vacío.");
 } # Si es ingresado un dato no numerico en un campo de tipo numerico
 elseif ($instAccountBusiness->validateNumeric(array($idAccount,$idClient)) === false) {
-	header("location: ../presentation/ClientAccountInsert.php?error=Error de tipo numérico.");
+	header("location: ../presentation/ClientAccountRetrieve.php?msg=Error de tipo numérico.");
 } #Si los datos son correctos entonces se hace la consulta en la BD
 else{
 	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount);
 	$result = $instAccountBusiness->insertAccountBusiness($account);
-	header("location: ../presentation/ClientAccountInsert.php?idAccount=". $result);
+	header("location: ../presentation/ClientAccountRetrieve.php?msg=La insercion se realizo con exito.");
 }
 
