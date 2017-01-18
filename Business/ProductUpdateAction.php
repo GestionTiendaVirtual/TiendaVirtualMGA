@@ -7,11 +7,13 @@ $brand = $_POST['txtBrand'];
 $model = $_POST['txtModel'];
 $price = $_POST['txtPrice'];
 $color = $_POST['txtColor'];
+$description = $_POST['txtDescription'];
 
 
-if (strlen($brand) >= 2 && strlen($model) >= 2 && strlen($color) >= 2 && is_numeric($price)) {
+if (strlen($brand) >= 2 && strlen($model) >= 2 && strlen($color) >= 2 
+        && is_numeric($price) && strlen($description) >= 2) {
     
-    $product = new Product($brand,$model,$price,$color);
+    $product = new Product($brand,$model,$price,$color,$description);
     $product->setIdProduct($idProduct);
     $productBusiness = new ProductBusiness();
     $result = $productBusiness->updateProduct($product);

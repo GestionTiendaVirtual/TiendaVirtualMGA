@@ -1,28 +1,28 @@
 <?php
-include "./ClientAccountBusiness.php";
+include "./AccountBusiness.php";
 
 /* Se obtienen los datos */
 $idAccount = $_GET['idAccount'];
 
-$instClientAccountBusiness = new ClientAccountBusiness();
+$instAccountBusiness = new AccountBusiness();
 
 /*Validamos*/
-$resultValidation = $instClientAccountBusiness->validateEmpty(array($idAccount));
+$resultValidation = $instAccountBusiness->validateEmpty(array($idAccount));
 #Si existen campos vacios
 if($resultValidation == false){ 
 	header("location: ../presentation/ClientAccountDelete.php?error=ERROR! Debe ingresar un valor.");
 } # Si es ingresado un dato no numerico en un campo de tipo numerico
-elseif ($instClientAccountBusiness->validateNumeric(array($idAccount)) === false) {
+elseif ($instAccountBusiness->validateNumeric(array($idAccount)) === false) {
 	header("location: ../presentation/ClientAccountDelete.php?error=ERROR! debe ingresar un número.");
 } #Si los datos son correctos se verifica si existe el id ingresado
 else{
-	$result = $instClientAccountBusiness->getClientAccountByIdBusiness($idAccount);
+	$result = $instAccountBusiness->getAccountByIdBusiness($idAccount);
 	if ((count($result)) <= 0) {
         header("location: ../presentation/ClientAccountDelete.php?error= ERROR! No se encontro la cuenta con el id: ". $idAccount);
     }
     else{
 		/*Se hace la consulta (eliminacion en la BD)*/
-		$result = $instClientAccountBusiness->deleteAccountBusiness($idAccount);
+		$result = $instAccountBusiness->deleteAccountBusiness($idAccount);
 		header("location: ../presentation/ClientAccountDelete.php?idAccount=". $idAccount);
 	}
 }

@@ -32,6 +32,7 @@
             <th>Modelo</th>
             <th>Precio ₡</th>
             <th>Color</th>           
+            <th>Descripción</th>           
             <?php
             foreach ($products as $currentProducts) {
                 ?>
@@ -49,7 +50,9 @@
                                value= <?php echo '"' . $currentProducts->getPrice() . '"'; ?>/></td>
                     <td><input type="text" id="txtColor" name="txtColor" 
                                data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
-                               value= <?php echo '"' . $currentProducts->getColor() . '"'; ?>/></td>                
+                               value= <?php echo '"' . $currentProducts->getColor() . '"'; ?>/></td>
+                    <td><input type="text" id="txtDescription" name="txtDescription"                                
+                               value= <?php echo '"' . $currentProducts->getDescription() . '"'; ?>/></td> 
                     <td><input type="submit" id="btnAccept" name="btnAccept" value="Actualizar" /></td>                
                     </tr>
                 </form>

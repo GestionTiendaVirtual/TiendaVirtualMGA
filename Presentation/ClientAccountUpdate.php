@@ -21,17 +21,13 @@
                             "<div id='close'>
                                 <b><input type='button' onclick='miFuncion()' value='X'> ",
                                     "-----MESSAGE-----",
-                                    "</b><br>__________________________________________________________
+                                    "</b><br>__________________________________________________________<br>
                                 <br><br>
                             </div>");
 
              #Si viene el idAccount quiere decir que se hizo la consulta en la BD
-            if (isset($_GET['idAccount'])) {
-                $resultInsert[1] = "<b>Se realizo la actualización de la cuenta: </b><br><br> 
-                                    <b> &rArr; Id cuenta: </b>". $_GET['idAccount'].
-                                    "<br> <b> &rArr; Id cliente: </b>". $_GET['idClient'].
-                                    "<br> <b> &rArr; Banco: </b>". $_GET['bank'].
-                                    "<br> <b> &rArr; Tipo cuenta: </b>". $_GET['typeAccount'];
+            if (isset($_GET['result'])) {
+                $resultInsert[1] = "<b>Se realizó la actualización de la cuenta:";
                 
             } #Fin de la accion en caso de lograr conexion con BD
 
@@ -63,38 +59,51 @@
                  }
             ?> 
 
+
             <!-- Listado de cuentas para actualizarlas-->
                 <?php
-                    include '../Business/ClientAccountBusiness.php';
-                    $clientAccountBusiness = new ClientAccountBusiness();
-                    $result = $clientAccountBusiness->getAllClientAccountBusiness();
+                    include '../Business/AccountBusiness.php';
+                    $AccountBusiness = new AccountBusiness();
+                    $result = $AccountBusiness->getAllAccountBusiness();
                     foreach ($result as $tem) {
                         echo '<form method="POST" action="../Business/updateAccount.php?idAccount='.$tem->idAccount.'">';
                         ?>
                         <!-- Form -->
-                            <blockquote>
-                                <label><b> &rArr; ID Cuenta </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?> readonly="readonly">
-                                <br><br>
+                        <table>
 
-                                <label><b> &rArr; ID Cliente </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" name="idClient" value= <?php echo "'".$tem->idClient."'"?>>
-                                <br><br>
-
-                                <label><b> &rArr; Banco </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" name="bank" value= <?php echo "'".$tem->bank."'"?>>
-                                <br><br>
-
-                                <label><b> &rArr; Tipo Cuenta </b></label>&nbsp;
-                                <input type="text" name="typeAccount" value= <?php echo "'".$tem->typeAccount."'"?>>
-                                <br><br>
-
-                                <input type="submit" value="Actualizar" >
-                            </blockquote>
+                            <tr>
+                                <td><label><b> &rArr; ID Cuenta </b></label></td>
+                                <td><input type="text" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?> readonly="readonly"></td>
+                            </tr>
+                            <tr>
+                                <td><label><b> &rArr; ID Cliente </b></label></td>
+                                <td><input type="text" name="idClient" value= <?php echo "'".$tem->idClient."'"?>></td>
+                            </tr>
+                            <tr>
+                                <td><label><b> &rArr; CSC </b></label></td>
+                                <td><input type="text" name="CSC" value= <?php echo "'".$tem->CSC."'"?>></td>
+                            </tr>
+                            <tr>
+                                <td><label><b> &rArr; Tipo Cuenta </b></label></td>
+                                <td><input type="text" name="typeAccount" value= <?php echo "'".$tem->typeAccount."'"?>></td>
+                            </tr>
+                            <tr>
+                                <td><label><b> &rArr; Numero de Cuenta </b></label></td>
+                                <td><input type="text" name="cardNumber" value= <?php echo "'".$tem->cardNumber."'"?>></td>
+                            </tr>
+                            <tr>
+                                <td><label><b> &rArr; Fecha de expiración  </b></label></td>
+                                <td><input type="text" name="expirationDate" value= <?php echo "'".$tem->expirationDate."'"?>></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Actualizar" ></td>
+                            </tr>
+                        </table>
+                               
                         </form>
 
                         <?php  
-                            echo "____________________________________________";
+                            echo "<br><br><br><br>";
                     }
                         ?>
             </center>

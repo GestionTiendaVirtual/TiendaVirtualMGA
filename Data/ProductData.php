@@ -9,6 +9,8 @@ include_once '../Domain/Product.php';
  */
 class ProductData extends Data {
     
+    
+    
     /***
      * Función que permite el registro de los productos en la base de datos
      */
@@ -18,18 +20,19 @@ class ProductData extends Data {
         $conn->set_charset('utf8');
         //Se consulta por el ultimo id registrado para generar el consecutivo
         $resultID = mysqli_query($conn, 
-                "SELECT * FROM Product ORDER BY idProduct DESC LIMIT 1");
+                "SELECT * FROM tbproducto ORDER BY idProducto DESC LIMIT 1");
         $row = mysqli_fetch_array($resultID);
         if(sizeof($row)>= 1){            
-            $id = $row['idProduct'] + 1;        
+            $id = $row['idProducto'] + 1;        
         }else{ 
             $id = 1;            
         }
         //Se realiza el insert en la base de datos
         $queryInsert = mysqli_query($conn,
-                "insert into Product values (".$id.",'".$product->getBrand()."','".
+                "insert into tbproducto values (".$id.",'".$product->getBrand()."','".
                 $product->getModel()."',".
-                $product->getPrice().",'".$product->getColor()."');");
+                $product->getPrice().",'".$product->getDescription()."', 1, 1, "
+                . "'".$product->getColor()."');");
         mysqli_close($conn);        
         
         if($queryInsert){
@@ -48,12 +51,12 @@ class ProductData extends Data {
         
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn,"SELECT * FROM Product");
+        $result = mysqli_query($conn,"select * from tbproducto order by marca asc");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
-            $currentData = new Product($row['brand'], $row['model'],
-                    $row['price'],$row['color']);
-            $currentData->setIdProduct($row['idProduct']);
+            $currentData = new Product($row['Marca'], $row['Modelo'],
+                    $row['Precio'],$row['color'],$row['descripcion'], $row['idTipoProducto']);
+            $currentData->setIdProduct($row['idProducto']);
             array_push($array, $currentData);
         }
         return $array;
@@ -68,10 +71,11 @@ class ProductData extends Data {
         $conn->set_charset('utf8');
         //Se realiza la actualizacion en la base de datos
         $queryUpdate = mysqli_query($conn,
-                "update Product set brand = '".$product->getBrand()."', model = '".
-                $product->getModel()."', price = ".
-                $product->getPrice().", color = '".$product->getColor()."' "
-                . "where Product.idProduct = ".$product->getIdProduct().";");
+                "update tbproducto set Marca = '".$product->getBrand()."', Modelo = '".
+                $product->getModel()."', Precio = ".
+                $product->getPrice().", color = '".$product->getColor()."' , "
+                . "descripcion = '".$product->getDescription()
+                . "' where tbproducto.idProducto = ".$product->getIdProduct().";");
         mysqli_close($conn);        
         
         if($queryUpdate){
@@ -90,7 +94,7 @@ class ProductData extends Data {
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
         $queryDelete = mysqli_query($conn,
-                "delete from Product where idProduct = ".$idProduct.";");
+                "delete from tbproducto where idProducto = ".$idProduct.";");
         mysqli_close($conn);        
         
         if($queryDelete){

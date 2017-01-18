@@ -43,7 +43,11 @@
                     <td><label id="txtColor">Color:</label></td>
                     <td><input type="text" id="txtColor" name="txtColor" 
                                data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"/></td>
-                </tr>   
+                </tr>  
+                <tr>
+                    <td><label id="txtColor">Descripción:</label></td>
+                    <td><input type="text" id="txtDescription" name="txtDescription"/></td>
+                </tr> 
 
             </table>
             <input type="submit" id="btnAccept" name="btnAccept" value="Aceptar" />

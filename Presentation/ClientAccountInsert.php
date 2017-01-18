@@ -16,11 +16,11 @@
     </head>
     <body>
         <?php
-            include '../Business/ClientAccountBusiness.php';
-            $clientAccountBusiness = new ClientAccountBusiness();
+            include '../Business/AccountBusiness.php';
+            $accountBusiness = new AccountBusiness();
 
             #Obtiene el id para la nueva cuenta
-            $idAccount = $clientAccountBusiness->getIDBusiness();
+            $idAccount = $accountBusiness->getIDBusiness();
 
             #En caso de haber intentado una insercion verifica el resultado
             $resultInsert = array(
@@ -33,7 +33,7 @@
 
             #Si viene el idAccount quiere decir que se hizo la consulta el la BD
             if (isset($_GET['idAccount'])) {
-                $result = $clientAccountBusiness->getClientAccountByIdBusiness($_GET['idAccount']);
+                $result = $accountBusiness->getAccountByIdBusiness($_GET['idAccount']);
                 
                 #Si no se optiene quiere decir que existio algun problema
                 if ((count($result)) <= 0) {
@@ -43,10 +43,12 @@
                 else{
                     $tem = $result[0];
                     $resultInsert[1] = "<b>Se realizo la insercion de la cuenta: </b><br><br> 
-                                        <b> &rArr; Id cuenta: </b>". $tem->idAccount.
+                                         <b> &rArr; Id cuenta: </b>". $tem->idAccount.
                                         "<br> <b> &rArr; Id cliente: </b>".$tem->idClient.
-                                        "<br> <b> &rArr; Banco: </b>". $tem->bank.
-                                        "<br> <b> &rArr; Tipo cuenta: </b>". $tem->typeAccount;
+                                        "<br> <b> &rArr; Tipo cuenta: </b>". $tem->typeAccount.
+                                        "<br> <b> &rArr; CSC: </b>".$tem->CSC.
+                                        "<br> <b> &rArr; Fecha de expiración: </b>". $tem->expirationDate.
+                                        "<br> <b> &rArr; Número de Tarjeta: </b>". $tem->cardNumber;
                 }
             } #Fin de la accion en caso de lograr conexion con BD
             # ERRORES por validaciones de campos
@@ -76,25 +78,42 @@
 
         <!-- Form -->
         <form method="POST" action="../Business/insertAccount.php">
-            <blockquote>
-                <label><b> &rArr; ID Cuenta </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" name="idAccount" value= <?php echo "'".$idAccount."'"?> readonly="readonly">
-                <br><br>
+            <table>
+                <tr>
+                    <td><label><b> &rArr; ID Cuenta </b></label></td>
+                    <td><input type="text" name="idAccount" value= <?php echo "'".$idAccount."'"?> readonly="readonly"></td>
+                </tr>
 
-                <label><b> &rArr; ID Cliente </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" name="idClient" placeholder="ID cliente">
-                <br><br>
+                <tr>
+                    <td><label><b> &rArr; ID Cliente </b></label></td>
+                    <td><input type="text" name="idClient" placeholder="ID cliente"></td>
+                </tr>
+                
+                <tr>
+                    <td><label><b> &rArr; CSC </b></label></td>
+                    <td><input type="text" name="CSC" placeholder="CSC"></td>
+                </tr>
 
-                <label><b> &rArr; Banco </b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" name="bank" placeholder="Banco">
-                <br><br>
+                <tr>
+                    <td><label><b> &rArr; Tipo Cuenta </b></label></td>
+                    <td><input type="text" name="typeAccount" placeholder="Tipo de cuenta"></td>
+                </tr>
 
-                <label><b> &rArr; Tipo Cuenta </b></label>&nbsp;
-                <input type="text" name="typeAccount" placeholder="Tipo de cuenta">
-                <br><br>
+                <tr>
+                    <td><label><b> &rArr; Numero de Tarjeta </b></label></td>
+                    <td><input type="text" name="cardNumber" placeholder="Numero de Cuenta"></td>
+                </tr>
 
-                <input type="submit" value="Insertar" >
-            </blockquote>
+                <tr>
+                    <td><label><b> &rArr; Fecha de expiración (aaaa-mm-dd) </b></label></td>
+                    <td><input type="text" name="expirationDate" placeholder="aaaa-mm-dd"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Insertar" ></td>
+                </tr>
+                
+            </table>
+
         </form>
         </center>
     </body>

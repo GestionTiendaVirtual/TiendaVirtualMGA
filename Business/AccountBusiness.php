@@ -1,30 +1,31 @@
 <?php 
-include "../Data/ClientAccountData.php";
+include "../Data/AccountData.php";
 
-class ClientAccountBusiness extends ClientAccountData{
+class AccountBusiness extends AccountData{
 
 
-	public function getAllClientAccountBusiness(){
-		return $this->getAllClientAccountData();
+	public function getAllAccountBusiness(){
+		return $this->getAllAccountData();
 	}
 
-	public function insertAccountBusiness($idAccount, $idClient, $bank, $typeAccount){
-		return $this->insertAccountData($idAccount, $idClient, $bank, $typeAccount);
+	public function insertAccountBusiness($account){
+		return $this->insertAccountData($account);
 	}
 
 	public function deleteAccountBusiness($idAccount){
 		return $this->deleteAccountData($idAccount);
 	}
+	
 	public function getIDBusiness(){
 		return $this->getIdData();
 	}
 
-	public function getClientAccountByIdBusiness($idAccount) {
-		return $this->getClientAccountByIdData($idAccount);
+	public function getAccountByIdBusiness($idAccount) {
+		return $this->getAccountByIdData($idAccount);
 	}
 
-	public function updateAccountBusiness($idAccount, $idClient, $bank, $typeAccount){
-		return $this->updateAccountData($idAccount, $idClient, $bank, $typeAccount);
+	public function updateAccountBusiness($account){
+		return $this->updateAccountData($account);
 	}
 
 	/* ================== Validaciones -> true(datos correctos) ==================*/
