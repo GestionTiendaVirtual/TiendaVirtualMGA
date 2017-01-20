@@ -28,8 +28,8 @@
                 ' . $tem->idTypeProduct .'
                     <input type="hidden" id="idType" name="idType" value=' . $tem->idTypeProduct .'> 
                     <input type="text" id="txtNameType" name="txtNameType" value= '.$tem->nameTypeProduct.'> &nbsp;
-                    <input type="submit" name="update" value="Actualizar" />&nbsp;
-                    <input type="submit" name="delete" value="Eliminar" />
+                    <input type="submit" id="update" name="update" value="Actualizar" />&nbsp;
+                    <input type="submit" id="delete" name="delete" value="Eliminar" />
                 </blockquote>
             </form>';
 

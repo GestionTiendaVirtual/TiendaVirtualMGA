@@ -1,11 +1,12 @@
 <?php
-include './typeProductBusiness.php';
-include '../../Domain/typeProduct.php';
-
 $idTypeProduct = $_POST['idType'];
 $nameTypeProduct = $_POST['txtNameType'];
+$delete = $_POST['delete'];
+$update = $_POST['update'];
 
-if ($_POST['delete']) {
+if ($delete) {
+    include './typeProductBusiness.php';
+    
     if (is_numeric($idTypeProduct)) {
         $typeProductBusiness = new TypeProductBusiness();
         $result = $typeProductBusiness->deleteTypeProduct($idTypeProduct);
@@ -18,11 +19,12 @@ if ($_POST['delete']) {
         header('location: ../../Presentation/Product/typeProductInterface.php?error=Valor no numerico');
     }
 }
-
-if ($_POST['update']) {
+elseif ($_POST['update']) {
+    include './typeProductBusiness.php';
+    include_once ''; '../../Domain/typeProduct.php';
     if (is_numeric($idTypeProduct) && strlen($nameTypeProduct) >= 2) {
         $typeProduct = new typeProduct($nameTypeProduct);
-        $typeProduct->setIdProduct($idTypeProduct);
+        $typeProduct->setIdTypeProduct($idTypeProduct);
         $typeProductBusiness = new TypeProductBusiness();
         $result = $typeProductBusiness->updateTypeProduct($typeProduct);
         if ($result == true) {
@@ -33,4 +35,6 @@ if ($_POST['update']) {
     } else {
         header('location: ../../Presentation/Product/typeProductInterface.php?error=errorData');
     }
-}
+} else {
+        header('location: ../../Presentation/Product/typeProductInterface.php?error=errorChange');
+    }
