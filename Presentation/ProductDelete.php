@@ -26,6 +26,7 @@
         <h1>Visualizar Productos</h1>
         <br>        
         <table>
+            <th>Nombre</th>
             <th>Marca</th>
             <th>Modelo</th>
             <th>Precio</th>
@@ -37,6 +38,7 @@
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
+                    <td><label><?php echo $currentProducts->getName(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getBrand(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo '₡ ' . $currentProducts->getPrice(); ?>&emsp;&emsp;&emsp;</label></td>

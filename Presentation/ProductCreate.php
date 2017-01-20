@@ -6,6 +6,14 @@
         <title>Registar Producto</title>          
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#txtPrice').focus(function () {
+                    
+                });
+            });
+
+        </script>
     </head>
     <body>
     <center>
@@ -26,6 +34,11 @@
         <form id="createProduct" method="POST" action="../Business/ProductInsertAction.php">
             <table>
                 <tr>
+                    <td><label id="lblName" >Nombre:</label></td>
+                    <td><input type="text" id="txtName" name="txtName" 
+                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"></td>                     
+                </tr>
+                <tr>
                     <td><label id="txtBrand" >Marca:</label></td>
                     <td><input type="text" id="txtBrand" name="txtBrand" 
                                data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"></td>                     
@@ -36,7 +49,7 @@
                                data-validation="alphanumeric" data-validation-allowing="-_"/></td
                 </tr>
                 <tr>
-                    <td><label id="txtPrice">Precio ₡</label></td>
+                    <td><label id="lblPrice">Precio </label></td>
                     <td><input type="number" id="txtPrice" name="txtPrice" data-validation="number"/></td>                    
                 </tr>
                 <tr>
@@ -57,6 +70,9 @@
 
     </center>
 </body>
+<!--<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+
+
 <?php
 if (isset($_GET['success'])) {
     echo '<script>                        

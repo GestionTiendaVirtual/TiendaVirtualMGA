@@ -7,8 +7,7 @@ include_once '../Domain/Product.php';
  * para llevar a cabo el CRUD que corresponde a Productos 
  * @author Michael Meléndez Mesén
  */
-class ProductData extends Data {
-    
+class ProductData extends Data {   
     
     
     /***
@@ -32,7 +31,7 @@ class ProductData extends Data {
                 "insert into tbproducto values (".$id.",'".$product->getBrand()."','".
                 $product->getModel()."',".
                 $product->getPrice().",'".$product->getDescription()."', 1, 1, "
-                . "'".$product->getColor()."');");
+                . "'".$product->getColor()."', '".$product->getName()."');");
         mysqli_close($conn);        
         
         if($queryInsert){
@@ -55,7 +54,7 @@ class ProductData extends Data {
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new Product($row['Marca'], $row['Modelo'],
-                    $row['Precio'],$row['color'],$row['descripcion'], $row['idTipoProducto']);
+                    $row['Precio'],$row['color'],$row['descripcion'],$row['nombreProducto']);
             $currentData->setIdProduct($row['idProducto']);
             array_push($array, $currentData);
         }
@@ -75,7 +74,7 @@ class ProductData extends Data {
                 $product->getModel()."', Precio = ".
                 $product->getPrice().", color = '".$product->getColor()."' , "
                 . "descripcion = '".$product->getDescription()
-                . "' where tbproducto.idProducto = ".$product->getIdProduct().";");
+                . "', nombreProducto = '".$product->getName()."' where tbproducto.idProducto = ".$product->getIdProduct().";");
         mysqli_close($conn);        
         
         if($queryUpdate){

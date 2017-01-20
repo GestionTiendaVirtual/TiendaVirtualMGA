@@ -28,7 +28,8 @@
         <h1>Actualizar Producto</h1>
         <br>        
         <table>
-            <th>Marca</th>
+            <th>Nombre</th>
+            <th>Marca</th>            
             <th>Modelo</th>
             <th>Precio ₡</th>
             <th>Color</th>           
@@ -40,6 +41,9 @@
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
+                    <td><input type="text" id="txtName" name="txtName" 
+                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
+                               value= <?php echo '"' . $currentProducts->getName() . '"'; ?>></td>
                     <td><input type="text" id="txtBrand" name="txtBrand" 
                                data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
                                value= <?php echo '"' . $currentProducts->getBrand() . '"'; ?>></td>
