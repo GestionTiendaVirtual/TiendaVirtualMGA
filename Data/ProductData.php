@@ -2,6 +2,7 @@
 
 include_once 'Data.php';
 include_once '../Domain/Product.php';
+include_once '../Domain/typeProduct.php';
 
 /**
  * Descripcion de ProductData
@@ -29,7 +30,7 @@ class ProductData extends Data {
         //Se realiza el insert en la base de datos
         $queryInsert = mysqli_query($conn, "insert into tbproducto values (" . $id . ",'" . $product->getBrand() . "','" .
                 $product->getModel() . "'," .
-                $product->getPrice() . ",'" . $product->getDescription() . "', 1, 1, "
+                $product->getPrice() . ",'" . $product->getDescription() . "', 1," . $product->getTypeProduct() . " , "
                 . "'" . $product->getColor() . "', '" . $product->getName() . "');");
 
         $resultIDNew = mysqli_query($conn, "SELECT * FROM tbproducto ORDER BY idProducto DESC LIMIT 1");
@@ -143,13 +144,23 @@ class ProductData extends Data {
 
 //fin función deleteProduct
 
-    function insertImageProduct($idProduct,$arrayPath) {
+    function insertImageProduct($idProduct, $arrayPath) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
+        $resultID = mysqli_query($conn, "SELECT * FROM tbimagenproducto ORDER BY idImagen DESC LIMIT 1");
+        $row = mysqli_fetch_array($resultID);
+        if (sizeof($row) >= 1) {
+            $id = $row['idImagen'] + 1;
+        } else {
+            $id = 1;
+        }
         for ($i = 0; $i < sizeof($arrayPath); $i++) {
             $queryInsertImages = mysqli_query($conn, "insert into `tbimagenproducto` "
-                    . "(`idImagen`, `RutaImagen`, `idProducto`) VALUES (NULL, "
+                    . "(`idImagen`, `RutaImagen`, `idProducto`) VALUES (" . $id . ", "
                     . "'" . $arrayPath[$i] . "', " . $idProduct . ");");
+            $resultID = mysqli_query($conn, "SELECT * FROM tbimagenproducto ORDER BY idImagen DESC LIMIT 1");
+            $rowNew = mysqli_fetch_array($resultID);
+            $id = $rowNew['idImagen'] + 1;
         }
         mysqli_close($conn);
         if ($queryInsertImages == true) {
@@ -160,4 +171,21 @@ class ProductData extends Data {
     }
 
 //fin función deleteProduct
+
+
+    function getTypeProduct() {
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "SELECT * FROM tbtipoproducto order by idTipoProducto asc");
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $currentData = new TypeProduct($row['Nombre']);
+            $currentData->setIdTypeProduct($row['idTipoProducto']);
+            array_push($array, $currentData);
+        }
+        return $array;
+    }
+
+//fin función getTypeProducts
 }

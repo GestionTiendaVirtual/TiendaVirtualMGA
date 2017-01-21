@@ -57,7 +57,6 @@ class TypeProductData extends Data {
         }
         return $array;
     }//fin función getTypeProducts
-    
     /*
      * Función que permite la actualización de un tipo de producto en la base de datos
      */

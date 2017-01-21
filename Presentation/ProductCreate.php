@@ -18,7 +18,6 @@
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
                 <td><a href="ProductDelete.php">Eliminar</a><td>
-
             </tr>
         </table>
         <hr>
@@ -26,6 +25,21 @@
         <br>
         <form id="createProduct" method="POST" action="../Business/ProductAction.php" enctype="multipart/form-data">
             <table id="input">
+                <tr>
+                    <td><label id="lblName" >Tipo producto:</label></td>
+                    <td><select name="cbTypeProduct" id="cbTypeProduct">
+                            <?php
+                            include '../Data/ProductData.php';
+                            /* obtiene todos los elementos de la BD y los carga en un select */
+                            $typeProduct = new ProductData();
+                            $result = $typeProduct->getTypeProduct();
+                            foreach ($result as $currentType) {
+                                echo '<option value=' . $currentType->getIdTypeProduct(). '>' .
+                                $currentType->getNameTypeProduct() . '.</option>';
+                            }
+                            ?>
+                        </select> </td>                     
+                </tr>
                 <tr>
                     <td><label id="lblName" >Nombre:</label></td>
                     <td><input type="text" id="txtName" name="txtName" 
@@ -43,7 +57,7 @@
                 </tr>
                 <tr>
                     <td><label id="lblPrice">Precio ₡ </label></td>
-                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this,cpf)"  onpaste="return false"/></td>                    
+                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  onpaste="return false"/></td>                    
                 </tr>
                 <tr>
                     <td><label id="lblColor">Color:</label></td>
@@ -58,7 +72,7 @@
                     <td><label id="lblColor">Imagen:</label></td>
                     <td><input type="file" id="fileImage0" name="fileImage0"/></td>
                 </tr> 
-                
+
             </table>
             <input type="hidden" id="count" name="count" value="1">
             <input type="hidden" id="optionCreate" name="optionCreate">
@@ -84,11 +98,11 @@ if (isset($_GET['success'])) {
     echo ' <script>                
                document.getElementById("txtMessage").innerHTML = "Error con los datos ingresados";
            </script>';
-}else if (isset($_GET['errorExis'])) {
+} else if (isset($_GET['errorExis'])) {
     echo ' <script>                
                document.getElementById("txtMessage").innerHTML = "La imagen ingresada ya existe";
            </script>';
-}else if (isset($_GET['errorSize'])) {
+} else if (isset($_GET['errorSize'])) {
     echo ' <script>                
                document.getElementById("txtMessage").innerHTML = "La imagen supera el tamaño permitido";
            </script>';
@@ -96,7 +110,7 @@ if (isset($_GET['success'])) {
 ?>
 <script language="JavaScript">
 
-   
+
 
 </script>
 
