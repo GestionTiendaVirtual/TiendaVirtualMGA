@@ -11,6 +11,7 @@ if (isset($_POST['optionCreate'])) {
     $price = $_POST['txtPrice'];
     $color = $_POST['txtColor'];
     $count = $_POST['count'];
+    $typeProduct = $_POST['cbTypeProduct'];
     $description = $_POST['txtDescription'];
     $price = str_replace(",", "", $price);
 
@@ -51,6 +52,7 @@ if (isset($_POST['optionCreate'])) {
             strlen($model) >= 2 && strlen($color) >= 2 && is_numeric($price) && $flag == true) {
 
         $product = new Product($brand, $model, $price, $color, $description, $name);
+        $product->setTypeProduct($typeProduct);
         $productBusiness = new ProductBusiness();
         $result = $productBusiness->insertProduct($product, $arrayImages);
         echo $result;
@@ -62,6 +64,7 @@ if (isset($_POST['optionCreate'])) {
     } else {
         header('location: ../Presentation/ProductCreate.php?error=errorData');
     }
+    
 } else if (isset($_POST['optionUpdate'])) {
     $idProduct = $_POST['idProduct'];
     $brand = $_POST['txtBrand'];
@@ -129,7 +132,7 @@ if (isset($_POST['optionCreate'])) {
 
         $fileImage = 'fileImage' . $i;
         if ($_FILES[$fileImage]["error"] > 0) {
-            header('location: ../Presentation/ProductInsertImage.php?error=errorData');
+            header('location: ../Presentation/ProductUpdate.php?error=errorData');
         } else {
 
             $allowed = array("image/jpg", "image/jpeg", "image/gif", "image/png");
@@ -149,10 +152,10 @@ if (isset($_POST['optionCreate'])) {
                         $flag = true;
                     }
                 } else {
-                    header('location: ../Presentation/ProductInsertImage.php?errorExis=error');
+                    header('location: ../Presentation/ProductUpdate.php?errorExis=error');
                 }
             } else {
-                header('location: ../Presentation/ProductInsertImage.php?errorSize=error');
+                header('location: ../Presentation/ProductUpdate.php?errorSize=error');
             }
         }
     }
