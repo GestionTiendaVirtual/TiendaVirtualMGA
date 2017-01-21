@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <title>Obtener Cuenta</title>
 
+        <!-- Script para eliminar el mensaje. -->
         <script type="text/javascript">
             function miFuncion()
             {
@@ -13,13 +14,12 @@
                 d.removeChild(d.firstChild);
             }
         </script>
-
     </head>
     <body>
 
         <?php
 
-            include '../Business/accountBusiness.php';
+            include '../../Business/Account/accountBusiness.php';
             $accountBusiness = new AccountBusiness();
             #Obtiene el id para la nueva cuenta
             $idAccount = $accountBusiness->getIDBusiness();
@@ -33,7 +33,7 @@
                                 <br><br>
                             </div>");
 
-            #Se realizo con exito.
+            #Mensaje de respuesta. 
             if (isset($_GET['msg'])) {
                 $resultInsert[1] = $_GET['msg'];
             }
@@ -65,7 +65,7 @@
         <h2>Cuentas &rarr;Insertar</h2> 
 
         <!-- Form -->
-        <form method="POST" action="../Business/insertAccount.php">
+        <form method="POST" action="../../Business/Account/insertAccount.php">
             <label>ID Cuenta</label>
             <input type="text" name="idAccount" value= <?php echo "'".$idAccount."'"?> readonly="readonly">
 
@@ -86,14 +86,14 @@
            <input type="submit" value="Insertar" >   
 
         </form>
-        <br><br>
+        <br>
 
         <!--=============================================================================-->
         <h2>Cuentas &rarr;Eliminar</h2>
         
 
         <!-- Form -->
-        <form method="GET" action="../Business/deleteAccount.php">
+        <form method="GET" action="../../Business/Account/deleteAccount.php">
             <label> ID Cuenta </label>&nbsp;
             <input type="text" name="idAccount" placeholder="ID Cuenta">
             <input type="submit" value="Eliminar" ><br><br>
@@ -101,14 +101,13 @@
         <!-- Fin del form -->
      
         <!-- =========================================================================================== -->
-            <hr>
-            <h1>Cuentas &rarr;Actualizar/Eliminar</h1>
+            <h2>Cuentas &rarr;Actualizar/Eliminar</h2>
             
             <!-- Listado de cuentas para actualizarlas-->
                 <?php
                     $result = $accountBusiness->getAllAccountBusiness();
                     foreach ($result as $tem) {
-                        echo '<form method="POST" action="../Business/updateAccount.php?idAccount='.$tem->idAccount.'">';
+                        echo '<form method="POST" action="../../Business/Account/updateAccount.php?idAccount='.$tem->idAccount.'">';
                         ?>
                         <!-- Form -->
                             <label> ID Cuenta </label>
@@ -130,16 +129,13 @@
                             <input type="text" name="expirationDate" value= <?php echo "'".$tem->expirationDate."'"?>>
                             
                             <input type="submit" value="Actualizar" >
-                            <a href=<?php echo "../Business/deleteAccount.php?idAccount=".$tem->idAccount; ?> >Eliminar</a>
+                            <a href=<?php echo "../../Business/Account/deleteAccount.php?idAccount=".$tem->idAccount; ?> >Eliminar</a>
                                
                         </form>
 
-                        <?php  
-                            echo "<br><br><br><br>";
+                <?php  
+                    echo "<br>";
                     }
-                        ?>
-            </center>
-
-
+                ?>
     </body>
 </html>
