@@ -44,7 +44,7 @@
         ?>
 
 
-
+        <a href="../../index.php"><h3>Inicio</h3></a>
         <h2>Cuentas &rarr;listado</h2>
         <?php
             $result = $accountBusiness->getAllAccountBusiness();
