@@ -6,7 +6,7 @@
         <title>Registar Producto</title>          
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-        <script src="../JS/GenerateFields.js" type="text/javascript"></script>
+       
     </head>
     <body>
     <center>
@@ -22,55 +22,34 @@
             </tr>
         </table>
         <hr>
-        <h1>Registar Producto</h1>
+        <?php 
+            $name = $_GET['nameProduct'];
+            $idProduct = $_GET['idProduct'];
+            $count = $_GET['count'];        
+        ?>
+        <h1>Registar Imagen a&emsp;<?php echo $name; ?></h1>
         <br>
         <form id="createProduct" method="POST" action="../Business/ProductAction.php" enctype="multipart/form-data">
             <table id="input">
                 <tr>
-                    <td><label id="lblName" >Nombre:</label></td>
-                    <td><input type="text" id="txtName" name="txtName" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"></td>                     
-                </tr>
-                <tr>
-                    <td><label id="lblBrand" >Marca:</label></td>
-                    <td><input type="text" id="txtBrand" name="txtBrand" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"></td>                     
-                </tr>
-                <tr>
-                    <td><label id="txtModel">Modelo:</label></td>
-                    <td><input type="text" id="txtModel" name="txtModel"
-                               data-validation="alphanumeric" data-validation-allowing="-_"/></td
-                </tr>
-                <tr>
-                    <td><label id="lblPrice">Precio ₡ </label></td>
-                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this,cpf)"  onpaste="return false"/></td>                    
-                </tr>
-                <tr>
-                    <td><label id="lblColor">Color:</label></td>
-                    <td><input type="text" id="txtColor" name="txtColor" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"/></td>
-                </tr>  
-                <tr>
-                    <td><label id="lblDescription">Descripción:</label></td>
-                    <td><textarea type="text" id="txtDescription" name="txtDescription"></textarea></td>
-                </tr> 
-                <tr>
                     <td><label id="lblColor">Imagen:</label></td>
                     <td><input type="file" id="fileImage0" name="fileImage0"/></td>
+                    <td><input type="hidden" id="idProduct" name="idProduct" value="<?php echo $idProduct;?>"/></td>
+                    
                 </tr> 
                 
             </table>
-            <input type="hidden" id="count" name="count" value="1">
-            <input type="hidden" id="optionCreate" name="optionCreate">
+            <input type="hidden" id="count" name="count" value="<?php echo $count;?>"/>
+            <input type="hidden" id="optionInsertImage" name="optionInsertImage">
             <input type="submit" id="btnAccept" name="btnAccept" value="Aceptar" />
-            <input type="submit" id="btnAdd" onclick="return addInput('input')" value="Nueva imagen">
+            <input type="submit" id="btnAdd" onclick="return addInputFileImage('input');" value="Nueva imagen">
         </form>
         <br>
         <label id="txtMessage"></label>
 
     </center>
 </body>
-
+ <script src="../JS/GenerateFieldsImages.js" type="text/javascript"></script>
 <?php
 if (isset($_GET['success'])) {
     echo '<script>                        

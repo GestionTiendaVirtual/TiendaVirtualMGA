@@ -14,6 +14,7 @@ class Product {
     private $color;
     private $description;
     private $typeProduct;
+    private $pathImages = [];
     
     public function Product($brand, $model, $price, $color, $description, $name){
         $this->brand = $brand;
@@ -71,6 +72,24 @@ class Product {
     }
     public function setName($name){
         $this->name = $name;
+    }
+    
+    public function getPathImages(){
+        return $this->pathImages;
+    }
+    public function setPathImages($path){
+        array_push($this->pathImages, $path);
+    }
+    public function getPathImagesDelete(){
+        $path = ""; 
+        for($i = 0; $i< sizeof($this->pathImages); $i++ ){
+            if($i < sizeof($this->pathImages)-1){
+                $path .= $this->pathImages[$i] .';';
+            }else{
+                $path .= $this->pathImages[$i];
+            }            
+        }
+        return $path;
     }
     
 }

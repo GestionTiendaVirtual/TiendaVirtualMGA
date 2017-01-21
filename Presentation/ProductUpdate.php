@@ -6,6 +6,7 @@
         <title>Actualizar Productos</title>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+        <script src="../JS/GenerateFields.js" type="text/javascript"></script>
     </head>
     <body>
         <?php
@@ -36,8 +37,9 @@
             <th>Descripción</th>           
             <?php
             foreach ($products as $currentProducts) {
+                $count = sizeof($currentProducts->getPathImages());
                 ?>
-                <form id="updateproduct" method="POST" action="../Business/ProductUpdateAction.php">
+                <form id="updateproduct" method="POST" action="../Business/ProductAction.php">
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
@@ -50,16 +52,45 @@
                     <td><input type="text" id="txtModel" name="txtModel"
                                data-validation="alphanumeric" data-validation-allowing="-_"
                                value= <?php echo '"' . $currentProducts->getModel() . '"'; ?>/></td>
-                    <td><input type="number" id="txtPrice" name="txtPrice" data-validation="number" 
-                               value= <?php echo '"' . $currentProducts->getPrice() . '"'; ?>/></td>
+                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  
+                               value= <?php
+                               $price = number_format($currentProducts->getPrice());
+                               echo '"' . $price . '"';
+                               ?>/></td>
                     <td><input type="text" id="txtColor" name="txtColor" 
                                data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
                                value= <?php echo '"' . $currentProducts->getColor() . '"'; ?>/></td>
                     <td><input type="text" id="txtDescription" name="txtDescription"                                
                                value= <?php echo '"' . $currentProducts->getDescription() . '"'; ?>/></td> 
-                    <td><input type="submit" id="btnAccept" name="btnAccept" value="Actualizar" /></td>                
-                    </tr>
+                    <input type="hidden" id="optionUpdate" name="optionUpdate" value="update">
+                    <td><input type="submit" id="btnAccept" name="btnAccept" value="Actualizar" /></td>  
+                    <?php
+                    if ($count <= 5) {
+                        ?>
+                        <td><a href="ProductInsertImage.php?nameProduct=<?php echo $currentProducts->getName();
+                        ?>&idProduct=<?php echo $currentProducts->getIdProduct(); ?>&count=<?php echo $count; ?>">Agregar imagen</a></td>
+                            <?php
+                        }
+                        ?>
+
+                    </tr>   
                 </form>
+                <tr>
+                    <?php
+                    foreach ($currentProducts->getPathImages() as $path) {
+                        ?>
+                    <form method="POST" action="../Business/ProductAction.php">
+                        <td><img style="width: 150px; height: 100px;"src="<?php echo $path; ?>">&emsp;&emsp;<br>
+                            <input type="submit" value="Eliminar"></td>
+                        <input type="hidden" id="idProduct" name='idProduct' 
+                               value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>     
+                        <input type="hidden" id="path" name="path" value="<?php echo $path; ?>" />     
+                        <input type="hidden" id="optionDeleteImg" name="optionDeleteImg" value="delete" />     
+                    </form>
+                    <?php
+                }
+                ?>
+                </tr> 
                 <?php
             }
             ?>
