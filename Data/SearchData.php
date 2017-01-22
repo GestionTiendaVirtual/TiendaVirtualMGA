@@ -32,6 +32,7 @@ class SearchData extends Data{
     /*Fin del metodo de busqueda de productos.*/
 
     public function insertSearch($arraySearch){
+        session_start();
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
@@ -42,7 +43,7 @@ class SearchData extends Data{
         $cont = $row[0]+1; 
         
         foreach ($arraySearch as $tem) {
-        	$query = "INSERT INTO tbbusqueda (`idBusqueda`,`idProducto`, `idCliente`) VALUES (".$cont."," . $tem->getidProduct() . "," . 1 . ");";
+        	$query = "INSERT INTO tbbusqueda (`idBusqueda`,`idProducto`, `idCliente`) VALUES (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
             $result = mysqli_query($conn, $query);
             $cont ++;
         }
