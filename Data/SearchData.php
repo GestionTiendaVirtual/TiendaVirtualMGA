@@ -34,7 +34,13 @@ class SearchData extends Data{
     public function insertSearch($arraySearch){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $cont = 1;
+
+        /*Se obtiene el nuevo id*/
+        $query = "select max(idBusqueda) from tbbusqueda";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_array($result);
+        $cont = $row[0]+1; 
+        
         foreach ($arraySearch as $tem) {
         	$query = "INSERT INTO tbbusqueda (`idBusqueda`,`idProducto`, `idCliente`) VALUES (".$cont."," . $tem->getidProduct() . "," . 1 . ");";
             $result = mysqli_query($conn, $query);
