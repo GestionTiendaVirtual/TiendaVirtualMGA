@@ -6,6 +6,13 @@
         <title></title>
     </head>
     <body>
+        <?php
+        session_start();
+        if(!isset($_SESSION["idUser"])){
+            header("location: ../index.php");
+        }
+        ?>
+
     	<h1>Search</h1>
         <br>
         <hr>

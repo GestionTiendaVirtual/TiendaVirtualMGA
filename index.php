@@ -13,13 +13,13 @@
         <a href="./Presentation/ProductCreate.php">CRUD Producto</a>
         <a href="./Presentation/combo.php">Dirección cliente</a>
         <a href="./Presentation/Product/typeProductInterface.php">Tipo</a>
-        <a href="./Presentation/Search.php">Search</a>
         <hr>
 
         <?php
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
                 ?>
+                <a href="./Presentation/Search.php">Search</a>
                 <a href="Business/loginAction.php?logout">Cerrar</a>
                 <hr>   
 
