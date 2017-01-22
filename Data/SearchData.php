@@ -12,7 +12,7 @@ class SearchData extends Data{
 
         while ($row = mysqli_fetch_array($result)) {
             /*Se crean los objetos de los productos y se agregan al array $arrayProduct */
-            $currentData = new Product($row['Marca'], $row['Modelo'], $row['Precio'], $row['color'], $row['descripcion'], "Nombre Prducto");
+            $currentData = new Product($row['Marca'], $row['Modelo'], $row['Precio'], $row['color'], $row['descripcion'], $row['nombreProducto']);
             $idProduct = $row['idProducto'];
             $currentData->setIdProduct($idProduct);
             
