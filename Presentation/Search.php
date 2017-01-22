@@ -13,22 +13,11 @@
         <hr>
 
         <!--Form para busquedas-->
-        
-            <input type="text" id="termSearch" placeholder="termino de busqueda">
-            <button onclick="ajax();" >buscar</button>
+        <input type="text" id="termSearch" placeholder="termino de busqueda">
+        <button onclick="ajax();" >buscar</button>
         <!-- Fin del form para busqueda -->
 
         <div id="tableDiv"></div>
-
-
-
-
-
-
-
-
-
-
 
 
         <script type="text/javascript">
@@ -54,8 +43,12 @@
              
             function response() {
                 if(connection.readyState == 4) {
+                    var d = document.getElementById("tableDiv");
+                    while (d.hasChildNodes())
+                        d.removeChild(d.firstChild);
+
+
                     var text = String(connection.responseText);
-                    alert(text);
 
                     // Obtener la referencia del elemento tabla (donde se creara la tabla)
                     var body = document.getElementById("tableDiv");
@@ -65,7 +58,6 @@
 
                     /*Se separa por producto*/
                     var listProduct = text.split("&");
-
 
                     /******* Se crean th ********/
                     var nameTh = document.createElement("th");
@@ -137,9 +129,25 @@
                         hilera.appendChild(color);
                         hilera.appendChild(description);
 
-                        /*Se incerta la hilera*/
-                        
+
+                        var hileraImg = document.createElement("tr");
+                        for (var p = 6, lenImg = item.length; p < lenImg; p++) {
+                            var imgProduct = item[p];
+                            var imgTd = document.createElement("td");
+                            
+                            var img = document.createElement("img");
+                            img.src = imgProduct;
+                            img.width = 100;
+                            img.height = 100;
+                            
+
+                            imgTd.appendChild(img);
+                            hileraImg.appendChild(imgTd);
+                        }
+
+                        /*Se incertan las hileras*/
                         tblBody.appendChild(hilera);
+                        tblBody.appendChild(hileraImg);
 
                         // posiciona el <tbody> debajo del elemento <table>
                         tabla.appendChild(tblBody);
@@ -148,10 +156,8 @@
                         // modifica el atributo "border" de la tabla y lo fija a "2";
                         //tabla.setAttribute("border", "1");
                     }
-                    
                 }
             }
-            
         </script>
     </body>
 </html>
