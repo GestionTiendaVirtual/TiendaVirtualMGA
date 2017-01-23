@@ -12,17 +12,21 @@
         <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta</a>
         <a href="./Presentation/ProductCreate.php">CRUD Producto</a>
         <a href="./Presentation/combo.php">Dirección cliente</a>
+        <a href="./Presentation/productOption.php">Muro de productos</a>
+
         <a href="./Presentation/Product/typeProductInterface.php">Tipo</a>
+        <a href="./Presentation/Client/clientInterface.php">Cliente</a>
+
+        <hr>
+
         <?php
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
                 ?>
+                <a href="./Presentation/Search.php">Búsqueda.</a>
                 <a href="Business/loginAction.php?logout">Cerrar</a>
-                <hr>                <!--Form para busquedas-->
+                <hr>   
 
-                <input type="text" id="termSearch" placeholder="termino de busqueda">
-                <button onclick="ajax();" >buscar</button>
-                <!-- Fin del form para busqueda -->
                 <?php
             } else {
                 ?>
@@ -48,36 +52,5 @@
            </script>';
         }
         ?>
-
-
-
-        <script type="text/javascript">
-            function ajax() {
-                // De esta forma se obtiene la instancia del objeto XMLHttpRequest
-                if (window.XMLHttpRequest) {
-                    connection = new XMLHttpRequest();
-                }
-                else if (window.ActiveXObject) {
-                    connection = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                var param = document.getElementById("termSearch").value;
-
-                // Preparando la función de respuesta
-                connection.onreadystatechange = response;
-
-                // Realizando la petición HTTP con método POST
-                connection.open('POST', './Business/Search/SearchProduct.php');
-                connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                connection.send("termSearch=" + param);
-            }
-
-            function response() {
-                if (connection.readyState == 4) {
-                    alert(connection.responseText);
-                }
-            }
-        </script>
-
     </body>
 </html>

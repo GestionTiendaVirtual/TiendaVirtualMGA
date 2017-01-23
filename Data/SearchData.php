@@ -7,12 +7,13 @@ class SearchData extends Data{
     public function searchProductData($termSearch) {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select * from tbproducto where descripcion like '%" . $termSearch . "%' OR modelo like '%" . $termSearch . "%' OR marca like '%" . $termSearch . "%'");
+        $result = mysqli_query($conn, "select * from tbproducto where descripcion like '%" . $termSearch . "%' OR modelo like '%" .
+         $termSearch . "%' OR marca like '%" . $termSearch . "%'  OR nombreProducto like '%" . $termSearch . "%'");
         $arrayProduct = array();
 
         while ($row = mysqli_fetch_array($result)) {
             /*Se crean los objetos de los productos y se agregan al array $arrayProduct */
-            $currentData = new Product($row['Marca'], $row['Modelo'], $row['Precio'], $row['color'], $row['descripcion'], "Nombre Prducto");
+            $currentData = new Product($row['Marca'], $row['Modelo'], $row['Precio'], $row['color'], $row['descripcion'], $row['nombreProducto']);
             $idProduct = $row['idProducto'];
             $currentData->setIdProduct($idProduct);
             
@@ -32,6 +33,7 @@ class SearchData extends Data{
     /*Fin del metodo de busqueda de productos.*/
 
     public function insertSearch($arraySearch){
+        session_start();
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
@@ -42,7 +44,7 @@ class SearchData extends Data{
         $cont = $row[0]+1; 
         
         foreach ($arraySearch as $tem) {
-        	$query = "INSERT INTO tbbusqueda (`idBusqueda`,`idProducto`, `idCliente`) VALUES (".$cont."," . $tem->getidProduct() . "," . 1 . ");";
+        	$query = "INSERT INTO tbbusqueda (`idBusqueda`,`idProducto`, `idCliente`) VALUES (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
             $result = mysqli_query($conn, $query);
             $cont ++;
         }

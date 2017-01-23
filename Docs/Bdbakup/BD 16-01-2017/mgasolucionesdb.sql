@@ -52,21 +52,43 @@ CREATE TABLE `tbcanton` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbcliente`
+-- Estructura de tabla para la tabla `tbclient`
 --
 
-CREATE TABLE `tbcliente` (
-  `idCliente` int(11) NOT NULL,
-  `NombreCliente` varchar(30) NOT NULL,
-  `ApellidoPCliente` varchar(30) NOT NULL,
-  `ApellidoSCliente` varchar(30) NOT NULL,
-  `EmailCliente` varchar(40) NOT NULL,
-  `UsuarioCliente` varchar(40) NOT NULL,
-  `ContrasenaCliente` varchar(40) NOT NULL,
-  `DireccionCliente` varchar(100) NOT NULL
+CREATE TABLE `tbclient` (
+  `idClient` int(11) NOT NULL,
+  `nameClient` varchar(30) NOT NULL,
+  `lastNameFClient` varchar(30) NOT NULL,
+  `lastNameSClient` varchar(30) NOT NULL,
+  `emailClient` varchar(40) NOT NULL,
+  `userClient` varchar(40) NOT NULL,
+  `passwordClient` varchar(40) NOT NULL,
+  `addressClient` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 -- --------------------------------------------------------
+
+--
+-- Volcado de datos para la tabla `tbclient`
+--
+
+INSERT INTO `tbclient` (
+`idClient`,
+ `nameClient`, 
+ `lastNameFClient`,
+ `lastNameSClient`, 
+ `emailClient`,
+ `userClient`,
+ `passwordClient`, 
+ `addressClient`) 
+ VALUES ('1', 'Alberth', 'Calderon', 'Alvarado', 
+ 'alberth5@hotmail.com', 'alberth5', '12345',7
+ 'Cartago,Turrialba,Turrialba,Turrialba'), 
+ ('2', 'Gabriel', 'Gutierrez', 'Brenes', 
+ 'gabgb@hotmail.com', 'gabgb', '456', 
+ 'Cartago,Turrrialba,Turrrialba,Turrrialba');
+
 
 --
 -- Estructura de tabla para la tabla `tbcuenta`
@@ -218,22 +240,25 @@ INSERT INTO `tbtienda` (`idTienda`, `NombreTienda`, `TelefonoTienda`, `EmailTien
 
 -- --------------------------------------------------------
 
+
 --
--- Estructura de tabla para la tabla `tbtipoproducto`
+-- Estructura de tabla para la tabla `tbtypeproduct`
 --
 
-CREATE TABLE `tbtipoproducto` (
-  `idTipoProducto` int(11) NOT NULL,
-  `Nombre` varchar(100) NOT NULL
+CREATE TABLE `tbtypeproduct` (
+  `idTypeProduct` int(11) NOT NULL,
+  `nameTypeProduct` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbtipoproducto`
+-- Volcado de datos para la tabla `tbtypeproduct`
 --
 
-INSERT INTO `tbtipoproducto` (`idTipoProducto`, `Nombre`) VALUES
+INSERT INTO `tbtypeproduct` (`idTypeProduct`, `nameTypeProduct`) VALUES
 (1, 'Celulares'),
-(2, 'Computadoras');
+(2, 'Computadoras')
+(3, 'Pantallas'),
+(4, 'Consola Juegos');
 
 --
 -- Índices para tablas volcadas
@@ -254,12 +279,13 @@ ALTER TABLE `tbcanton`
   ADD PRIMARY KEY (`idCanton`),
   ADD KEY `idProvincia` (`idProvincia`);
 
+
 --
--- Indices de la tabla `tbcliente`
+-- Indices de la tabla `tbclient`
 --
-ALTER TABLE `tbcliente`
-  ADD PRIMARY KEY (`idCliente`),
-  ADD UNIQUE KEY `idCliente` (`idCliente`);
+ALTER TABLE `tbclient`
+  ADD PRIMARY KEY (`idClient`),
+  ADD UNIQUE KEY `idClient` (`idClient`);
 
 --
 -- Indices de la tabla `tbcuenta`
@@ -334,12 +360,13 @@ ALTER TABLE `tbpueblo`
 ALTER TABLE `tbtienda`
   ADD PRIMARY KEY (`idTienda`),
   ADD UNIQUE KEY `idTienda` (`idTienda`);
+  
+--
+-- Indices de la tabla `tbTypeProduct`
+--
+ALTER TABLE `tbtypeproduct`
+  ADD PRIMARY KEY (`idTypeProduct`);
 
---
--- Indices de la tabla `tbtipoproducto`
---
-ALTER TABLE `tbtipoproducto`
-  ADD PRIMARY KEY (`idTipoProducto`);
 
 --
 -- Restricciones para tablas volcadas
