@@ -23,28 +23,37 @@
             </tr>
         </table>
         <hr>
-        <h1>Visualizar Productos</h1>
+        <h1>Eliminar Productos</h1>
         <br>        
         <table>
+            <th>Nombre</th>
             <th>Marca</th>
             <th>Modelo</th>
             <th>Precio</th>
             <th>Color</th>           
             <?php
+            
             foreach ($products as $currentProducts) {
+                
                 ?>  
-                <form id="deleteProduct" method="POST" action="../Business/ProductDeleteAction.php">
+                <form id="deleteProduct" method="POST" action="../Business/ProductAction.php">
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
+                    <td><label><?php echo $currentProducts->getName(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getBrand(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo '₡ ' . $currentProducts->getPrice(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
+                    <input type="hidden" id="path" name="path" value="<?php echo $currentProducts->getPathImagesDelete(); ?>" />     
+                    <input type="hidden" id="optionDelete" name="optionDelete" value="delete" />     
+
                     <td><input type="submit" id="btnAccept" name="btnAccept" value="Eliminar" /></td>                
                     </tr>
                 </form>
+
                 <?php
+                
             }
             ?>
         </table>

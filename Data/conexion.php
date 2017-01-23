@@ -17,4 +17,5 @@ mysqli_select_db($conexion, $database)or die(mysqli_error($conexion));
     exit();
   }
   
-?>
+
+
