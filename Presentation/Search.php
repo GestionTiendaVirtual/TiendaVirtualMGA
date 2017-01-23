@@ -100,7 +100,7 @@
 
 
                     for (var i = 0, len = listProduct.length; i < len; i++) {
-                        var item = listProduct[i].split(",");
+                        var item = listProduct[i].split(";");
                         // Crea las hileras de la tabla
                         var hilera = document.createElement("tr");
 

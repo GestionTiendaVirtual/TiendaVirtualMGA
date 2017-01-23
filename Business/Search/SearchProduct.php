@@ -15,14 +15,14 @@
 
 		/* Se obtienen todas las imagenes */
 		foreach ($tem->getPathImages() as $temImages){
-			$listIamge .= "," . $temImages;
+			$listIamge .= ";" . $temImages;
 		}
 		/*Se terminan de concatenas las imagenes*/
 
 		if($response != ""){
 			$response .= "&";
 		}
-		$response .= $tem->getName() . "," . $tem->getBrand() . "," . $tem->getModel() . "," .
-		 $tem->getPrice() . "," .$tem->getColor() . "," . $tem->getDescription() . $listIamge;
+		$response .= $tem->getName() . ";" . $tem->getBrand() . ";" . $tem->getModel() . ";" .
+		 $tem->getPrice() . ";" .$tem->getColor() . ";" . $tem->getDescription() . $listIamge;
 	}
 	 echo $response;
