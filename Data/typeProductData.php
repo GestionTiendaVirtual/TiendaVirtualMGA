@@ -19,16 +19,16 @@ class TypeProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se consulta por el ultimo id registrado para generar el consecutivo
-        $resultID = mysqli_query($conn, "SELECT * FROM tbtypeproduct ORDER BY idTypeProduct DESC LIMIT 1");
+        $resultID = mysqli_query($conn, "SELECT * FROM tbtipoproducto ORDER BY idTipoProducto DESC LIMIT 1");
         $row = mysqli_fetch_array($resultID);
         if (sizeof($row) >= 1) {
-            $id = $row['idTypeProduct'] + 1;
+            $id = $row['idTipoProducto'] + 1;
         } else {
             $id = 1;
         }
 
         //Se realiza el insert en la base de datos
-        $queryInsert = mysqli_query($conn, "insert into tbtypeproduct values (" . $id . ",'" . $typeProduct->getNameTypeProduct()."')");
+        $queryInsert = mysqli_query($conn, "insert into tbtipoproducto values (" . $id . ",'" . $typeProduct->getNameTypeProduct()."')");
         mysqli_close($conn);
 
         if ($queryInsert) {
@@ -48,11 +48,11 @@ class TypeProductData extends Data {
         
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn,"SELECT * FROM tbtypeproduct order by idTypeProduct asc");
+        $result = mysqli_query($conn,"SELECT * FROM tbtipoproducto order by idTipoProducto asc");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
-            $currentData = new TypeProduct($row['nameTypeProduct']);
-            $currentData->setIdTypeProduct($row['idTypeProduct']);
+            $currentData = new TypeProduct($row['Nombre']);
+            $currentData->setIdTypeProduct($row['idTipoProducto']);
             array_push($array, $currentData);
         }
         return $array;
@@ -65,8 +65,8 @@ class TypeProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la actualizacion en la base de datos
-        $queryUpdate = mysqli_query($conn, "update tbtypeproduct set nameTypeProduct = '"
-                . $typeProduct->getNameTypeProduct() . "' where tbtypeproduct.idTypeProduct = "
+        $queryUpdate = mysqli_query($conn, "update tbtipoproducto set Nombre = '"
+                . $typeProduct->getNameTypeProduct() . "' where tbtipoproducto.idTipoProducto = "
                 . $typeProduct->getIdTypeProduct() . ";");
         mysqli_close($conn);
 
@@ -87,7 +87,7 @@ class TypeProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDelete = mysqli_query($conn, "delete from tbtypeproduct where idTypeProduct = "
+        $queryDelete = mysqli_query($conn, "delete from tbtipoproducto where idTipoProducto = "
                 . $idTypeProduct . ";");
         mysqli_close($conn);
 
