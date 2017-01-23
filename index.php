@@ -12,6 +12,7 @@
     	<a href="./Presentation/ClientAccountRetrieve.php">CRUD cuenta</a>
         <a href="./Presentation/ProductCreate.php">CRUD Producto</a>
         <a href="./Presentation/combo.php">Dirección cliente</a>
+        <a href="./Presentation/productOption.php">Muro de productos</a>
         <hr>
             <?php
             
