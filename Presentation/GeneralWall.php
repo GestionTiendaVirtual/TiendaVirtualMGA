@@ -39,7 +39,7 @@
 
       if(isset($_POST['enviar'])){
         $comentario = utf8_decode(mysqli_real_escape_string($conexion, $_POST['comentario']));
-        $tipoProducto='computadora';
+        $tipoProducto='general';
         if($comentario==''){
          
         }
