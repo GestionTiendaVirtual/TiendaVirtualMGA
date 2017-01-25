@@ -48,11 +48,11 @@ class TypeProductData extends Data {
         
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn,"SELECT * FROM tbtipoproducto order by idTipoProducto asc");
+        $result = mysqli_query($conn,"SELECT * FROM tbtypeproduct order by idTypeProduct asc");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
-            $currentData = new TypeProduct($row['Nombre']);
-            $currentData->setIdTypeProduct($row['idTipoProducto']);
+            $currentData = new TypeProduct($row['nameTypeProduct']);
+            $currentData->setIdTypeProduct($row['idTypeProduct']);
             array_push($array, $currentData);
         }
         return $array;

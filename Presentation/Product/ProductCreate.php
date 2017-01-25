@@ -35,7 +35,7 @@
                             $result = $typeProduct->getTypeProduct();
                             foreach ($result as $currentType) {
                                 echo '<option value=' . $currentType->getIdTypeProduct() . '>' .
-                                $currentType->getNameTypeProduct() . '.</option>';
+                                $currentType->getNameTypeProduct() . '</option>';
                             }
                             ?>
                         </select> </td>                     
