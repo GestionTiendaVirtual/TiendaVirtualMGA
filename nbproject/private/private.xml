@@ -3,7 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/prueba.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/getLocalidad.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Domain/Product.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/ProductData.php</file>
@@ -19,6 +18,7 @@
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/AccountData.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/ProductRetrieve.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/loginAction.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/ProductInsertAction.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/typeProductData.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/ClientLoginBusiness.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/getCanton.php</file>
