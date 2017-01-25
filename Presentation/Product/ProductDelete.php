@@ -43,7 +43,7 @@
                     <td><label><?php echo $currentProducts->getName(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getBrand(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php echo '₡ ' . $currentProducts->getPrice(); ?>&emsp;&emsp;&emsp;</label></td>
+                    <td><label><?php echo '₡ ' . number_format($currentProducts->getPrice()); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
                     <input type="hidden" id="path" name="path" value="<?php echo $currentProducts->getPathImagesDelete(); ?>" />     
                     <input type="hidden" id="optionDelete" name="optionDelete" value="delete" />     

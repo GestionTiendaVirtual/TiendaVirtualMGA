@@ -14,7 +14,8 @@ if (isset($_POST['optionCreate'])) {
     $typeProduct = $_POST['cbTypeProduct'];
     $description = $_POST['txtDescription'];
     $price = str_replace(",", "", $price);
-
+    $price = str_replace("₡", "", $price);
+    
     $arrayImages = [];
     $flag = false;
     for ($i = 0; $i <= $count; $i++) {

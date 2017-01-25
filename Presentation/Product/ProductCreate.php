@@ -56,8 +56,8 @@
                                data-validation="alphanumeric" data-validation-allowing="-_"/></td
                 </tr>
                 <tr>
-                    <td><label id="lblPrice">Precio ₡ </label></td>
-                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  onpaste="return false"/></td>                    
+                    <td><label id="lblPrice">Precio</label></td>
+                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  onpaste="return false" value="₡"/></td>                    
                 </tr>
                 <tr>
                     <td><label id="lblColor">Color:</label></td>
@@ -109,7 +109,10 @@ if (isset($_GET['success'])) {
 }
 ?>
 <script language="JavaScript">
-
+    $("#txtColor").focus(function () {
+        var price = document.getElementById('txtPrice').value;
+        document.getElementById('txtPrice').value = '₡ ' + price;
+    });
 
 
 </script>
