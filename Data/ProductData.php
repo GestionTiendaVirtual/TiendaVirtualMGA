@@ -1,8 +1,8 @@
 <?php
 
 include_once 'Data.php';
-include_once '../Domain/Product.php';
-include_once '../Domain/typeProduct.php';
+include_once '../../Domain/Product.php';
+include_once '../../Domain/typeProduct.php';
 
 /**
  * Descripcion de ProductData

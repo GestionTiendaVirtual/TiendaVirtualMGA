@@ -1,5 +1,5 @@
 <?php
-include '../Data/ProductData.php';
+include_once '../../Data/ProductData.php';
 
 /**
  * Descripcion de ProductBusiness

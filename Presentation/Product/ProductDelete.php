@@ -7,7 +7,7 @@
     </head>
     <body>
         <?php
-        include '../Business/ProductBusiness.php';
+        include '../../Business/Product/ProductBusiness.php';
         $productBusiness = new ProductBusiness();
         $products = $productBusiness->getProducts();
         ?>
@@ -15,7 +15,7 @@
         <br>
         <table>
             <tr>
-                <td><a href="../index.php">Inicio</a></td>
+                <td><a href="../../index.php">Inicio</a></td>
                 <td><a href="ProductCreate.php">Registrar</a></td>
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
@@ -36,7 +36,7 @@
             foreach ($products as $currentProducts) {
                 
                 ?>  
-                <form id="deleteProduct" method="POST" action="../Business/ProductAction.php">
+            <form id="deleteProduct" method="POST" action="../../Business/Product/ProductAction.php">
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
