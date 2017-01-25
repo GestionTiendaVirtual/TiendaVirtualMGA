@@ -74,6 +74,7 @@ if (isset($_POST['optionCreate'])) {
     $color = $_POST['txtColor'];
     $description = $_POST['txtDescription'];
     $price = str_replace(",", "", $price);
+    $price = str_replace("₡", "", $price);
 
     if (strlen($brand) >= 2 && strlen($model) >= 2 && strlen($color) >= 2 && is_numeric($price) && strlen($description) >= 2) {
 

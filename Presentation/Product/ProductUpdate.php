@@ -32,7 +32,7 @@
             <th>Nombre</th>
             <th>Marca</th>            
             <th>Modelo</th>
-            <th>Precio ₡</th>
+            <th>Precio</th>
             <th>Color</th>           
             <th>Descripción</th>           
             <?php
@@ -55,7 +55,7 @@
                     <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  
                                value= <?php
                                $price = number_format($currentProducts->getPrice());
-                               echo '"' . $price . '"';
+                               echo '"₡' . $price . '"';
                                ?>/></td>
                     <td><input type="text" id="txtColor" name="txtColor" 
                                data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
