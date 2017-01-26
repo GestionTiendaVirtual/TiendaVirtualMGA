@@ -10,7 +10,7 @@
         <br>
         <hr>
         <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta</a>
-        <a href="./Presentation/ProductCreate.php">CRUD Producto</a>
+        <a href="./Presentation/Product/ProductCreate.php">CRUD Producto</a>
         <a href="./Presentation/combo.php">Dirección cliente</a>
         <a href="./Presentation/productOption.php">Muro de productos</a>
 

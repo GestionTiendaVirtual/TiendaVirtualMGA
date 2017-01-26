@@ -7,20 +7,20 @@ class SearchData extends Data{
     public function searchProductData($termSearch) {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select * from tbproducto where descripcion like '%" . $termSearch . "%' OR modelo like '%" .
-         $termSearch . "%' OR marca like '%" . $termSearch . "%'  OR nombreProducto like '%" . $termSearch . "%'");
+        $result = mysqli_query($conn, "select * from tbproduct where description like '%" . $termSearch . "%' OR model like '%" .
+         $termSearch . "%' OR brand like '%" . $termSearch . "%'  OR nameProduct like '%" . $termSearch . "%'");
         $arrayProduct = array();
 
         while ($row = mysqli_fetch_array($result)) {
             /*Se crean los objetos de los productos y se agregan al array $arrayProduct */
-            $price = '₡ ' . number_format($row['Precio']);
-            $currentData = new Product($row['Marca'], $row['Modelo'],$price, $row['color'], $row['descripcion'], $row['nombreProducto']);
-            $idProduct = $row['idProducto'];
+            $price = '₡ ' . number_format($row['price']);
+            $currentData = new Product($row['brand'], $row['model'],$price, $row['color'], $row['description'], $row['nameProduct']);
+            $idProduct = $row['idProduct'];
             $currentData->setIdProduct($idProduct);
             
-            $resultImage = mysqli_query($conn, "select * from tbimagenproducto where idProducto = " . $idProduct);
+            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idProduct = " . $idProduct);
             while ($rowImage = mysqli_fetch_array($resultImage)) {
-                $currentData->setPathImages($rowImage['RutaImagen']);
+                $currentData->setPathImages($rowImage['pathImage']);
             }
             array_push($arrayProduct, $currentData);
             /* Se terminan de agregar los productos al array. */
@@ -39,13 +39,13 @@ class SearchData extends Data{
         $conn->set_charset('utf8');
 
         /*Se obtiene el nuevo id*/
-        $query = "select max(idBusqueda) from tbbusqueda";
+        $query = "select max(idSearch) from tbSearch";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_array($result);
         $cont = $row[0]+1; 
         
         foreach ($arraySearch as $tem) {
-        	$query = "INSERT INTO tbbusqueda (`idBusqueda`,`idProducto`, `idCliente`) VALUES (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
+        	$query = "INSERT INTO tbSearch (`idSearch`,`idproduct`, `idClient`) VALUES (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
             $result = mysqli_query($conn, $query);
             $cont ++;
         }
