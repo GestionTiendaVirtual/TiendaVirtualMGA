@@ -23,7 +23,7 @@
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
                 ?>
-                <a href="./Presentation/Search.php">Búsqueda.</a>
+                <a href="./Presentation/Search/Search.php">Búsqueda.</a>
                 <a href="Business/loginAction.php?logout">Cerrar</a>
                 <hr>   
 

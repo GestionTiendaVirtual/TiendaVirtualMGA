@@ -13,8 +13,7 @@ class SearchData extends Data{
 
         while ($row = mysqli_fetch_array($result)) {
             /*Se crean los objetos de los productos y se agregan al array $arrayProduct */
-            $price = '₡ ' . number_format($row['price']);
-            $currentData = new Product($row['brand'], $row['model'],$price, $row['color'], $row['description'], $row['nameProduct']);
+            $currentData = new Product($row['brand'], $row['model'],$row['price'], $row['color'], $row['description'], $row['nameProduct']);
             $idProduct = $row['idProduct'];
             $currentData->setIdProduct($idProduct);
             
@@ -27,14 +26,13 @@ class SearchData extends Data{
         }
 
         /*Se inserta el resultado de la busqueda en la tabla search */
-        $this->insertSearch($arrayProduct); 
+        $this->insertSearchData($arrayProduct); 
 
         return $arrayProduct; //Se retornan todos los productos relacionados
     }
     /*Fin del metodo de busqueda de productos.*/
 
-    public function insertSearch($arraySearch){
-        session_start();
+    public function insertSearchData($arraySearch){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
