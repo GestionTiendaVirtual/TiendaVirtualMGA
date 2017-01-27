@@ -1,4 +1,3 @@
-
 function getProvincia() {
 	
 	if (window.XMLHttpRequest) {
@@ -12,11 +11,12 @@ function getProvincia() {
 			document.getElementById("provinciaList").innerHTML=xmlhttp3.responseText;
 		}
 	}
-	xmlhttp3.open("GET","../Business/getProvincia.php",true);
+	xmlhttp3.open("GET","../Business/GetProvince.php",true);
 	xmlhttp3.send();
 }
 
-function getCanton(estado_id) {
+
+function getCanton(idProvince) {
 	
 	if (window.XMLHttpRequest) {
 		xmlhttp3 = new XMLHttpRequest();
@@ -29,11 +29,11 @@ function getCanton(estado_id) {
 			document.getElementById("cantonList").innerHTML=xmlhttp3.responseText;
 		}
 	}
-	xmlhttp3.open("GET","../Business/getCanton.php?estado_id="+estado_id,true);
+	xmlhttp3.open("GET","../Business/getCanton.php?idProvince="+idProvince,true);
 	xmlhttp3.send();
 }
 
-function getLocalidad(municipio_id) {
+function getDistrict(idCanton) {
 	
 	if (window.XMLHttpRequest) {
 		xmlhttp3 = new XMLHttpRequest();
@@ -46,7 +46,42 @@ function getLocalidad(municipio_id) {
 			document.getElementById("distritoList").innerHTML=xmlhttp3.responseText;
 		}
 	}
-	xmlhttp3.open("GET","../Business/getLocalidad.php?municipio_id="+municipio_id,true);
+	xmlhttp3.open("GET","../Business/GetDistrict.php?idCanton="+idCanton,true);
 	xmlhttp3.send();
 }
 
+
+function getTipoProducto() {
+	
+	if (window.XMLHttpRequest) {
+		xmlhttp3 = new XMLHttpRequest();
+		} else { 
+		xmlhttp3 = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp3.onreadystatechange=function() {
+		if (xmlhttp3.readyState==4 && xmlhttp3.status==200) {
+			document.getElementById("tipoProducto").innerHTML=xmlhttp3.responseText;
+		}
+	}
+	xmlhttp3.open("GET","../Presentation/getTypeProduct.php",true);
+	xmlhttp3.send();
+}
+
+
+function getProduct(idTypeProduct) {
+	
+	if (window.XMLHttpRequest) {
+		xmlhttp3 = new XMLHttpRequest();
+		} else { 
+		xmlhttp3 = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xmlhttp3.onreadystatechange=function() {
+		if (xmlhttp3.readyState==4 && xmlhttp3.status==200) {
+			document.getElementById("producto").innerHTML=xmlhttp3.responseText;
+		}
+	}
+	xmlhttp3.open("GET","../Presentation/GetProduct.php?idTypeProduct="+idTypeProduct,true);
+	xmlhttp3.send();
+}

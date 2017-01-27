@@ -2,18 +2,18 @@
 	
 	require ('../Data/conexion.php');
 	
-	$id_estado = $_GET['estado_id'];
+	$idProvince = $_GET['idProvince'];
 	
-	echo 'Seleccione el canton : <select onChange="getLocalidad(this.value);" name="cbx_municipio" id="cbx_municipio">';
+	echo 'Seleccione el canton : <select onChange="getDistrict(this.value);" name="cbxCanton" id="cbxCanton">';
 	
-	$query = "SELECT idCanton, nombreCanton FROM tbCanton WHERE idProvincia = '$id_estado' ORDER BY idCanton";
+	$query = "SELECT idCanton, nameCanton FROM tbCanton WHERE idProvince = '$idProvince' ORDER BY idCanton";
 	
 	if($resultado=$mysqli->query($query))
 	{
 		while($row = $resultado->fetch_assoc())
 		{
 		?>
-		<option value="<?php echo $row['idCanton']; ?>"><?php echo $row['nombreCanton']; ?></option>
+		<option value="<?php echo $row['idCanton']; ?>"><?php echo $row['nameCanton']; ?></option>
 		
 		<?php
 		}
