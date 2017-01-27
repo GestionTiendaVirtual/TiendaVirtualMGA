@@ -199,5 +199,25 @@ class ProductData extends Data {
         return $array;
     }
 
+    public function getProductByID($idProduct){
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "SELECT * FROM tbproduct where idProduct = " . $idProduct);
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
+            $currentData->setIdProduct($row['idProduct']);
+
+            $idProduct = $row['idProduct'];
+            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idProduct = " . $idProduct);
+            while ($rowImage = mysqli_fetch_array($resultImage)) {
+                $currentData->setPathImages($rowImage['pathImage']);
+            }
+            array_push($array, $currentData);
+        }
+        return $array;
+    }
+
 //fin función getTypeProducts
 }

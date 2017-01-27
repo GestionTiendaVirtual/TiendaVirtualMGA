@@ -32,6 +32,10 @@ class ProductBusiness {
         return $this->productData->insertImageProduct($idProduct, $arrayPath);
     }
 
+    public function getProductByID($idProduct){
+        return $this->productData->getProductByID($idProduct);
+    }
+
     public function deleteSpecialCharacters($text){
         return preg_replace("/([^ A-Za-z0-9])/", "", $this->normalVowels($text));
     }

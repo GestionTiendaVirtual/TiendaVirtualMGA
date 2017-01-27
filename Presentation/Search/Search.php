@@ -59,7 +59,8 @@
                         echo '₡ ' . $price
                         ?>&emsp;&emsp;&emsp;</label></td>
                             <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
-                            <td><label><?php echo $currentProducts->getDescription(); ?>&emsp;&emsp;&emsp;</label></td>           
+                            <td><label><?php echo $currentProducts->getDescription(); ?>&emsp;&emsp;&emsp;</label></td>
+                            <td><a href="../Product/ProductDetails.php?idProduct=<?php echo $currentProducts->getIdProduct() ?>">Ver producto</a><td>           
                         </tr>
                         <tr>
                             <?php
