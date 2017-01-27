@@ -21,10 +21,8 @@ else{
         header("location: ../../presentation/Account/AccountInterface.php?msg= ERROR! No se encontro la cuenta con el id: ". $idAccount);
     }
     else{
-		/*Se hace la consulta (eliminacion en la BD)*/
-		$result = $instAccountBusiness->deleteAccountBusiness($idAccount);
-		header("location: ../../presentation/Account/AccountInterface.php?msg=Se realizo la eliminación de la cuenta con el ID: ". $idAccount);
+		/*Se hace la consulta (desactivacion en la BD)*/
+		$result = $instAccountBusiness->deactivateAccountBusiness($idAccount);
+		header("location: ../../presentation/Account/AccountInterface.php?msg=Se realizo la desactivación de la cuenta con el ID: ". $idAccount);
 	}
 }
-
-

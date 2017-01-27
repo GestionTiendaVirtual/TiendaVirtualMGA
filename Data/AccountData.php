@@ -22,10 +22,10 @@ class AccountData extends Data {
     }
 
     /*Optiene todas las filas de la tabla ClientAccount*/
-    public function getAllAccountData() {
+    public function getAllAccountAssetsData() {
     	$conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select * from tbAccount";
+        $query = "select * from tbAccount where active = 1";
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         $array = [];
@@ -42,7 +42,7 @@ class AccountData extends Data {
     public function getAccountByIdData($idAccount) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select * from tbAccount where idAccount = ". $idAccount;
+        $query = "select * from tbAccount where idAccount = ". $idAccount . " AND active = 1";
         
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
@@ -63,7 +63,7 @@ class AccountData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $query = "INSERT INTO `mgasoluciones`.`tbAccount` (`idAccount`, `typeAccount`, `numberCard`, `DateExpiration`, `CSC`, `idClient`) VALUES ('". $account->idAccount ."', '". $account->typeAccount. "', '".  $account->cardNumber ."', '". $account->expirationDate."', '". $account->CSC."', '". $account->idClient."');";
+        $query = "INSERT INTO `mgasoluciones`.`tbAccount` (`idAccount`, `typeAccount`, `numberCard`, `DateExpiration`, `CSC`, `idClient`, `active`) VALUES ('". $account->idAccount ."', '". $account->typeAccount. "', '".  $account->cardNumber ."', '". $account->expirationDate."', '". $account->CSC."', '". $account->idClient."', 1);";
         
 
         $result = mysqli_query($conn, $query);
@@ -73,10 +73,10 @@ class AccountData extends Data {
 
     /*Elimina una cuenta específica*/
     /* DELETE FROM nombreTabla WHERE columna (>, <, =, etc.) valorEspecificado  */
-    public function deleteAccountData($idAccount){
+    public function deactivateAccountData($idAccount){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "DELETE FROM tbAccount WHERE idAccount = ".$idAccount;
+        $query = "Update tbAccount Set active = 0 WHERE idAccount = ".$idAccount;
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         return $result;

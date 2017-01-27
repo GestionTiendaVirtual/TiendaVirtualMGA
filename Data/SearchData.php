@@ -7,8 +7,8 @@ class SearchData extends Data{
     public function searchProductData($termSearch) {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select * from tbproduct where description like '%" . $termSearch . "%' OR model like '%" .
-         $termSearch . "%' OR brand like '%" . $termSearch . "%'  OR nameProduct like '%" . $termSearch . "%'");
+        $result = mysqli_query($conn, "select * from tbproduct where (description like '%" . $termSearch . "%' OR model like '%" .
+         $termSearch . "%' OR brand like '%" . $termSearch . "%'  OR nameProduct like '%" . $termSearch . "%') && active = 1");
         $arrayProduct = array();
 
         while ($row = mysqli_fetch_array($result)) {
