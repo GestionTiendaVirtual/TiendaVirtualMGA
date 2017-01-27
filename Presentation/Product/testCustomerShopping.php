@@ -57,10 +57,6 @@ and open the template in the editor.
             echo '<h1>total:</h1> ₡' . number_format($invoice->getTotalPurchase());
         }
         ?>
-        
-        <h1>Anular compra</h1>
-        
-        
     </body>
    
 </html>

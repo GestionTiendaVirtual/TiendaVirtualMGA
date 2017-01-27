@@ -25,6 +25,9 @@ class CustomerShoppingBusiness {
     public function cancelInvoice($id){
         return $this->customerShoppingDate->cancelInvoice($id);
     }
+    public function getCustomerInvoices(){
+        return $this->customerShoppingDate->getCustomerInvoices();
+    }
     
     
 }

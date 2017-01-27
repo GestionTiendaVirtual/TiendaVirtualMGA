@@ -26,6 +26,13 @@ class client {
         $this->passwordClient = $passwordClient;
         $this->addressClient = $addressClient;
     }
+    
+     static function ClientInvoice($name,$surname1,$surname2) {
+        
+        return new self($name,$surname1,$surname2,"","","","");
+       
+    }
+    
 
     function getIdClient() {
         return $this->idClient;
