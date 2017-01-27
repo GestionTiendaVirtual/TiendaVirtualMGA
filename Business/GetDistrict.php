@@ -2,18 +2,20 @@
 	
 	require ('../Data/conexion.php');
 	
-	$id_municipio = $_GET['municipio_id'];
+	$idCanton = $_GET['idCanton'];
 	
 	echo 'Selecciona Localidad: <select name="cbx_localidad" id="cbx_localidad">';
 	
-	$query = "SELECT idDistrito, nombreDistrito FROM tbdistrito WHERE idCanton = '$id_municipio' ORDER BY idDistrito";
+	
+
+	$query = "SELECT idDistrict, nameDistrict FROM tbdistrict WHERE idCanton = '$idCanton' ORDER BY idDistrict";
 	
 	if($resultado=$mysqli->query($query))
 	{
 		while($row = $resultado->fetch_assoc())
 		{
 		?>
-		<option value="<?php echo $row['idDistrito']; ?>"><?php echo $row['nombreDistrito']; ?></option>
+		<option value="<?php echo $row['idDistrict']; ?>"><?php echo $row['nameDistrict']; ?></option>
 		
 		<?php
 		}

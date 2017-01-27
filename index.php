@@ -9,11 +9,10 @@
         <h1>Inicio</h1>
         <br>
         <hr>
-        <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta</a>
+        <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta</a>  
+        <a href="./Presentation/DirectionClient.php">Dirección cliente</a>
         <a href="./Presentation/Product/ProductCreate.php">CRUD Producto</a>
-        <a href="./Presentation/combo.php">Dirección cliente</a>
         <a href="./Presentation/productOption.php">Muro de productos</a>
-
         <a href="./Presentation/Product/typeProductInterface.php">Tipo</a>
         <a href="./Presentation/Client/clientInterface.php">Cliente</a>
 
