@@ -31,7 +31,7 @@ class ProductData extends Data {
         $queryInsert = mysqli_query($conn, "insert into tbproduct values (" . $id . ",'" . $product->getBrand() . "','" .
                 $product->getModel() . "'," .
                 $product->getPrice() . ",'" . $product->getDescription() . "', 1," . $product->getTypeProduct() . " , "
-                . "'" . $product->getColor() . "', '" . $product->getName() . "');");
+                . "'" . $product->getColor() . "', '" . $product->getName() . "',1);");
 
         $resultIDNew = mysqli_query($conn, "SELECT * FROM tbproduct ORDER BY idProduct DESC LIMIT 1");
         $rowNew = mysqli_fetch_array($resultIDNew);
