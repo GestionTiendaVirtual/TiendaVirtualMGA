@@ -6,11 +6,11 @@
         <title>Actualizar Productos</title>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-        <script src="../JS/GenerateFields.js" type="text/javascript"></script>
+        <script src="../../JS/GenerateFields.js" type="text/javascript"></script>
     </head>
     <body>
         <?php
-        include '../Business/ProductBusiness.php';
+        include '../../Business/Product/ProductBusiness.php';
         $productBusiness = new ProductBusiness();
         $products = $productBusiness->getProducts();
         ?>
@@ -18,7 +18,7 @@
         <br>
         <table>
             <tr>
-                <td><a href="../index.php">Inicio</a></td>
+                <td><a href="../../index.php">Inicio</a></td>
                 <td><a href="ProductCreate.php">Registrar</a></td>
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
@@ -32,14 +32,14 @@
             <th>Nombre</th>
             <th>Marca</th>            
             <th>Modelo</th>
-            <th>Precio ₡</th>
+            <th>Precio</th>
             <th>Color</th>           
             <th>Descripción</th>           
             <?php
             foreach ($products as $currentProducts) {
                 $count = sizeof($currentProducts->getPathImages());
                 ?>
-                <form id="updateproduct" method="POST" action="../Business/ProductAction.php">
+            <form id="updateproduct" method="POST" action="../../Business/Product/ProductAction.php">
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
@@ -55,7 +55,7 @@
                     <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  
                                value= <?php
                                $price = number_format($currentProducts->getPrice());
-                               echo '"' . $price . '"';
+                               echo '"₡' . $price . '"';
                                ?>/></td>
                     <td><input type="text" id="txtColor" name="txtColor" 
                                data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
@@ -79,7 +79,7 @@
                     <?php
                     foreach ($currentProducts->getPathImages() as $path) {
                         ?>
-                    <form method="POST" action="../Business/ProductAction.php">
+                <form method="POST" action="../../Business/Product/ProductAction.php">
                         <td><img style="width: 150px; height: 100px;"src="<?php echo $path; ?>">&emsp;&emsp;<br>
                             <input type="submit" value="Eliminar"></td>
                         <input type="hidden" id="idProduct" name='idProduct' 

@@ -6,14 +6,14 @@
         <title>Registar Producto</title>          
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-        <script src="../JS/GenerateFields.js" type="text/javascript"></script>
+        <script src="../../JS/GenerateFields.js" type="text/javascript"></script>
     </head>
     <body>
     <center>
         <br>
         <table>
             <tr>
-                <td><a href="../index.php">Inicio</a></td>
+                <td><a href="../../index.php">Inicio</a></td>
                 <td><a href="ProductCreate.php">Registrar</a></td>
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
@@ -23,19 +23,19 @@
         <hr>
         <h1>Registar Producto</h1>
         <br>
-        <form id="createProduct" method="POST" action="../Business/ProductAction.php" enctype="multipart/form-data">
+        <form id="createProduct" method="POST" action="../../Business/Product/ProductAction.php" enctype="multipart/form-data">
             <table id="input">
                 <tr>
                     <td><label id="lblName" >Tipo producto:</label></td>
                     <td><select name="cbTypeProduct" id="cbTypeProduct">
                             <?php
-                            include '../Data/ProductData.php';
+                            include_once '../../Business/TypeProduct/typeProductBusiness.php';
                             /* obtiene todos los elementos de la BD y los carga en un select */
-                            $typeProduct = new ProductData();
+                            $typeProduct = new typeProductBusiness();
                             $result = $typeProduct->getTypeProduct();
                             foreach ($result as $currentType) {
                                 echo '<option value=' . $currentType->getIdTypeProduct() . '>' .
-                                $currentType->getNameTypeProduct() . '.</option>';
+                                $currentType->getNameTypeProduct() . '</option>';
                             }
                             ?>
                         </select> </td>                     
@@ -56,8 +56,8 @@
                                data-validation="alphanumeric" data-validation-allowing="-_"/></td
                 </tr>
                 <tr>
-                    <td><label id="lblPrice">Precio ₡ </label></td>
-                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  onpaste="return false"/></td>                    
+                    <td><label id="lblPrice">Precio</label></td>
+                    <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  onpaste="return false" value="₡"/></td>                    
                 </tr>
                 <tr>
                     <td><label id="lblColor">Color:</label></td>
@@ -109,7 +109,10 @@ if (isset($_GET['success'])) {
 }
 ?>
 <script language="JavaScript">
-
+    $("#txtColor").focus(function () {
+        var price = document.getElementById('txtPrice').value;
+        document.getElementById('txtPrice').value = '₡ ' + price;
+    });
 
 
 </script>

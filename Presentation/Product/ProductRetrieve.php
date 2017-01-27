@@ -7,7 +7,7 @@
     </head>
     <body>
         <?php
-        include '../Business/ProductBusiness.php';
+        include_once '../../Business/Product/ProductBusiness.php';
         $productBusiness = new ProductBusiness();
         $products = $productBusiness->getProducts();
         ?>

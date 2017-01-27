@@ -47,7 +47,7 @@
         <a href="../../index.php"><h3>Inicio</h3></a>
         <h2>Cuentas &rarr;listado</h2>
         <?php
-            $result = $accountBusiness->getAllAccountBusiness();
+            $result = $accountBusiness->getAllAccountAssetsBusiness();
             foreach ($result as $tem) {
                 echo "
                         Id cuenta: ". $tem->idAccount.
@@ -89,23 +89,23 @@
         <br>
 
         <!--=============================================================================-->
-        <h2>Cuentas &rarr;Eliminar</h2>
+        <h2>Cuentas &rarr;Desactivar</h2>
         
 
         <!-- Form -->
-        <form method="GET" action="../../Business/Account/deleteAccount.php">
+        <form method="GET" action="../../Business/Account/DeactivateAccount.php">
             <label> ID Cuenta </label>&nbsp;
             <input type="text" name="idAccount" placeholder="ID Cuenta">
-            <input type="submit" value="Eliminar" ><br><br>
+            <input type="submit" value="Deactivate" ><br><br>
         </form>
         <!-- Fin del form -->
      
         <!-- =========================================================================================== -->
-            <h2>Cuentas &rarr;Actualizar/Eliminar</h2>
+            <h2>Cuentas &rarr;Actualizar/Deactivar</h2>
             
             <!-- Listado de cuentas para actualizarlas-->
                 <?php
-                    $result = $accountBusiness->getAllAccountBusiness();
+                    $result = $accountBusiness->getAllAccountAssetsBusiness();
                     foreach ($result as $tem) {
                         echo '<form method="POST" action="../../Business/Account/updateAccount.php?idAccount='.$tem->idAccount.'">';
                         ?>
@@ -129,7 +129,7 @@
                             <input type="text" name="expirationDate" value= <?php echo "'".$tem->expirationDate."'"?>>
                             
                             <input type="submit" value="Actualizar" >
-                            <a href=<?php echo "../../Business/Account/deleteAccount.php?idAccount=".$tem->idAccount; ?> >Eliminar</a>
+                            <a href=<?php echo "../../Business/Account/DeactivateAccount.php?idAccount=".$tem->idAccount; ?> >Desactivar</a>
                                
                         </form>
 

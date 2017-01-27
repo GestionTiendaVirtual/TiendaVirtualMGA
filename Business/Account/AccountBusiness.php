@@ -4,16 +4,16 @@ include "../../Data/AccountData.php";
 class AccountBusiness extends AccountData{
 
 
-	public function getAllAccountBusiness(){
-		return $this->getAllAccountData();
+	public function getAllAccountAssetsBusiness(){
+		return $this->getAllAccountAssetsData();
 	}
 
 	public function insertAccountBusiness($account){
 		return $this->insertAccountData($account);
 	}
 
-	public function deleteAccountBusiness($idAccount){
-		return $this->deleteAccountData($idAccount);
+	public function deactivateAccountBusiness($idAccount){
+		return $this->deactivateAccountData($idAccount);
 	}
 	
 	public function getIDBusiness(){

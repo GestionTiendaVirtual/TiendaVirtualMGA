@@ -13,7 +13,7 @@
         <br>
         <table>
             <tr>
-                <td><a href="../index.php">Inicio</a></td>
+                <td><a href="../../index.php">Inicio</a></td>
                 <td><a href="ProductCreate.php">Registrar</a></td>
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
@@ -29,7 +29,7 @@
         ?>
         <h1>Registar Imagen a&emsp;<?php echo $name; ?></h1>
         <br>
-        <form id="createProduct" method="POST" action="../Business/ProductAction.php" enctype="multipart/form-data">
+        <form id="createProduct" method="POST" action="../../Business/Product/ProductAction.php" enctype="multipart/form-data">
             <table id="input">
                 <tr>
                     <td><label id="lblColor">Imagen:</label></td>
@@ -49,7 +49,7 @@
 
     </center>
 </body>
- <script src="../JS/GenerateFieldsImages.js" type="text/javascript"></script>
+ <script src="../../JS/GenerateFieldsImages.js" type="text/javascript"></script>
 <?php
 if (isset($_GET['success'])) {
     echo '<script>                        

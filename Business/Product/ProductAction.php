@@ -1,7 +1,7 @@
 <?php
 
-include '../Domain/Product.php';
-include './ProductBusiness.php';
+include_once '../../Domain/Product.php';
+include_once './ProductBusiness.php';
 
 if (isset($_POST['optionCreate'])) {
 
@@ -14,14 +14,15 @@ if (isset($_POST['optionCreate'])) {
     $typeProduct = $_POST['cbTypeProduct'];
     $description = $_POST['txtDescription'];
     $price = str_replace(",", "", $price);
-
+    $price = str_replace("₡", "", $price);
+    
     $arrayImages = [];
     $flag = false;
     for ($i = 0; $i <= $count; $i++) {
 
         $fileImage = 'fileImage' . $i;
         if ($_FILES[$fileImage]["error"] > 0) {
-            header('location: ../Presentation/ProductCreate.php?error=errorData');
+            header('location: ../../Presentation/Product/ProductCreate.php?error=errorData');
         } else {
 
             $allowed = array("image/jpg", "image/jpeg", "image/gif", "image/png");
@@ -30,7 +31,7 @@ if (isset($_POST['optionCreate'])) {
             if (in_array($_FILES[$fileImage]['type'], $allowed) &&
                     $_FILES[$fileImage]['size'] <= $limit_kb * 1024) {
 
-                $path = "../images/" . $_FILES[$fileImage]['name'];
+                $path = "../../images/" . $_FILES[$fileImage]['name'];
 
                 /* verifiacion imagen a isertar no exista */
                 if (!file_exists($path)) {
@@ -41,10 +42,10 @@ if (isset($_POST['optionCreate'])) {
                         $flag = true;
                     }
                 } else {
-                    header('location: ../Presentation/ProductCreate.php?errorExis=error');
+                    header('location: ../../Presentation/Product/ProductCreate.php?errorExis=error');
                 }
             } else {
-                header('location: ../Presentation/ProductCreate.php?errorSize=error');
+                header('location: ../../Presentation/Product/ProductCreate.php?errorSize=error');
             }
         }
     }
@@ -57,12 +58,12 @@ if (isset($_POST['optionCreate'])) {
         $result = $productBusiness->insertProduct($product, $arrayImages);
         echo $result;
         if ($result == true) {
-            header('location: ../Presentation/ProductCreate.php?success=success');
+            header('location: ../../Presentation/Product/ProductCreate.php?success=success');
         } else {
-            header('location: ../Presentation/ProductCreate.php?errorInsert=errorInsert');
+            header('location: ../../Presentation/Product/ProductCreate.php?errorInsert=errorInsert');
         }
     } else {
-        header('location: ../Presentation/ProductCreate.php?error=errorData');
+        header('location: ../../Presentation/Product/ProductCreate.php?error=errorData');
     }
     
 } else if (isset($_POST['optionUpdate'])) {
@@ -74,6 +75,7 @@ if (isset($_POST['optionCreate'])) {
     $color = $_POST['txtColor'];
     $description = $_POST['txtDescription'];
     $price = str_replace(",", "", $price);
+    $price = str_replace("₡", "", $price);
 
     if (strlen($brand) >= 2 && strlen($model) >= 2 && strlen($color) >= 2 && is_numeric($price) && strlen($description) >= 2) {
 
@@ -82,12 +84,12 @@ if (isset($_POST['optionCreate'])) {
         $productBusiness = new ProductBusiness();
         $result = $productBusiness->updateProduct($product);
         if ($result == true) {
-            header('location: ../Presentation/ProductUpdate.php?success=success');
+            header('location: ../../Presentation/Product/ProductUpdate.php?success=success');
         } else {
-            header('location: ../Presentation/ProductUpdate.php?errorUpdate=errorUpdate');
+            header('location: ../../Presentation/Product/ProductUpdate.php?errorUpdate=errorUpdate');
         }
     } else {
-        header('location: ../Presentation/ProductUpdate.php?error=errorData');
+        header('location: ../../Presentation/Product/ProductUpdate.php?error=errorData');
     }
 } else if (isset($_POST['optionDelete'])) {
 
@@ -103,12 +105,12 @@ if (isset($_POST['optionCreate'])) {
             foreach ($paths as $currentPath) {
                 unlink($currentPath);
             }
-            header('location: ../Presentation/ProductDelete.php?success=success');
+            header('location: ../../Presentation/Product/ProductDelete.php?success=success');
         } else {
-            header('location: ../Presentation/ProductDelete.php?errorDelete=errorDelete');
+            header('location: ../../Presentation/Product/ProductDelete.php?errorDelete=errorDelete');
         }
     } else {
-        header('location: ../Presentation/ProductUpdate.php?error=errorData');
+        header('location: ../../Presentation/Product/ProductUpdate.php?error=errorData');
     }
 } else if (isset($_POST['optionDeleteImg'])) {
 
@@ -118,9 +120,9 @@ if (isset($_POST['optionCreate'])) {
     $result = $productBusiness->deleteImageProduct($idProduct, $path);
     if ($result == true) {
         unlink($path);
-        header('location: ../Presentation/ProductUpdate.php?success=success');
+        header('location: ../../Presentation/Product/ProductUpdate.php?success=success');
     } else {
-        header('location: ../Presentation/ProductUpdate.php?errorUpdate=error');
+        header('location: ../../Presentation/Product/ProductUpdate.php?errorUpdate=error');
     }
 } else if (isset($_POST['optionInsertImage'])) {
 
@@ -132,7 +134,7 @@ if (isset($_POST['optionCreate'])) {
 
         $fileImage = 'fileImage' . $i;
         if ($_FILES[$fileImage]["error"] > 0) {
-            header('location: ../Presentation/ProductUpdate.php?error=errorData');
+            header('location: ../../Presentation/Product/ProductUpdate.php?error=errorData');
         } else {
 
             $allowed = array("image/jpg", "image/jpeg", "image/gif", "image/png");
@@ -141,7 +143,7 @@ if (isset($_POST['optionCreate'])) {
             if (in_array($_FILES[$fileImage]['type'], $allowed) &&
                     $_FILES[$fileImage]['size'] <= $limit_kb * 1024) {
 
-                $path = "../images/" . $_FILES[$fileImage]['name'];
+                $path = "../../images/" . $_FILES[$fileImage]['name'];
 
                 /* verifiacion imagen a isertar no exista */
                 if (!file_exists($path)) {
@@ -152,10 +154,10 @@ if (isset($_POST['optionCreate'])) {
                         $flag = true;
                     }
                 } else {
-                    header('location: ../Presentation/ProductUpdate.php?errorExis=error');
+                    header('location: ../../Presentation/Product/ProductUpdate.php?errorExis=error');
                 }
             } else {
-                header('location: ../Presentation/ProductUpdate.php?errorSize=error');
+                header('location: ../../Presentation/Product/ProductUpdate.php?errorSize=error');
             }
         }
     }
@@ -163,9 +165,9 @@ if (isset($_POST['optionCreate'])) {
         $product = new ProductBusiness();
         $result = $product->insertImageProduct($idProduct, $arrayImages);
         if ($result == true) {
-            header('location: ../Presentation/ProductUpdate.php?success=success');
+            header('location: ../../Presentation/Product/ProductUpdate.php?success=success');
         } else {
-            header('location: ../Presentation/ProductUpdate.php?errorUpdate=error');
+            header('location: ../../Presentation/Product/ProductUpdate.php?errorUpdate=error');
         }
     }
 }

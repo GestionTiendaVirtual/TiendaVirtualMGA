@@ -14,7 +14,7 @@ class AccountData extends Data {
     public function getIDData(){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select max(idCuenta) from tbCuenta";
+        $query = "select max(idAccount) from tbAccount";
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         $row = mysqli_fetch_array($result);
@@ -22,16 +22,16 @@ class AccountData extends Data {
     }
 
     /*Optiene todas las filas de la tabla ClientAccount*/
-    public function getAllAccountData() {
+    public function getAllAccountAssetsData() {
     	$conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select * from tbCuenta";
+        $query = "select * from tbAccount where active = 1";
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-            $myAccount = new  Account($row['CSC'], $row['FechaVencimiento'], $row['idCliente'],
-             $row['idCuenta'], $row['NumeroTarjeta'], $row['TipoCuenta']);
+            $myAccount = new  Account($row['CSC'], $row['DateExpiration'], $row['idClient'],
+             $row['idAccount'], $row['numberCard'], $row['typeAccount']);
 
             array_push($array, $myAccount);
         }
@@ -42,15 +42,15 @@ class AccountData extends Data {
     public function getAccountByIdData($idAccount) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select * from tbCuenta where idCuenta = ". $idAccount;
+        $query = "select * from tbAccount where idAccount = ". $idAccount . " AND active = 1";
         
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
 
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-            $myAccount = new  Account($row['CSC'], $row['FechaVencimiento'], $row['idCliente'],
-             $row['idCuenta'], $row['NumeroTarjeta'], $row['TipoCuenta']);
+            $myAccount = new  Account($row['CSC'], $row['DateExpiration'], $row['idClient'],
+             $row['idAccount'], $row['numberCard'], $row['typeAccount']);
             array_push($array, $myAccount);
         }
         return $array;#si no hay resultados en la BD entonces devuelve nulo
@@ -63,7 +63,7 @@ class AccountData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $query = "INSERT INTO `mgasolucionesdb`.`tbcuenta` (`idCuenta`, `TipoCuenta`, `NumeroTarjeta`, `FechaVencimiento`, `CSC`, `idCliente`) VALUES ('". $account->idAccount ."', '". $account->typeAccount. "', '".  $account->cardNumber ."', '". $account->expirationDate."', '". $account->CSC."', '". $account->idClient."');";
+        $query = "INSERT INTO `mgasoluciones`.`tbAccount` (`idAccount`, `typeAccount`, `numberCard`, `DateExpiration`, `CSC`, `idClient`, `active`) VALUES ('". $account->idAccount ."', '". $account->typeAccount. "', '".  $account->cardNumber ."', '". $account->expirationDate."', '". $account->CSC."', '". $account->idClient."', 1);";
         
 
         $result = mysqli_query($conn, $query);
@@ -73,10 +73,10 @@ class AccountData extends Data {
 
     /*Elimina una cuenta específica*/
     /* DELETE FROM nombreTabla WHERE columna (>, <, =, etc.) valorEspecificado  */
-    public function deleteAccountData($idAccount){
+    public function deactivateAccountData($idAccount){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "DELETE FROM tbCuenta WHERE idCuenta = ".$idAccount;
+        $query = "Update tbAccount Set active = 0 WHERE idAccount = ".$idAccount;
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         return $result;
@@ -87,10 +87,10 @@ class AccountData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $query = "UPDATE tbCuenta SET idCuenta=".$account->idAccount.", TipoCuenta= '".$account->typeAccount.
-         "', NumeroTarjeta= '".$account->cardNumber."', FechaVencimiento= '".$account->expirationDate.
-         "', CSC='".$account->CSC."', idCliente= '".$account->idClient.
-         "' where idCuenta = ".$account->idAccount;
+        $query = "UPDATE tbAccount SET idAccount=".$account->idAccount.", typeAccount= '".$account->typeAccount.
+         "', numberCard= '".$account->cardNumber."', DateExpiration= '".$account->expirationDate.
+         "', CSC='".$account->CSC."', idClient= '".$account->idClient.
+         "' where idAccount = ".$account->idAccount;
         
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
