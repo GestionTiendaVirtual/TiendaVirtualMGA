@@ -21,15 +21,15 @@ class clientData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se consulta por el ultimo id registrado para generar el consecutivo
-        $resultID = mysqli_query($conn, "SELECT * FROM tbcliente ORDER BY idCliente DESC LIMIT 1");
+        $resultID = mysqli_query($conn, "SELECT * FROM tbclient ORDER BY idClient DESC LIMIT 1");
         $row = mysqli_fetch_array($resultID);
         if (sizeof($row) >= 1) {
-            $id = $row['idCliente'] + 1;
+            $id = $row['idClient'] + 1;
         } else {
             $id = 1;
         }
         //Se realiza el insert en la base de datos
-        $queryInsert = mysqli_query($conn, "insert into tbcliente values (". 
+        $queryInsert = mysqli_query($conn, "insert into tbclient values (". 
                 $id . ",'" .
                 $client->getNameClient() . "','" .
                 $client->getLastNameFClient() . "','" .
@@ -37,7 +37,8 @@ class clientData extends Data {
                 $client->getEmailClient() . "','" .
                 $client->getUserClient() . "','" . 
                 $client->getPasswordClient() . "','" . 
-                $client->getAddressClient() . "')");
+                $client->getAddressClient() .  
+                "',1)");
         mysqli_close($conn);
 
         if ($queryInsert) {
@@ -57,17 +58,19 @@ class clientData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "SELECT * FROM tbcliente order by idcliente asc");
+        $result = mysqli_query($conn, "SELECT * FROM tbclient where active=1 order by idclient asc");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
-            $currentData = new client($row['NombreCliente'], $row['ApellidoPCliente'], $row['ApellidoSCliente'], $row['EmailCliente'], $row['UsuarioCliente'], $row['ContrasenaCliente'], $row['DireccionCliente']);
-            $currentData->setIdClient($row['idCliente']);
+            $currentData = new client($row['nameClient'], $row['surname1Client'], 
+                    $row['surname2Client'], $row['emailClient'], $row['userClient'], 
+                    $row['passwordClient'], $row['addressClient']);
+            $currentData->setIdClient($row['idClient']);
             array_push($array, $currentData);
         }
         return $array;
     }
 
-//fin función getTypeProducts
+//fin función getClient
 
     /*
      * Función que permite la actualización de un tipo de producto en la base de datos
@@ -78,14 +81,14 @@ class clientData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la actualizacion en la base de datos
-        $queryUpdate = mysqli_query($conn, "update tbcliente set NombreCliente = '"
-                . $client->getNameClient() . "',ApellidoPCliente = '"
-                . $client->getLastNameFClient() . "',ApellidoSCliente = '"
-                . $client->getLastNameSClient() . "',EmailCliente = '"
-                . $client->getEmailClient() . "',UsuarioCliente = '"
-                . $client->getUserClient() . "',ContrasenaCliente = '"
-                . $client->getPasswordClient() . "',DireccionCliente = '"
-                . $client->getAddressClient() . "' where tbcliente.idCliente = "
+        $queryUpdate = mysqli_query($conn, "update tbclient set nameClient = '"
+                . $client->getNameClient() . "',surname1Client = '"
+                . $client->getLastNameFClient() . "',surname2Client = '"
+                . $client->getLastNameSClient() . "',emailClient = '"
+                . $client->getEmailClient() . "',userClient = '"
+                . $client->getUserClient() . "',passwordClient = '"
+                . $client->getPasswordClient() . "',addressClient = '"
+                . $client->getAddressClient() . "' where tbclient.idClient = "
                 . $client->getIdClient() . ";");
         mysqli_close($conn);
 
@@ -96,7 +99,7 @@ class clientData extends Data {
         }
     }
 
-    //fin función updateTypeProduct
+    //fin función updateClient
 
     /*
      * Función que permite realizar la eliminación de algun registro de clientes en la base de datos
@@ -107,7 +110,7 @@ class clientData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDelete = mysqli_query($conn, "delete from tbcliente where idCliente = '"
+        $queryDelete = mysqli_query($conn, "update tbclient set active=0 where idClient = '"
                 . $idClient . "';");
         mysqli_close($conn);
 
@@ -118,5 +121,5 @@ class clientData extends Data {
         }
     }
 
-//fin función deleteTypeProduct
+//fin función deleteClient
 }

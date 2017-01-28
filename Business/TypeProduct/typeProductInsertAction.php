@@ -10,11 +10,11 @@ if (strlen($nameTypeProduct) >= 2) {
     $typeProductBusiness = new TypeProductBusiness();
     $result = $typeProductBusiness->insertTypeProduct($typeProduct);
     if($result == true){
-        header('location: ../../Presentation/Product/typeProductInterface.php?success=success');
+        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?success=success');
     }else{
-        header('location: ../../Presentation/Product/typeProductInterface.php?errorInsert=errorInsert');
+        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorInsert=errorInsert');
     }
     
 } else {
-    header('location: ../../Presentation/Product/typeProductInterface.php?error=errorData'.strlen($nameTypeProduct));
+    header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=errorData'.strlen($nameTypeProduct));
 }
