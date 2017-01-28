@@ -31,7 +31,7 @@ class ProductData extends Data {
         $queryInsert = mysqli_query($conn, "insert into tbproduct values (" . $id . ",'" . $product->getBrand() . "','" .
                 $product->getModel() . "'," .
                 $product->getPrice() . ",'" . $product->getDescription() . "', 1," . $product->getTypeProduct() . " , "
-                . "'" . $product->getColor() . "', '" . $product->getName() . "');");
+                . "'" . $product->getColor() . "', '" . $product->getName() . "',1);");
 
         $resultIDNew = mysqli_query($conn, "SELECT * FROM tbproduct ORDER BY idProduct DESC LIMIT 1");
         $rowNew = mysqli_fetch_array($resultIDNew);
@@ -73,7 +73,7 @@ class ProductData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select * from tbproduct order by brand asc");
+        $result = mysqli_query($conn, "SELECT * FROM `tbproduct` WHERE active != 0 ORDER BY brand ASC;");        
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
@@ -86,6 +86,7 @@ class ProductData extends Data {
             }
             array_push($array, $currentData);
         }
+        mysqli_close($conn);
         return $array;
     }
 
@@ -125,11 +126,10 @@ class ProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDeleteImage = mysqli_query($conn, "delete from tbimageproduct where idProduct = " . $idProduct . ";");
-        $queryDelete = mysqli_query($conn, "delete from tbproduct where idProduct = " . $idProduct . ";");
+        $queryDelete = mysqli_query($conn, "update tbproduct set active = 0 where idProduct = " . $idProduct . ";");
         mysqli_close($conn);
 
-        if ($queryDelete == true && $queryDeleteImage == true) {
+        if ($queryDelete) {
             return true;
         } else {
             return false;
@@ -184,20 +184,6 @@ class ProductData extends Data {
 
 //fin función deleteProduct
 
-
-    function getTypeProduct() {
-
-        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-        $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "SELECT * FROM tbtypeproduct order by idTypeProduct asc");
-        $array = array();
-        while ($row = mysqli_fetch_array($result)) {
-            $currentData = new TypeProduct($row['NameTypeProduct']);
-            $currentData->setIdTypeProduct($row['idTypeProduct']);
-            array_push($array, $currentData);
-        }
-        return $array;
-    }
 
     public function getProductByID($idProduct){
 

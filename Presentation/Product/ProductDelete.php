@@ -19,7 +19,7 @@
                 <td><a href="ProductCreate.php">Registrar</a></td>
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
-                <td><a href="ProductDelete.php">Eliminar</a><td>
+                <td><a href="ProductDelete.php">Desactivar</a><td>
             </tr>
         </table>
         <hr>
@@ -48,7 +48,7 @@
                     <input type="hidden" id="path" name="path" value="<?php echo $currentProducts->getPathImagesDelete(); ?>" />     
                     <input type="hidden" id="optionDelete" name="optionDelete" value="delete" />     
 
-                    <td><input type="submit" id="btnAccept" name="btnAccept" value="Eliminar" /></td>                
+                    <td><input type="submit" id="btnAccept" name="btnAccept" value="Desactivar" /></td>                
                     </tr>
                 </form>
 

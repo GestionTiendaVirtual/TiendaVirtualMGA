@@ -11,15 +11,15 @@ if ($delete) {
         $typeProductBusiness = new TypeProductBusiness();
         $result = $typeProductBusiness->deleteTypeProduct($idTypeProduct);
         if ($result == true) {
-            header('location: ../../Presentation/Product/typeProductInterface.php?success=success');
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?success=success');
         } else {
-            header('location: ../../Presentation/Product/typeProductInterface.php?errorDelete=errorDelete');
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorDelete=errorDelete');
         }
     } else {
-        header('location: ../../Presentation/Product/typeProductInterface.php?error=Valor no numerico');
+        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=Valor no numerico');
     }
 }
-elseif ($_POST['update']) {
+elseif ($update) {
     include './typeProductBusiness.php';
     include_once ''; '../../Domain/typeProduct.php';
     if (is_numeric($idTypeProduct) && strlen($nameTypeProduct) >= 2) {
@@ -28,13 +28,13 @@ elseif ($_POST['update']) {
         $typeProductBusiness = new TypeProductBusiness();
         $result = $typeProductBusiness->updateTypeProduct($typeProduct);
         if ($result == true) {
-            header('location: ../../Presentation/Product/typeProductInterface.php?success=success');
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?success=success');
         } else {
-            header('location: ../../Presentation/Product/typeProductInterface.php?errorUpdate=errorUpdate');
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorUpdate=errorUpdate');
         }
     } else {
-        header('location: ../../Presentation/Product/typeProductInterface.php?error=errorData');
+        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=errorData');
     }
 } else {
-        header('location: ../../Presentation/Product/typeProductInterface.php?error=errorChange');
+        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=errorChange');
     }
