@@ -18,7 +18,7 @@ class SearchData extends Data{
             $currentData->setIdProduct($idProduct);
             
             $resultImage = mysqli_query($conn, "select * from tbimageproduct where idProduct = " . $idProduct);
-            while ($rowImage = mysqli_fetch_array($resultImage)) {
+            if ($rowImage = mysqli_fetch_array($resultImage)) {
                 $currentData->setPathImages($rowImage['pathImage']);
             }
             array_push($arrayProduct, $currentData);
