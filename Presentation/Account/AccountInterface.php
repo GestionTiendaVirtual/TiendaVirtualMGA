@@ -68,9 +68,6 @@
         <form method="POST" action="../../Business/Account/insertAccount.php">
             <label>ID Cuenta</label>
             <input type="text" name="idAccount" value= <?php echo "'".$idAccount."'"?> readonly="readonly">
-
-            <label>ID Cliente</label>
-            <input type="text" name="idClient" placeholder="ID cliente">
             
             <label>CSC</label>
             <input type="text" name="CSC" placeholder="CSC">
@@ -81,9 +78,9 @@
             <label>Numero de Tarjeta</label>
             <input type="text" name="cardNumber" placeholder="Numero de Cuenta">
            
-            <br><br><label>Fecha de expiración (aaaa-mm-dd)</label>
-            <input type="text" name="expirationDate" placeholder="aaaa-mm-dd">
-           <input type="submit" value="Insertar" >   
+            <br><br><label>Fecha de expiración</label>
+            <input type="date" name="expirationDate" value="<?php echo date('Y-m-d');?>">
+            <input type="submit" value="Insertar" >   
 
         </form>
         <br>
@@ -114,7 +111,7 @@
                             <input type="text" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?> readonly="readonly">
                             
                             <label> ID Cliente </label>
-                            <input type="text" name="idClient" value= <?php echo "'".$tem->idClient."'"?>>                            
+                            <input type="text" name="idClient" value= <?php echo "'".$tem->idClient."'"?> readonly="readonly">                            
                             
                             <label> CSC </label>
                             <input type="text" name="CSC" value= <?php echo "'".$tem->CSC."'"?>>
@@ -126,7 +123,7 @@
                             <input type="text" name="cardNumber" value= <?php echo "'".$tem->cardNumber."'"?>>
                             
                             <br><br><label> Fecha de expiración </label>
-                            <input type="text" name="expirationDate" value= <?php echo "'".$tem->expirationDate."'"?>>
+                            <input type="date" name="expirationDate" value= <?php echo "'".$tem->expirationDate."'"?>>
                             
                             <input type="submit" value="Actualizar" >
                             <a href=<?php echo "../../Business/Account/DeactivateAccount.php?idAccount=".$tem->idAccount; ?> >Desactivar</a>
