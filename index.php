@@ -13,8 +13,7 @@
         <a href="./Presentation/DirectionClient.php">Dirección cliente</a>
         <a href="./Presentation/Product/ProductCreate.php">CRUD Producto</a>
         <a href="./Presentation/productOption.php">Muro de productos</a>
-        <a href="./Presentation/Product/typeProductInterface.php">Tipo</a>
-        <a href="./Presentation/Client/clientInterface.php">Cliente</a>
+
 
         <hr>
 
@@ -22,6 +21,8 @@
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
                 ?>
+                <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo</a>
+                <a href="./Presentation/Client/clientInterface.php">Cliente</a>
                 <a href="./Presentation/Search/Search.php">Búsqueda.</a>
                 <a href="Business/loginAction.php?logout">Cerrar</a>
                 <hr>   

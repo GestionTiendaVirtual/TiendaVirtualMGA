@@ -1,3 +1,8 @@
+<?php
+if (@session_start() == true) {
+    if (isset($_SESSION["idUser"])) {
+        ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -55,6 +60,25 @@
             }
             ?>
         </table>
+ <?php
+                    include '../../Business/Details/detailsBusiness.php';
+                    $detailsBusiness = new detailsBusiness();
+                    $wish=$detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
+                            ?>
+                <form id="wish" method="POST" action="../../Business/Details/desireAction.php">
+                    
+                    <input type="hidden" id="idProductWish" name="idProductWish" value="<?php echo $_GET['idProduct'] ?>">                    
+                    <input type="hidden" id="idclientWish" name="idClientWish" value="<?php echo $_SESSION["idUser"] ?>">                    
+                    <input type="checkbox" name="checkWish" <?php
+                        if ($wish) {
+                            echo 'checked="true"';
+                        } 
+                        ?>/> *Lo deseo <br>
+                    <input type="submit" name ="change" id="change" value="Desear" >
+        
     </center>
 </body>
 </html>
+    <?php
+    }
+}
