@@ -22,8 +22,8 @@ class ProductBusiness {
     public function updateProduct($product){
         return $this->productData->updateProduct($product);
     }
-    public function deleteProduct($idProduct){
-        return $this->productData->deleteProduct($idProduct);
+    public function stateProduct($idProduct){
+        return $this->productData->stateProduct($idProduct);
     }
     public function deleteImageProduct($idProduct,$path){
         return $this->productData->deleteImageProduct($idProduct,$path);

@@ -19,11 +19,11 @@
                 <td><a href="ProductCreate.php">Registrar</a></td>
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
-                <td><a href="ProductDelete.php">Desactivar</a><td>
+                <td><a href="ProductState.php">Estado</a><td>
             </tr>
         </table>
         <hr>
-        <h1>Eliminar Productos</h1>
+        <h1>Estado de Productos</h1>
         <br>        
         <table>
             <th>Nombre</th>
@@ -63,11 +63,11 @@
 <?php
 if (isset($_GET['success'])) {
     echo '<script>                        
-             document.getElementById("txtMessage").innerHTML = "Eliminación con éxito";
+             document.getElementById("txtMessage").innerHTML = "Se desactivó con éxito";
           </script>';
 } else if (isset($_GET['errorDelete'])) {
     echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Eliminación fallida";
+              document.getElementById("txtMessage").innerHTML = "Desactivación fallida";
           </script>';
 } else if (isset($_GET['errorData'])) {
     echo ' <script>                

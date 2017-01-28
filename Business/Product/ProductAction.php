@@ -99,18 +99,18 @@ if (isset($_POST['optionCreate'])) {
     if (is_numeric($idProduct)) {
 
         $productBusiness = new ProductBusiness();
-        $result = $productBusiness->deleteProduct($idProduct);
+        $result = $productBusiness->stateProduct($idProduct);
         $paths = split(";", $path);
         if ($result == true) {
             foreach ($paths as $currentPath) {
                 unlink($currentPath);
             }
-            header('location: ../../Presentation/Product/ProductDelete.php?success=success');
+            header('location: ../../Presentation/Product/ProductState.php?success=success');
         } else {
-            header('location: ../../Presentation/Product/ProductDelete.php?errorDelete=errorDelete');
+            header('location: ../../Presentation/Product/ProductState.php?errorDelete=errorDelete');
         }
     } else {
-        header('location: ../../Presentation/Product/ProductUpdate.php?error=errorData');
+        header('location: ../../Presentation/Product/ProductState.php?error=errorData');
     }
 } else if (isset($_POST['optionDeleteImg'])) {
 
