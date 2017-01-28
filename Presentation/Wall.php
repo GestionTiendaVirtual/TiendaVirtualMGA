@@ -1,14 +1,11 @@
 <?php
 	require ('../Data/conexion.php');
-	//$idTypeProduct = $_POST['cbxProducto'];
+	$idTypeProduct = $_POST['cbxProducto'];
 	//echo $idTypeProduct;
 	//$query = "SELECT * FROM tbcomment WHERE idProduct='$idTypeProduct'";
-	$ultimo= "SELECT MAX(idComment) from tbcomment";
-
 	
 
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -17,19 +14,20 @@
 </head>
 <body>
 	<H1>Muro de productos</H1>
-	<form action="" method="POST">
-		<textarea name="comment"></textarea>
-		<input type="hidden" name="idProduct" value="<?php echo $idTypeProduct; ?>">
-		
+	<form action="../Business/Wall/insertComment.php" method="POST">
+		<textarea id="comment" name="comment"></textarea>
+		<input type="hidden" id="idProduct" name="idProduct" value="<?php echo $idTypeProduct; ?>">
+		<input type="submit" name="boton" value="boton" id="Registrar">
 	</form>
 
 	<?php
-		if($resultado=$mysqli->query($ultimo))
-		{
-			$row = $resultado->fetch_assoc();
-			echo $row['MAX(idComment)']+1;
-			echo '<br></br>';
-		}
+
+        include '../Business/Wall/WallBusiness.php';
+        $wallBusiness = new WallBusiness();
+        $result = $wallBusiness->insertComment();
+
+       
+		
 
 	?>
 

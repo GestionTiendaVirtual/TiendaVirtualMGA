@@ -1,7 +1,6 @@
 <?php
 	
-	require ('../Data/conexion.php');
-	
+	require ('../../Data/conexion.php');
 	$idProvince = $_GET['idProvince'];
 	
 	echo 'Seleccione el canton : <select onChange="getDistrict(this.value);" name="cbxCanton" id="cbxCanton">';

@@ -1,5 +1,5 @@
 <?php
-	require ('../Data/conexion.php');
+	require ('../../Data/conexion.php');
 	
 	echo 'Selecciona Provincia : <select onChange="getCanton(this.value);" name="cbx_provincia" id="cbx_provincia">';
 	

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Direccion de clientes</title>
-		<script src="../script/js.js"></script>
+		<script src="../Data/DirectionClient.php"></script>
 	</head>
 	<body onload="getProvincia();">
 
@@ -14,7 +14,6 @@
 		<div id="cantonList"></div> <br />
 		
 		<div id="distritoList"></div>
-			
-	
+				
 </body>
 </html>
