@@ -11,6 +11,7 @@
         <form action="Wall.php" method="POST">
          	<div id="producto"></div> <br /> 
         </form>
+        <a href="../../index.php">Atras</a>
  
     
 </body>

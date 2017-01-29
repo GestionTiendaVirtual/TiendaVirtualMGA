@@ -15,7 +15,7 @@
 	<form action="../../Business/Wall/insertComment.php" method="POST">
 		<textarea id="comment" name="comment"></textarea>
 		<input type="hidden" id="idProduct" name="idProduct" value="<?php echo $idTypeProduct;?>">
-		<input type="submit" name="boton" value="boton" id="Registrar">
+		<input type="submit" name="boton" value="Ingresar comentario" id="Registrar">
 	</form>
 
 	<?php
@@ -24,6 +24,7 @@
         $wallBusiness = new WallBusiness();
         $result = $wallBusiness->getAllCommentBusiness();
 	?>
+	<a href="ProductOption.php">Atras</a>
 
 
 </body>
