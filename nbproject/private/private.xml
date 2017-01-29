@@ -5,9 +5,9 @@
         <group>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/Details/desireAction.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductDetails.php</file>
-            <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/ProductData.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/Details/detailsBusiness.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/detailsData.php</file>
-            <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/clientData.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/Data.php</file>
         </group>
     </open-files>
 </project-private>

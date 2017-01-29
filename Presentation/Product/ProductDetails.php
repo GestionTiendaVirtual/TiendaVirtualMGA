@@ -65,7 +65,7 @@ if (@session_start() == true) {
                 include '../../Business/Details/detailsBusiness.php';
                 $detailsBusiness = new detailsBusiness();
                 $wish = $detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
-                echo "valor de deseo= ".$wish;
+                
                 ?>
                 <form id="wish" method="POST" action="../../Business/Details/desireAction.php">
 
@@ -74,9 +74,9 @@ if (@session_start() == true) {
                     <input type="checkbox" name="checkWish" <?php
                     
                     if ($wish) {
-                        echo 'checked="true"';
+                        echo 'checked="false"';
                     }
-                    ?> />  <br>
+                    ?> disabled/>  <br>
                     <input type="submit" name ="change" id="change" value="Desear" >
                 </form>
 
