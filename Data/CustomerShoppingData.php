@@ -18,14 +18,15 @@ class CustomerShoppingData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $result = mysqli_query($conn, "select cus.idSale, cl.nameClient, cl.surname1Client, "
-                . "cl.surname2Client, cus.dateSale, cus.totalSale from tbcustomershopping cus"
-                . " INNER join tbclient cl on cus.idClient = cl.idClient;");        
-        $array = array();
+                . "cl.surname2Client, cus.dateSale, cus.totalSale from tbcustomershopping "
+                . "cus INNER join tbclient cl on cus.idClient = cl.idClient and cus.active != 1;");        
+        $array = [];
         while ($row = mysqli_fetch_array($result)) {
             $currentClient = client::ClientInvoice($row['nameClient'], $row['surname1Client'], $row['surname2Client']);
             $currentCusShopping = new CustomerShopping("", $row['dateSale'], $row['totalSale']);
             $currentCusShopping->setIdSale($row['idSale']);
-            array_push($array, $currentClient,$currentCusShopping);
+            $arrayNew = array($currentClient,$currentCusShopping);
+            array_push($array, $arrayNew);
         }
         mysqli_close($conn);
         return $array;

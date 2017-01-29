@@ -11,6 +11,17 @@ and open the template in the editor.
     </head>
     <body>
         
+        <br>
+        <table>
+            <tr>
+                <td><a href="../../index.php">Inicio</a></td>
+                <td><a href="testCustomerShopping.php">Test compra</a></td>
+                <td><a href="CustomerShoppingState.php">Anular compra</a></td>
+            </tr>
+        </table>
+        <hr>
+        <br>
+        
         <h1>Simular cuando se realiza una compra (Prueba del método que realiza el registro de la compra)</h1>
 
         <form method="POST" action="../../Business/CustomerShoppingBusiness/CustomerShoppingAtion.php">
@@ -24,6 +35,7 @@ and open the template in the editor.
             <input type="text" id="product3" name="product3"/><br>
             <label>Total</label>
             <input type="text" id="total" name="total"/><br>
+            <input type="hidden" id="create" name="create" value="create"/><br>
             <input type="submit" value="comprar"/>
         </form>
 

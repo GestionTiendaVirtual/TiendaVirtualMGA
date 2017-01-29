@@ -32,11 +32,9 @@
             <th>Precio</th>
             <th>Color</th>           
             <?php
-            
             foreach ($products as $currentProducts) {
-                
                 ?>  
-            <form id="deleteProduct" method="POST" action="../../Business/Product/ProductAction.php">
+                <form id="deleteProduct" method="POST" action="../../Business/Product/ProductAction.php">
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
@@ -53,7 +51,6 @@
                 </form>
 
                 <?php
-                
             }
             ?>
         </table>
