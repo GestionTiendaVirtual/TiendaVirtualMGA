@@ -11,9 +11,7 @@
         <hr> 
         <a href="./Presentation/DirectionClient.php">Dirección cliente</a>
         <a href="./Presentation/Product/ProductCreate.php">CRUD Producto</a>
-        
-
-
+       
         <?php
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {

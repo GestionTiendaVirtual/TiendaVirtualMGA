@@ -36,27 +36,6 @@ class WallData extends Data {
         $result2 = mysqli_query($conn, $query2);
         mysqli_close($conn);
 
-       
-
-		//$idProduct = $_POST['idProduct'];
-		//$comment = $_POST['comment'];
-        //echo $idProduct;
-        /*
-		$conn = new mysqli($this->server, $this->user, $this->password, $this->db);
-        $conn->set_charset('utf8');
-        $query= "SELECT MAX(idComment) from tbcomment";
-        $result = mysqli_query($conn, $query);
-		$row = $result->fetch_assoc();
-		$valor= $row['MAX(idComment)']+1;
-		echo '<br></br>';
-        
-        //insertar en la tabla.
-		$query2 = "insert into tbcomment values ($valor,$idProduct,$comment)";
-        $result = mysqli_query($conn, $query2);
-        mysqli_close($conn);
-        */
-        
-
 	
 
 	}

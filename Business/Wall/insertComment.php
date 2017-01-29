@@ -1,4 +1,10 @@
 <?php
+
+include '../../Data/Frecuency.php';
+$frecuency = new Frecuency();
+$result = $frecuency->updateWall();
+
+
 include "./WallBusiness.php";
 /* Se obtienen los datos */
 $comment = $_POST['comment'];
