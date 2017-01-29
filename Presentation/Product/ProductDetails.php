@@ -3,82 +3,89 @@ if (@session_start() == true) {
     if (isset($_SESSION["idUser"])) {
         ?>
 
-<!DOCTYPE html>
+        <!DOCTYPE html>
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        include_once '../../Business/Product/ProductBusiness.php';
-        $productBusiness = new ProductBusiness();
-        $products = $productBusiness->getProductByID($_GET['idProduct']);
-        ?>
-    <center>
-        <br>
-        <table>
-            <tr>
-                <td><a href="../../index.php">Inicio</a></td>
-            </tr>
-        </table>
-        <hr>
-        <h1>Visualizar Producto</h1>
-        <br>        
-        <table>
-            <th>Nombre</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Precio</th>
-            <th>Color</th>           
-            <th>Descripción</th>           
-            <?php
-            foreach ($products as $currentProducts) {
-                ?>                
-                <tr>
-                    <td><label><?php echo $currentProducts->getName(); ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php echo $currentProducts->getBrand(); ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php $price = number_format($currentProducts->getPrice());
-            echo '₡ ' . $price
-                ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
-                    <td><label><?php echo $currentProducts->getDescription(); ?>&emsp;&emsp;&emsp;</label></td>           
-                </tr>
-                <tr>
-                    <?php
-                    foreach ($currentProducts->getPathImages() as $path) {
-                        ?>
-                        <td><img style="width: 100px; height: 100px;"src="<?php echo $path; ?>">&emsp;&emsp;</td>
-                            <?php
-                        }
-                        ?>
-
-                </tr>
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <title></title>
+            </head>
+            <body>
                 <?php
-            }
-            ?>
-        </table>
- <?php
-                    include '../../Business/Details/detailsBusiness.php';
-                    $detailsBusiness = new detailsBusiness();
-                    $wish=$detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
+                include_once '../../Business/Product/ProductBusiness.php';
+                $productBusiness = new ProductBusiness();
+                $products = $productBusiness->getProductByID($_GET['idProduct']);
+                ?>
+            <center>
+                <br>
+                <table>
+                    <tr>
+                        <td><a href="../../index.php">Inicio</a></td>
+                    </tr>
+                </table>
+                <hr>
+                <h1>Visualizar Producto</h1>
+                <br>        
+                <table>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Precio</th>
+                    <th>Color</th>           
+                    <th>Descripción</th>           
+                    <?php
+                    foreach ($products as $currentProducts) {
+                        ?>                
+                        <tr>
+                            <td><label><?php echo $currentProducts->getName(); ?>&emsp;&emsp;&emsp;</label></td>
+                            <td><label><?php echo $currentProducts->getBrand(); ?>&emsp;&emsp;&emsp;</label></td>
+                            <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
+                            <td><label><?php
+                                    $price = number_format($currentProducts->getPrice());
+                                    echo '₡ ' . $price 
+                                    ?>&emsp;&emsp;&emsp;</label></td>
+                            <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
+                            <td><label><?php echo $currentProducts->getDescription(); ?>&emsp;&emsp;&emsp;</label></td>           
+                        </tr>
+                        <tr>
+                            <?php
+                            foreach ($currentProducts->getPathImages() as $path) {
+                                ?>
+                                <td><img style="width: 100px; height: 100px;"src="<?php echo $path; ?>">&emsp;&emsp;</td>
+                                <?php
+                            }
                             ?>
+
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+                <?php
+                include '../../Business/Details/detailsBusiness.php';
+                $detailsBusiness = new detailsBusiness();
+                $wish = $detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
+                echo "valor de deseo= ".$wish;
+                ?>
                 <form id="wish" method="POST" action="../../Business/Details/desireAction.php">
-                    
+
                     <input type="hidden" id="idProductWish" name="idProductWish" value="<?php echo $_GET['idProduct'] ?>">                    
                     <input type="hidden" id="idclientWish" name="idClientWish" value="<?php echo $_SESSION["idUser"] ?>">                    
                     <input type="checkbox" name="checkWish" <?php
-                        if ($wish) {
-                            echo 'checked="true"';
-                        } 
-                        ?>/> *Lo deseo <br>
+                    
+                    if ($wish) {
+                        echo 'checked="true"';
+                    }
+                    ?> />  <br>
                     <input type="submit" name ="change" id="change" value="Desear" >
+                </form>
+
+                
+            </center>
+        </body>
+        </html>
+        <?php
         
-    </center>
-</body>
-</html>
-    <?php
     }
 }
+?>

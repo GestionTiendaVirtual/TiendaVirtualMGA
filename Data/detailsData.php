@@ -26,25 +26,18 @@ class detailsData extends Data {
         } else {
             $id = 1;
         }
-        $consult = mysqli_query($conn, "select * from tbproductdesired where idclient=" .
-                $idclientWish . " and idproduct=" . $idProductWish . ";");
 
-        $num_rows = mysqli_num_rows($consult);
-        if ($num_rows > 0) {
+        //Se realiza el insert en la base de datos
+
+        $queryInsert = mysqli_query($conn, "insert into tbproductdesired values ('"
+                . $id . "','" . $idclientWish ."','" . $idProductWish . "', b'1' ,NOW());");
+
+        mysqli_close($conn);
+
+        if ($queryInsert) {
             return true;
         } else {
-//Se realiza el insert en la base de datos
-            $queryInsert = mysqli_query($conn, ("insert into tbproductdesired values ("
-                    . $id . "," . $idclientWish . "," . $idProductWish .
-                    ")"));
-
-            mysqli_close($conn);
-
-            if ($queryInsert) {
-                return true;
-            } else {
-                return false;
-            }
+            return false;
         }
     }
 
@@ -55,11 +48,10 @@ class detailsData extends Data {
     function isDesired($idProductWish, $idclientWish) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $consult = mysqli_query($conn, "select * from tbproductdesired where idclient=" .
-                $idclientWish . " and idproduct=" . $idProductWish . ";");
-
-        $num_rows = mysqli_num_rows($consult);
-        if ($num_rows > 0) {
+        $consulting = mysqli_query($conn, "SELECT iddesired FROM tbproductdesired WHERE idclient =" .
+                $idclientWish . " and idproduct = " . $idProductWish . " and active = 1 ");
+        $row = mysqli_num_rows($consulting);
+        if (sizeof($row) >= 1) {
             return true;
         } else {
             return false;
@@ -78,8 +70,8 @@ class detailsData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDelete = mysqli_query($conn, "delete from tbproductdesired where idclient="
-                . $idclientWish . " and idproduct=" . $idProductWish . ";");
+        $queryDelete = mysqli_query($conn, "update tbproductdesired set active= 0, dateactive=NOW() where idclient='"
+                . $idclientWish . "' and idproduct= '" . $idProductWish . "';");
         mysqli_close($conn);
 
         if ($queryDelete) {

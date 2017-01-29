@@ -29,7 +29,7 @@
                     <input type="password" id="passwordClient" name="passwordClient" value= ' . $tem->passwordClient . '> 
                     <input type="text" id="addressClient" name="addressClient" value= ' . $tem->addressClient . '>                        
                     <input type="submit" id="update" name="update" value="Actualizar" />
-                    <input type="submit" id="delete" name="delete" value="Eliminar" />
+                    <input type="submit" id="delete" name="delete" value="Desactivar" />
             </form>';
         }
         ?>
