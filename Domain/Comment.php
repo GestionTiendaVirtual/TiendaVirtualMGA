@@ -10,4 +10,7 @@ class Comment{
 		$this->idProduct= $idProduct;
 		$this->commentProduct= $commentProduct;
 	}
+	function getIdProduct(){
+		 return $this->idProduct;
+	}
 }

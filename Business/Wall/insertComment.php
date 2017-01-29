@@ -1,8 +1,12 @@
 <?php
-include "WallBusiness.php";
-
+include "./WallBusiness.php";
 /* Se obtienen los datos */
 $comment = $_POST['comment'];
 $idProduct = $_POST['idProduct'];
-echo $idProduct;
+session_start();
+$idClient = $_SESSION["idUser"];
+echo $idClient;
+$wall = new WallBusiness();
+$result = $wall->insertCommentBusiness($idProduct,$comment,$idClient);
+header("location: ../../presentation/WallView/ProductOption.php.");
 //$instAccountBusiness = new AccountBusiness();

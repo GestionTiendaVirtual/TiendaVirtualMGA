@@ -11,7 +11,7 @@ function getTipoProducto() {
 			document.getElementById("tipoProducto").innerHTML=xmlhttp3.responseText;
 		}
 	}
-	xmlhttp3.open("GET","../Presentation/getTypeProduct.php",true);
+	xmlhttp3.open("GET","../../Business/Wall/getTypeProduct.php",true);
 	xmlhttp3.send();
 }
 
@@ -30,6 +30,9 @@ function getProduct(idTypeProduct) {
 			document.getElementById("producto").innerHTML=xmlhttp3.responseText;
 		}
 	}
-	xmlhttp3.open("GET","../Presentation/GetProduct.php?idTypeProduct="+idTypeProduct,true);
+	xmlhttp3.open("GET","../../Business/Wall/GetProduct.php?idTypeProduct="+idTypeProduct,true);
 	xmlhttp3.send();
 }
+
+
+
