@@ -19,11 +19,11 @@
                 <td><a href="ProductCreate.php">Registrar</a></td>
                 <td><a href="ProductRetrieve.php">Visualizar</a><td>
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
-                <td><a href="ProductDelete.php">Desactivar</a><td>
+                <td><a href="ProductState.php">Estado</a><td>
             </tr>
         </table>
         <hr>
-        <h1>Eliminar Productos</h1>
+        <h1>Estado de Productos</h1>
         <br>        
         <table>
             <th>Nombre</th>
@@ -32,11 +32,9 @@
             <th>Precio</th>
             <th>Color</th>           
             <?php
-            
             foreach ($products as $currentProducts) {
-                
                 ?>  
-            <form id="deleteProduct" method="POST" action="../../Business/Product/ProductAction.php">
+                <form id="deleteProduct" method="POST" action="../../Business/Product/ProductAction.php">
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
@@ -53,7 +51,6 @@
                 </form>
 
                 <?php
-                
             }
             ?>
         </table>
@@ -63,11 +60,11 @@
 <?php
 if (isset($_GET['success'])) {
     echo '<script>                        
-             document.getElementById("txtMessage").innerHTML = "Eliminación con éxito";
+             document.getElementById("txtMessage").innerHTML = "Se desactivó con éxito";
           </script>';
 } else if (isset($_GET['errorDelete'])) {
     echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Eliminación fallida";
+              document.getElementById("txtMessage").innerHTML = "Desactivación fallida";
           </script>';
 } else if (isset($_GET['errorData'])) {
     echo ' <script>                

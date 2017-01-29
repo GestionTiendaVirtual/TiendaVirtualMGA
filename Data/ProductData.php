@@ -121,7 +121,7 @@ class ProductData extends Data {
      * Función que permite realizar la eliminación de algun registro en la base de datos
      */
 
-    function deleteProduct($idProduct) {
+    function stateProduct($idProduct) {
 
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
