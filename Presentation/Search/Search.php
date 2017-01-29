@@ -35,7 +35,11 @@
 
         <?php
             if(isset($_POST["termSearch"])){
-                include "../../Business/Search/SearchProductBusiness.php";
+                require_once '../../Data/Frecuency.php';
+                $frecuency = new Frecuency();
+                $result = $frecuency->updateSearch();
+
+                include_once "../../Business/Search/SearchProductBusiness.php";
                 $instSearchBusiness = new SearchProductBusiness();
                 $products = $instSearchBusiness->searchProduc($_POST["termSearch"]);
                 if (count($products) > 0) {

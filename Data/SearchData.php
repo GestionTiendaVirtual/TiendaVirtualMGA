@@ -1,5 +1,5 @@
 <?php
-include 'Data.php';
+include_once 'Data.php';
 include '../../Domain/Product.php';
 class SearchData extends Data{
 	

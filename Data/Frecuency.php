@@ -33,6 +33,31 @@ include_once 'Data.php';
                         mysqli_close($conn);
                 }
 
+                function updateSearch(){
+                        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+                         $conn->set_charset('utf8');
+                         $query= "SELECT MAX(idfrecuency) from tbfrecuency";
+                        $result = mysqli_query($conn, $query);
+                        $row = $result->fetch_assoc();
+                        $valor= $row['MAX(idfrecuency)'];
+                        $query2="Update tbfrecuency Set searchproduct=searchproduct+1 Where idfrecuency=$valor";
+                        $result2 = mysqli_query($conn, $query2);
+                        mysqli_close($conn);
+                }
+
+                  function updateView(){
+                        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+                         $conn->set_charset('utf8');
+                         $query= "SELECT MAX(idfrecuency) from tbfrecuency";
+                        $result = mysqli_query($conn, $query);
+                        $row = $result->fetch_assoc();
+                        $valor= $row['MAX(idfrecuency)'];
+                        $query2="Update tbfrecuency Set viewproduct=viewproduct+1 Where idfrecuency=$valor";
+                        $result2 = mysqli_query($conn, $query2);
+                        mysqli_close($conn);
+                }
+
+
 
 	}
 

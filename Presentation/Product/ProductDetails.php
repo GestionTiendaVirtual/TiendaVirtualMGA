@@ -12,6 +12,12 @@ if (@session_start() == true) {
             </head>
             <body>
                 <?php
+                require_once '../../Data/Frecuency.php';
+                $frecuency = new Frecuency();
+                $result = $frecuency->updateView();
+                ?>
+
+                <?php
                 include_once '../../Business/Product/ProductBusiness.php';
                 $productBusiness = new ProductBusiness();
                 $products = $productBusiness->getProductByID($_GET['idProduct']);
@@ -62,7 +68,7 @@ if (@session_start() == true) {
                     ?>
                 </table>
                 <?php
-                include '../../Business/Details/detailsBusiness.php';
+                include_once '../../Business/Details/detailsBusiness.php';
                 $detailsBusiness = new detailsBusiness();
                 $wish = $detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
                 

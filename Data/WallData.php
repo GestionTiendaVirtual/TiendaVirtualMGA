@@ -31,7 +31,8 @@ class WallData extends Data {
         $result = mysqli_query($conn, $query);
         $row = $result->fetch_assoc();
         $valor= $row['MAX(idComment)']+1;
-        $query2="INSERT INTO tbcomment VALUES($valor,$idProduct,'$commentProduct',$idClient)";
+        $date= date('Y-m-d');
+        $query2="INSERT INTO tbcomment VALUES($valor,$idProduct,'$commentProduct',$idClient,'$date')";
         //$query2 = "INSERT into tbcomment (idComment,idProduct,commentProduct) VALUES ($valor,comment->idProduct,comment->commentProduct)";
         $result2 = mysqli_query($conn, $query2);
         mysqli_close($conn);
