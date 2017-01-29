@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<script  type="text/javascript" src="../script/js.js"></script>
-</head>
-	<title>></title>
-</head>
-<body>
-	<?php
+<?php
 
-	
-	require ('../Data/conexion.php');
-
-
+	require ('../../Data/conexion.php');
 	echo 'Selecciona el tipo producto : <select onChange="getProduct(this.value);" name="cbxTipoProducto" id="cbxTipoProducto">';
 	
 	$query = "SELECT idTypeProduct, nameTypeProduct FROM tbtypeproduct ORDER BY idTypeProduct";
@@ -28,7 +17,4 @@
 	}
 	echo '</select>';
 ?>
-
-</body>
-</html>
 

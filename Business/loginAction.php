@@ -2,6 +2,13 @@
 
 include '../Business/ClientLoginBusiness.php';
 
+include '../Data/Frecuency.php';
+$frecuency = new Frecuency();
+$result = $frecuency->createFrecuency();
+
+//include './FrecuencyBusiness/FrecuencyBusiness.php';
+//$frecuency = new FrecuencyBusiness();
+
 
 if (isset($_POST['option']) == 'login') {
     $user = $_POST['txtUser'];

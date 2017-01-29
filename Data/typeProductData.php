@@ -29,7 +29,7 @@ class TypeProductData extends Data {
 
         //Se realiza el insert en la base de datos
         $queryInsert = mysqli_query($conn, "insert into tbtypeproduct values (" 
-                . $id . ",'" . $typeProduct->getNameTypeProduct()."')");
+                . $id . ",'" . $typeProduct->getNameTypeProduct()."',1)");
         mysqli_close($conn);
 
         if ($queryInsert) {
@@ -49,7 +49,7 @@ class TypeProductData extends Data {
         
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn,"SELECT * FROM tbtypeproduct order by idTypeProduct asc");
+        $result = mysqli_query($conn,"SELECT * FROM tbtypeproduct where active=1 order by idTypeProduct asc");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new TypeProduct($row['nameTypeProduct']);
@@ -88,7 +88,7 @@ class TypeProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDelete = mysqli_query($conn, "delete from tbtypeproduct where idTypeProduct = "
+        $queryDelete = mysqli_query($conn, "update tbtypeproduct set active=0 where idTypeProduct = "
                 . $idTypeProduct . ";");
         mysqli_close($conn);
 
@@ -101,27 +101,4 @@ class TypeProductData extends Data {
 
 //fin función deleteTypeProduct
 
-
-    /* Valida que los datos no esten vacios */
-
-    public function validateEmpty($arrayVar) {
-        foreach ($arrayVar as $tem) {
-            if (trim($tem) == '') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /* Valida que los datos ingresados sean numericos */
-
-    public function validateNumeric($arrayVar) {
-        foreach ($arrayVar as $tem) {
-            if ((filter_var(trim($tem), FILTER_VALIDATE_INT)) === false) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
 }

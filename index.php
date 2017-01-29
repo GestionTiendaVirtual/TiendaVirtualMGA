@@ -22,6 +22,7 @@
                 <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta</a> 
                 <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo</a>
                 <a href="./Presentation/Client/clientInterface.php">Cliente</a>
+                <a href="./Presentation/WallView/productOption.php">Muro de productos</a>
                 <a href="./Presentation/Search/Search.php">Búsqueda.</a>
                 <a href="Business/loginAction.php?logout">Cerrar</a>
                 <hr>

@@ -1,7 +1,6 @@
 <?php
 	
-	require ('../Data/conexion.php');
-	
+	require ('../../Data/conexion.php');
 	$idCanton = $_GET['idCanton'];
 	
 	echo 'Selecciona Localidad: <select name="cbx_localidad" id="cbx_localidad">';
