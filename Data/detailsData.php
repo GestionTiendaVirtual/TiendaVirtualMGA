@@ -19,14 +19,33 @@ class detailsData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se consulta por el ultimo id registrado para generar el consecutivo
-        $resultID = mysqli_query($conn, "SELECT * FROM tbproductdesired ORDER BY iddesired DESC LIMIT 1;");
+        $resultID = mysqli_query($conn, "select * from tbproductdesired order by iddesired desc limit 1;");
         $row = mysqli_fetch_array($resultID);
         if (sizeof($row) >= 1) {
             $id = $row['iddesired'] + 1;
         } else {
             $id = 1;
         }
+        $consulting = mysqli_query($conn, 
+                "select count(iddesired) as total from tbproductdesired where idclient =" .
+                $idclientWish . " and idproduct = " . $idProductWish);
+        $data=mysqli_fetch_assoc($consulting);
+        if ($data['total']>=1) {
 
+            $queryDelete = mysqli_query($conn, "update tbproductdesired set active= 1, dateactive=NOW() where idclient='"
+                . $idclientWish . "' and idproduct= '" . $idProductWish . "';");
+        mysqli_close($conn);
+
+        if ($queryDelete) {
+            return true;
+        } else {
+            return false;
+        }
+            
+            
+        } else {
+            
+        
         //Se realiza el insert en la base de datos
 
         $queryInsert = mysqli_query($conn, "insert into tbproductdesired values ('"
@@ -40,18 +59,20 @@ class detailsData extends Data {
             return false;
         }
     }
+    }
 
 //fin function insertDeseo
-    /*
+   /*
      * Funcion que permite comprobar si ya existe el producto en la lista de deseos o no.
      */
     function isDesired($idProductWish, $idclientWish) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $consulting = mysqli_query($conn, "SELECT iddesired FROM tbproductdesired WHERE idclient =" .
-                $idclientWish . " and idproduct = " . $idProductWish . " and active = 1 ");
-        $row = mysqli_num_rows($consulting);
-        if (sizeof($row) >= 1) {
+        $consulting = mysqli_query($conn, 
+                "select count(iddesired) as total from tbproductdesired where idclient =" .
+                $idclientWish . " and idproduct = " . $idProductWish. " and active = 1 ");
+        $data=mysqli_fetch_assoc($consulting);
+        if ($data['total']>=1) {
             return true;
         } else {
             return false;
@@ -59,7 +80,6 @@ class detailsData extends Data {
     }
 
     //fin del metodo isDesire
-
 
     /*
      * Función que permite realizar la eliminación de algun registro en la base de datos
@@ -70,7 +90,7 @@ class detailsData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDelete = mysqli_query($conn, "update tbproductdesired set active= 0, dateactive=NOW() where idclient='"
+        $queryDelete = mysqli_query($conn, "update tbproductdesired set active= 0, dateactive= now() where idclient='"
                 . $idclientWish . "' and idproduct= '" . $idProductWish . "';");
         mysqli_close($conn);
 

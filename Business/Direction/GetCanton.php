@@ -5,14 +5,14 @@
 	
 	echo 'Seleccione el canton : <select onChange="getDistrict(this.value);" name="cbxCanton" id="cbxCanton">';
 	
-	$query = "SELECT idCanton, nameCanton FROM tbCanton WHERE idProvince = '$idProvince' ORDER BY idCanton";
+	$query = "select idcanton, namecanton from tbcanton where idprovince = '$idprovince' order by idcanton";
 	
 	if($resultado=$mysqli->query($query))
 	{
 		while($row = $resultado->fetch_assoc())
 		{
 		?>
-		<option value="<?php echo $row['idCanton']; ?>"><?php echo $row['nameCanton']; ?></option>
+		<option value="<?php echo $row['idcanton']; ?>"><?php echo $row['namecanton']; ?></option>
 		
 		<?php
 		}

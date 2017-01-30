@@ -21,7 +21,7 @@ class clientData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se consulta por el ultimo id registrado para generar el consecutivo
-        $resultID = mysqli_query($conn, "SELECT * FROM tbclient ORDER BY idClient DESC LIMIT 1");
+        $resultID = mysqli_query($conn, "select * from tbclient order by idclient desc limit 1");
         $row = mysqli_fetch_array($resultID);
         if (sizeof($row) >= 1) {
             $id = $row['idClient'] + 1;
@@ -58,7 +58,7 @@ class clientData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "SELECT * FROM tbclient where active=1 order by idclient asc");
+        $result = mysqli_query($conn, "select * from tbclient where active=1 order by idclient asc");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new client($row['nameClient'], $row['surname1Client'], 

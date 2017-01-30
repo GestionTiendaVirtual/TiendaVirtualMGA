@@ -31,6 +31,7 @@ if (isset($_POST['option']) == 'login') {
     }
     header('location: ../index.php');
 } else if (isset($_GET['logout'])) {
+    $_SESSION['idUser'] = 0;
     session_start();
     session_destroy();
     header('location: ../index.php');

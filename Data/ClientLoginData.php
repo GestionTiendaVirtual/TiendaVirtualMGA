@@ -12,7 +12,7 @@ class ClientLoginData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $result = mysqli_query($conn, "select * from tbclient where "
-                . "UserClient = '".$client[0]."' and passwordClient = '".$client[1]."';");
+                . "userClient = '".$client[0]."' and passwordClient = '".$client[1]."';");
         $row = mysqli_fetch_array($result);
         $id = 0;
         if (sizeof($row) >= 1) {

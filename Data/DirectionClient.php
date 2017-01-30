@@ -1,3 +1,4 @@
+
 function getProvincia() {
 	
 	if (window.XMLHttpRequest) {
@@ -85,3 +86,4 @@ function getProduct(idTypeProduct) {
 	xmlhttp3.open("GET","../Presentation/GetProduct.php?idTypeProduct="+idTypeProduct,true);
 	xmlhttp3.send();
 }
+

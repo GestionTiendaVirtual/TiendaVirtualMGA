@@ -19,7 +19,7 @@ class CustomerShoppingData extends Data {
         $conn->set_charset('utf8');
         $result = mysqli_query($conn, "select cus.idSale, cl.nameClient, cl.surname1Client, "
                 . "cl.surname2Client, cus.dateSale, cus.totalSale from tbcustomershopping "
-                . "cus INNER join tbclient cl on cus.idClient = cl.idClient and cus.active != 1;");        
+                . "cus inner join tbclient cl on cus.idClient = cl.idClient and cus.active != 1;");        
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
             $currentClient = client::ClientInvoice($row['nameClient'], $row['surname1Client'], $row['surname2Client']);
@@ -40,7 +40,7 @@ class CustomerShoppingData extends Data {
         $result = mysqli_query($conn, "select cli.nameClient, cli.surname1Client, "
                 . "cli.surname2Client, cli.emailClient, cli.addressClient, "
                 . "cus.dateSale, cus.totalSale, cus.idSale from tbclient "
-                . "cli INNER join tbcustomershopping cus on cli.idClient = "
+                . "cli inner join tbcustomershopping cus on cli.idClient = "
                 . "cus.idClient where cus.idSale = " . $idSale . ";");
         
         $row = mysqli_fetch_array($result);

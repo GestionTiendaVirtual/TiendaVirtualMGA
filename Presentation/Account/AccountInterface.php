@@ -18,8 +18,7 @@
     <body>
 
         <?php
-
-            include '../../Business/Account/accountBusiness.php';
+            include_once '../../Business/Account/AccountBusiness.php';
             $accountBusiness = new AccountBusiness();
             #Obtiene el id para la nueva cuenta
             $idAccount = $accountBusiness->getIDBusiness();

@@ -36,6 +36,11 @@ class ProductBusiness {
         return $this->productData->getProductByID($idProduct);
     }
 
+    public function getProductsWall($id){
+        return $this->productData->getProductsWall($id);
+    }
+
+
     public function deleteSpecialCharacters($text){
         return preg_replace("/([^ A-Za-z0-9])/", "", $this->normalVowels($text));
     }

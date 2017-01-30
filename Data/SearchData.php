@@ -1,5 +1,5 @@
 <?php
-include 'Data.php';
+include_once 'Data.php';
 include '../../Domain/Product.php';
 class SearchData extends Data{
 	
@@ -7,8 +7,8 @@ class SearchData extends Data{
     public function searchProductData($termSearch) {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select * from tbproduct where (description like '%" . $termSearch . "%' OR model like '%" .
-         $termSearch . "%' OR brand like '%" . $termSearch . "%'  OR nameProduct like '%" . $termSearch . "%') && active = 1");
+        $result = mysqli_query($conn, "select * from tbproduct where (description like '%" . $termSearch . "%' or model like '%" .
+         $termSearch . "%' or brand like '%" . $termSearch . "%'  or nameProduct like '%" . $termSearch . "%') && active = 1");
         $arrayProduct = array();
 
         while ($row = mysqli_fetch_array($result)) {
@@ -17,7 +17,7 @@ class SearchData extends Data{
             $idProduct = $row['idProduct'];
             $currentData->setIdProduct($idProduct);
             
-            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idProduct = " . $idProduct);
+            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idproduct = " . $idProduct);
             if ($rowImage = mysqli_fetch_array($resultImage)) {
                 $currentData->setPathImages($rowImage['pathImage']);
             }
@@ -37,13 +37,13 @@ class SearchData extends Data{
         $conn->set_charset('utf8');
 
         /*Se obtiene el nuevo id*/
-        $query = "select max(idSearch) from tbSearch";
+        $query = "select max(idsearch) from tbsearch";
         $result = mysqli_query($conn, $query);
         $row = mysqli_fetch_array($result);
         $cont = $row[0]+1; 
         
         foreach ($arraySearch as $tem) {
-        	$query = "INSERT INTO tbSearch (`idSearch`,`idproduct`, `idClient`) VALUES (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
+        	$query = "insert into tbSearch (`idsearch`,`idproduct`, `idclient`) values (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
             $result = mysqli_query($conn, $query);
             $cont ++;
         }

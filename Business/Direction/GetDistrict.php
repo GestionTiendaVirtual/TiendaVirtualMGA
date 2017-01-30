@@ -7,14 +7,14 @@
 	
 	
 
-	$query = "SELECT idDistrict, nameDistrict FROM tbdistrict WHERE idCanton = '$idCanton' ORDER BY idDistrict";
+	$query = "select iddistrict, namedistrict from tbdistrict where idcanton = '$idcanton' order by iddistrict";
 	
 	if($resultado=$mysqli->query($query))
 	{
 		while($row = $resultado->fetch_assoc())
 		{
 		?>
-		<option value="<?php echo $row['idDistrict']; ?>"><?php echo $row['nameDistrict']; ?></option>
+		<option value="<?php echo $row['iddistrict']; ?>"><?php echo $row['namedistrict']; ?></option>
 		
 		<?php
 		}

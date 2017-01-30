@@ -2,7 +2,7 @@
 
 include_once 'Data.php';
 include_once '../../Domain/Product.php';
-include_once '../../Domain/typeProduct.php';
+
 
 /**
  * Descripcion de ProductData
@@ -20,7 +20,7 @@ class ProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se consulta por el ultimo id registrado para generar el consecutivo
-        $resultID = mysqli_query($conn, "SELECT * FROM tbproduct ORDER BY idProduct DESC LIMIT 1");
+        $resultID = mysqli_query($conn, "select * from tbproduct order by idproduct desc limit 1");
         $row = mysqli_fetch_array($resultID);
         if (sizeof($row) >= 1) {
             $id = $row['idProduct'] + 1;
@@ -33,11 +33,11 @@ class ProductData extends Data {
                 $product->getPrice() . ",'" . $product->getDescription() . "', 1," . $product->getTypeProduct() . " , "
                 . "'" . $product->getColor() . "', '" . $product->getName() . "',1);");
 
-        $resultIDNew = mysqli_query($conn, "SELECT * FROM tbproduct ORDER BY idProduct DESC LIMIT 1");
+        $resultIDNew = mysqli_query($conn, "select * from tbproduct order by idproduct desc limit 1");
         $rowNew = mysqli_fetch_array($resultIDNew);
         $idNew = $rowNew['idProduct'];
         
-        $resultID = mysqli_query($conn, "SELECT * FROM tbimageproduct ORDER BY idImage DESC LIMIT 1");
+        $resultID = mysqli_query($conn, "select * from tbimageproduct order by idimage desc limit 1");
         $row = mysqli_fetch_array($resultID);
         if (sizeof($row) >= 1) {
             $id = $row['idImage'] + 1;
@@ -47,9 +47,9 @@ class ProductData extends Data {
         
         for ($i = 0; $i < sizeof($arrayImages); $i++) {
             $queryInsertImages = mysqli_query($conn, "insert into `tbimageproduct` "
-                    . "(`idImage`, `pathImage`, `idProduct`) VALUES (".$id.", "
+                    . "(`idImage`, `pathImage`, `idProduct`) values (".$id.", "
                     . "'" . $arrayImages[$i] . "', " . $idNew . ");");
-             $resultID = mysqli_query($conn, "SELECT * FROM tbimageproduct ORDER BY idImage DESC LIMIT 1");
+             $resultID = mysqli_query($conn, "select * from tbimageproduct order by idimage desc limit 1");
             $rowNew = mysqli_fetch_array($resultID);
             $id = $rowNew['idImage'] + 1;
         }
@@ -73,7 +73,7 @@ class ProductData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "SELECT * FROM `tbproduct` WHERE active != 0 ORDER BY brand ASC;");        
+        $result = mysqli_query($conn, "select  * from `tbproduct` where active != 0 order by brand asc;");        
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
@@ -89,6 +89,23 @@ class ProductData extends Data {
         mysqli_close($conn);
         return $array;
     }
+    
+    
+    function getProductsWall($id) {
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "select  * from `tbproduct` where active != 0 and idTypeProduct = " .$id. " order by brand asc;");        
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
+            $currentData->setIdProduct($row['idProduct']);
+            array_push($array, $currentData);
+        }
+        mysqli_close($conn);
+        return $array;
+    }
+    
 
 //fin función getProducts
 
@@ -105,7 +122,7 @@ class ProductData extends Data {
                 $product->getModel() . "', price = " .
                 $product->getPrice() . ", color = '" . $product->getColor() . "' , "
                 . "description = '" . $product->getDescription()
-                . "', nameProduct = '" . $product->getName() . "' where tbproduct.idProduct = " . $product->getIdProduct() . ";");
+                . "', nameproduct = '" . $product->getName() . "' where tbproduct.idproduct = " . $product->getIdProduct() . ";");
         mysqli_close($conn);
 
         if ($queryUpdate) {
@@ -126,7 +143,7 @@ class ProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDelete = mysqli_query($conn, "update tbproduct set active = 0 where idProduct = " . $idProduct . ";");
+        $queryDelete = mysqli_query($conn, "update tbproduct set active = 0 where idproduct = " . $idProduct . ";");
         mysqli_close($conn);
 
         if ($queryDelete) {
@@ -143,7 +160,7 @@ class ProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDeleteImage = mysqli_query($conn, "delete from tbimageproduct where idProduct = " . $idProduct . " and pathImage = '" . $path . "';");
+        $queryDeleteImage = mysqli_query($conn, "delete from tbimageproduct where idproduct = " . $idProduct . " and pathImage = '" . $path . "';");
 
         mysqli_close($conn);
 
@@ -159,7 +176,7 @@ class ProductData extends Data {
     function insertImageProduct($idProduct, $arrayPath) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $resultID = mysqli_query($conn, "SELECT * FROM tbimageproduct ORDER BY idImage DESC LIMIT 1");
+        $resultID = mysqli_query($conn, "select * from tbimageproduct order by idimage desc limit 1");
         $row = mysqli_fetch_array($resultID);
         if (sizeof($row) >= 1) {
             $id = $row['idImage'] + 1;
@@ -168,9 +185,9 @@ class ProductData extends Data {
         }
         for ($i = 0; $i < sizeof($arrayPath); $i++) {
             $queryInsertImages = mysqli_query($conn, "insert into `tbimageproduct` "
-                    . "(`idImage`, `pathImage`, `idProduct`) VALUES (" . $id . ", "
+                    . "(`idimage`, `pathimage`, `idproduct`) values (" . $id . ", "
                     . "'" . $arrayPath[$i] . "', " . $idProduct . ");");
-            $resultID = mysqli_query($conn, "SELECT * FROM tbimageproduct ORDER BY idImage DESC LIMIT 1");
+            $resultID = mysqli_query($conn, "select  * from tbimageproduct order by idimage desc limit 1");
             $rowNew = mysqli_fetch_array($resultID);
             $id = $rowNew['idImage'] + 1;
         }
@@ -189,14 +206,14 @@ class ProductData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "SELECT * FROM tbproduct where idProduct = " . $idProduct);
+        $result = mysqli_query($conn, "select * from tbproduct where idproduct = " . $idProduct);
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
             $currentData->setIdProduct($row['idProduct']);
 
             $idProduct = $row['idProduct'];
-            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idProduct = " . $idProduct);
+            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idproduct = " . $idProduct);
             while ($rowImage = mysqli_fetch_array($resultImage)) {
                 $currentData->setPathImages($rowImage['pathImage']);
             }

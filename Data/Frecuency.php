@@ -6,17 +6,17 @@ include_once 'Data.php';
 		
 		$conn = new mysqli($this->server, $this->user, $this->password, $this->db);
                 $conn->set_charset('utf8');
-                $query= "SELECT MAX(idfrecuency) from tbfrecuency";
+                $query= "select  max(idFrecuency) from tbfrecuency";
                  $result = mysqli_query($conn, $query);
                 $row = $result->fetch_assoc();
-                $valor= $row['MAX(idfrecuency)']+1;
+                $valor= $row['max(idFrecuency)']+1;
                 session_start();
 		$idClient = $_SESSION["idUser"];
 		$date= date('Y-m-d');
                 $contador=0;
        
 
-                $query2= "INSERT INTO tbfrecuency values($valor,'$date',$idClient,$contador,$contador,$contador)";
+                $query2= "insert into tbfrecuency values($valor,'$date',$idClient,$contador,$contador,$contador)";
                 $result2 = mysqli_query($conn, $query2);
                 mysqli_close($conn);
 		}
@@ -24,14 +24,39 @@ include_once 'Data.php';
                 function updateWall(){
                         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
                          $conn->set_charset('utf8');
-                         $query= "SELECT MAX(idfrecuency) from tbfrecuency";
+                         $query= "select max(idFrecuency) from tbfrecuency";
                         $result = mysqli_query($conn, $query);
                         $row = $result->fetch_assoc();
-                        $valor= $row['MAX(idfrecuency)'];
-                        $query2="Update tbfrecuency Set participationwall=participationwall+1 Where idfrecuency=$valor";
+                        $valor= $row['max(idFrecuency)'];
+                        $query2="update tbfrecuency set participationwall=participationwall+1 where idfrecuency=$valor";
                         $result2 = mysqli_query($conn, $query2);
                         mysqli_close($conn);
                 }
+
+                function updateSearch(){
+                        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+                         $conn->set_charset('utf8');
+                         $query= "select max(idFrecuency) from tbfrecuency";
+                        $result = mysqli_query($conn, $query);
+                        $row = $result->fetch_assoc();
+                        $valor= $row['max(idfrecuency)'];
+                        $query2="update tbfrecuency set searchproduct=searchproduct+1 where idfrecuency=$valor";
+                        $result2 = mysqli_query($conn, $query2);
+                        mysqli_close($conn);
+                }
+
+                  function updateView(){
+                        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+                         $conn->set_charset('utf8');
+                         $query= "select max(idFrecuency) from tbfrecuency";
+                        $result = mysqli_query($conn, $query);
+                        $row = $result->fetch_assoc();
+                        $valor= $row['max(idfrecuency)'];
+                        $query2="update tbfrecuency set viewproduct=viewproduct+1 where idfrecuency=$valor";
+                        $result2 = mysqli_query($conn, $query2);
+                        mysqli_close($conn);
+                }
+
 
 
 	}

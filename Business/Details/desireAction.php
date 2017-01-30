@@ -5,7 +5,7 @@ $idClientDesire = $_POST['idClientWish'];
 include '../../Business/Details/detailsBusiness.php';
 $detailsBusiness = new detailsBusiness();
 
-if (isset($_REQUEST['checkWish'])) {
+if ($detailsBusiness->isDesired($idProductDesire, $idClientDesire)) {
     $result = $detailsBusiness->deleteDesire($idProductDesire, $idClientDesire);
     if ($result) {
         header('location: ../../Presentation/Product/ProductDetails.php?idProduct=' . $idProductDesire . "####");
