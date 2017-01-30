@@ -4,25 +4,24 @@ include '../../Domain/Comment.php';
 
 class WallData extends Data {
 
-	function getAllComments(){
-		$idTypeProduct = $_POST['cbxProducto'];
-		$conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+    function getAllComments($idTypeProduct){
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $query = "select * from tbcomment where idProduct = $idTypeProduct";
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-        	echo $row['commentProduct'];
-        	echo '<br></>';
+            echo $row['commentProduct'];
+            echo '<br></>';
             $comment = new  Comment($row['idComment'], $row['idProduct'], $row['commentProduct']);
             array_push($array, $comment);
         }
         return $array;
-	}
+    }
 
 
-	function insertComment($idProduct,$commentProduct,$idClient){
+    function insertComment($idProduct,$commentProduct,$idClient){
         echo $commentProduct;
         echo $idProduct;
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
@@ -37,11 +36,11 @@ class WallData extends Data {
         $result2 = mysqli_query($conn, $query2);
         mysqli_close($conn);
 
-	
+    
 
-	}
+    }
 }
 
-	
+    
 
 ?>

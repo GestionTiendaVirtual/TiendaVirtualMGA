@@ -1,6 +1,11 @@
 <?php
 	require ('../../Data/conexion.php');
-	$idTypeProduct = $_POST['cbxProducto'];
+	
+	if(isset($_GET['idProduct'])){
+		$idTypeProduct = $_GET['idProduct'];
+	}else {
+		$idTypeProduct = $_POST['cbxProducto'];	
+	}
 	
 
 ?>
@@ -22,7 +27,7 @@
 
         include '../../Business/Wall/WallBusiness.php';
         $wallBusiness = new WallBusiness();
-        $result = $wallBusiness->getAllCommentBusiness();
+        $result = $wallBusiness->getAllCommentBusiness($idTypeProduct);
 	?>
 	<a href="ProductOption.php">Atras</a>
 
