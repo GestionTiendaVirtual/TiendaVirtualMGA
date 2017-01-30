@@ -26,7 +26,26 @@ class detailsData extends Data {
         } else {
             $id = 1;
         }
+        $consulting = mysqli_query($conn, 
+                "SELECT Count(iddesired) as total FROM tbproductdesired WHERE idclient =" .
+                $idclientWish . " and idproduct = " . $idProductWish);
+        $data=mysqli_fetch_assoc($consulting);
+        if ($data['total']>=1) {
 
+            $queryDelete = mysqli_query($conn, "update tbproductdesired set active= 1, dateactive=NOW() where idclient='"
+                . $idclientWish . "' and idproduct= '" . $idProductWish . "';");
+        mysqli_close($conn);
+
+        if ($queryDelete) {
+            return true;
+        } else {
+            return false;
+        }
+            
+            
+        } else {
+            
+        
         //Se realiza el insert en la base de datos
 
         $queryInsert = mysqli_query($conn, "insert into tbproductdesired values ('"
@@ -39,6 +58,7 @@ class detailsData extends Data {
         } else {
             return false;
         }
+    }
     }
 
 //fin function insertDeseo
