@@ -25,7 +25,7 @@
             
             echo'<form id="typeproduct" method="POST" action="../../Business/TypeProduct/typeProductDeleteUpdateAction.php">
                 <blockquote> 
-                ' . $tem->idTypeProduct .'
+                
                     <input type="hidden" id="idType" name="idType" value=' . $tem->idTypeProduct .'> 
                     <input type="text" id="txtNameType" name="txtNameType" value= '.$tem->nameTypeProduct.'> &nbsp;
                     <input type="submit" id="update" name="update" value="Actualizar" />&nbsp;
