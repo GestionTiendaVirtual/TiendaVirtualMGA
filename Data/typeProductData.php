@@ -66,7 +66,7 @@ class TypeProductData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la actualizacion en la base de datos
-        $queryUpdate = mysqli_query($conn, "update tbtypeproduct set nameTypeProduct = '"
+        $queryUpdate = mysqli_query($conn, "update tbtypeproduct set  nameTypeProduct = '"
                 . $typeProduct->getNameTypeProduct() . "' where tbtypeproduct.idTypeProduct = "
                 . $typeProduct->getIdTypeProduct() . ";");
         mysqli_close($conn);
