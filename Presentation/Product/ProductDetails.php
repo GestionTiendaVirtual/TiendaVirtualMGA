@@ -85,6 +85,12 @@ if (@session_start() == true) {
                     ?> disabled/>  <br>
                     <input type="submit" name ="change" id="change" value="Desear" >
                 </form>
+                <?php
+                $idProduct=$_GET['idProduct'] ;
+                ?>
+                    
+    
+                <a href="../WallView/Wall.php?idProduct='$idProduct'">Ver muro</a><br>
 
                 
             </center>

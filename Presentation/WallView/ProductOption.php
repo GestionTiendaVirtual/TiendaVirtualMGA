@@ -62,8 +62,7 @@
     </body>
 
 
-    <script>
-        
+    <script>        
         $(document).ready(function () {
 
             $("#selType").change(function () {
