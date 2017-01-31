@@ -14,5 +14,5 @@ $idClient = $_SESSION["idUser"];
 echo $idClient;
 $wall = new WallBusiness();
 $result = $wall->insertCommentBusiness($idProduct,$comment,$idClient);
-header("location: ../../presentation/WallView/Wall.php?idProduct=".$idProduct);
+header("location: ../../Presentation/WallView/Wall.php?idProduct=".$idProduct);
 //$instAccountBusiness = new AccountBusiness();

@@ -1,8 +1,8 @@
 <html>
     <head>
         <title>Opcion de </title>
-        <script src="../../Data/ProductWall.php"></script>
-        <script type="text/javascript" src="../../JS/ProductWall.js"></script>
+       
+        <script src="../../JS/jquery-3.1.1.min.js" type="text/javascript"></script>
     </head>
     <body>
 
@@ -16,17 +16,18 @@
         <br>
         <h2>Seleccione el tipo:</h2>
 
-        <select>
+        <select id="selType">
             <option>--Seleccione--</option>
             <?php
             foreach ($result as $currentType) {
                 ?>
-                <option onclick="getProducts(this.value)" value="<?php echo $currentType->getIdTypeProduct(); ?>">
+                <option value="<?php echo $currentType->getIdTypeProduct(); ?>">
                     <?php echo $currentType->getNameTypeProduct(); ?></option>
                 <?php
             }
             ?>
         </select>
+
         <?php
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -34,18 +35,20 @@
             $productBusiness = new ProductBusiness();
             $result = $productBusiness->getProductsWall($id);
             ?>
-            <select>
+
+            <select id="selProduct">
                 <option>--seleccione--</option>>
                 <?php
                 foreach ($result as $currentProduct) {
                     ?>
-                <option onclick="getWallProduct(this.value)" value="<?php echo $currentProduct->getIdProduct(); ?>">
-                    <?php echo $currentProduct->getBrand() .'-'. $currentProduct->getModel(); ?></option>
+                    <option value="<?php echo $currentProduct->getIdProduct(); ?>">
+                        <?php echo $currentProduct->getBrand() . '-' . $currentProduct->getModel(); ?></option>
 
                     <?php
                 }
                 ?>
             </select>
+
             <?php
         }
         ?>
@@ -53,20 +56,24 @@
         <form action="Wall.php" method="POST">
             <div id="producto"></div> <br /> 
         </form>
-        
+
 
 
     </body>
 
 
-    <script>
-        function getProducts(idTypeProduct) {
-            alert();
-            window.location = "/ProductOption.php?id=" + idTypeProduct;
-        }
-        function getWallProduct(idProduct) {
-            window.location = "./Wall.php?idProduct=" + idProduct;
-        }
+    <script>        
+        $(document).ready(function () {
+
+            $("#selType").change(function () {
+                var idTypeProduct = $('select[id=selType]').val();
+                window.location = "./ProductOption.php?id=" + idTypeProduct;
+            });
+            $("#selProduct").change(function () {
+                var idProduct = $('select[id=selProduct]').val();
+                window.location = "./Wall.php?idProduct=" + idProduct;
+            });
+        });
     </script>
 
 </html>
