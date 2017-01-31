@@ -1,11 +1,14 @@
 <?php
 require ('../../Data/conexion.php');
 
+
 if (isset($_GET['idProduct'])) {
     $idTypeProduct = $_GET['idProduct'];
 } else {
     $idTypeProduct = $_POST['cbxProducto'];
 }
+    
+ 
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +18,7 @@ if (isset($_GET['idProduct'])) {
     </head>
     <body>
         <h1>Muro de productos</h1>
-        <a href="ProductOption.php">Atras</a><br>
+        <a href="../../index.php">Atras</a><br>
         <form action="../../Business/Wall/insertComment.php" method="POST">
             <textarea id="comment" name="comment"></textarea>
             <input type="hidden" id="idProduct" name="idProduct" value="<?php echo $idTypeProduct; ?>"><br>

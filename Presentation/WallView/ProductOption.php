@@ -61,7 +61,8 @@
 
     <script>
         function getProducts(idTypeProduct) {
-            window.location = "./ProductOption.php?id=" + idTypeProduct;
+            alert();
+            window.location = "/ProductOption.php?id=" + idTypeProduct;
         }
         function getWallProduct(idProduct) {
             window.location = "./Wall.php?idProduct=" + idProduct;
