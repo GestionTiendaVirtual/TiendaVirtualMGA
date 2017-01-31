@@ -14,6 +14,39 @@
                 d.removeChild(d.firstChild);
             }
         </script>
+
+        <script>
+            function valida(e){
+                tecla = (document.all) ? e.keyCode : e.which;
+                alert(String.fromCharCode(tecla));
+                var elementoDate = document.getElementById("expirationDate").value;
+
+                var elementoDate = document.getElementById("expirationDate").value;
+
+                //Tecla de retroceso para borrar, siempre la permite
+                if (tecla==8){
+                    if(elementoDate.length == 6 || elementoDate.length == 9){
+                        document.getElementById("expirationDate").value = elementoDate.substring(0, (elementoDate.length-1)); 
+                    }
+                    return true;
+                }//Termina el borrado de una letra
+
+                // Patron de entrada, en este caso solo acepta numeros
+                patron =/[0-9]/;
+                tecla_final = String.fromCharCode(tecla);
+
+                if (patron.test(tecla_final) && elementoDate.length < 10) {
+                    //Insercion de un nuevo numero
+                    if(elementoDate.length == 4 || elementoDate.length == 7){
+                        document.getElementById("expirationDate").value = elementoDate+"-";
+                    }
+
+                    return true;
+                }
+                else{ return false; }
+            }
+        </script>
+
     </head>
     <body>
 
@@ -48,10 +81,7 @@
         <?php
             $result = $accountBusiness->getAllAccountAssetsBusiness();
             foreach ($result as $tem) {
-                echo "
-                        Id cuenta: ". $tem->idAccount.
-                        " Id cliente: ".$tem->idClient.
-                        " Tipo cuenta: ". $tem->typeAccount.
+                echo    "Tipo cuenta: ". $tem->typeAccount.
                         " CSC: ".$tem->CSC.
                         " Fecha de expiración: ". $tem->expirationDate.
                         " Número de Tarjeta: ". $tem->cardNumber.
@@ -65,8 +95,7 @@
 
         <!-- Form -->
         <form method="POST" action="../../Business/Account/insertAccount.php">
-            <label>ID Cuenta</label>
-            <input type="text" name="idAccount" value= <?php echo "'".$idAccount."'"?> readonly="readonly">
+            <input type="hidden" name="idAccount" value= <?php echo "'".$idAccount."'"?> readonly="readonly">
             
             <label>CSC</label>
             <input type="text" name="CSC" placeholder="CSC">
@@ -78,23 +107,11 @@
             <input type="text" name="cardNumber" placeholder="Numero de Cuenta">
            
             <br><br><label>Fecha de expiración</label>
-            <input type="date" name="expirationDate" value="<?php echo date('Y-m-d');?>">
+            <input type="date" name="expirationDate" id="expirationDate" onkeypress="return valida(event)" value="<?php echo date('Y-m-d');?>">
             <input type="submit" value="Insertar" >   
 
         </form>
         <br>
-
-        <!--=============================================================================-->
-        <h2>Cuentas &rarr;Desactivar</h2>
-        
-
-        <!-- Form -->
-        <form method="GET" action="../../Business/Account/DeactivateAccount.php">
-            <label> ID Cuenta </label>&nbsp;
-            <input type="text" name="idAccount" placeholder="ID Cuenta">
-            <input type="submit" value="Deactivate" ><br><br>
-        </form>
-        <!-- Fin del form -->
      
         <!-- =========================================================================================== -->
             <h2>Cuentas &rarr;Actualizar/Deactivar</h2>
@@ -105,13 +122,10 @@
                     foreach ($result as $tem) {
                         echo '<form method="POST" action="../../Business/Account/updateAccount.php?idAccount='.$tem->idAccount.'">';
                         ?>
-                        <!-- Form -->
-                            <label> ID Cuenta </label>
-                            <input type="text" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?> readonly="readonly">
-                            
-                            <label> ID Cliente </label>
-                            <input type="text" name="idClient" value= <?php echo "'".$tem->idClient."'"?> readonly="readonly">                            
-                            
+                        <!-- Form --> 
+                                                   
+                            <input type="hidden" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?>>    
+
                             <label> CSC </label>
                             <input type="text" name="CSC" value= <?php echo "'".$tem->CSC."'"?>>
                             
@@ -133,5 +147,6 @@
                     echo "<br>";
                     }
                 ?>
+
     </body>
 </html>

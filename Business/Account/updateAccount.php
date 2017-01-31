@@ -4,7 +4,7 @@ include "./AccountBusiness.php";
 /*$CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount*/
 
 /* Se obtienen los datos */
-session_start();
+
 $idAccount = $_POST['idAccount'];
 $idClient = $_SESSION["idUser"];
 $CSC = $_POST['CSC'];
