@@ -43,12 +43,12 @@
                 <tr>
                     <td><label id="lblName" >Nombre:</label></td>
                     <td><input type="text" id="txtName" name="txtName" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"></td>                     
+                               data-validation="custom" data-validation-regexp="^[a-zA-Z_áéíóúñ\s]*$"></td>                     
                 </tr>
                 <tr>
                     <td><label id="lblBrand" >Marca:</label></td>
                     <td><input type="text" id="txtBrand" name="txtBrand" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"></td>                     
+                               data-validation="custom" data-validation-regexp="^[a-zA-Z_áéíóúñ\s]*$"></td>                     
                 </tr>
                 <tr>
                     <td><label id="txtModel">Modelo:</label></td>
