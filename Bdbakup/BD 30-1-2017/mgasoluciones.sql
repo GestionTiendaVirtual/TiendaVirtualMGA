@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 30-01-2017 a las 16:57:54
--- Versión del servidor: 10.1.10-MariaDB
--- Versión de PHP: 5.6.19
+-- Servidor: localhost
+-- Tiempo de generación: 01-02-2017 a las 03:14:22
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 5.5.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -45,7 +45,9 @@ INSERT INTO `tbaccount` (`idAccount`, `typeAccount`, `numberCard`, `DateExpirati
 (2, 'csc', '234', '2017-01-01', 'csc', 2, b'0'),
 (3, 'tipocuenta', '8765', '2017-01-12', 'csc4', 1, b'0'),
 (4, 'tipocuenta', '4334', '2017-01-30', 'csc', 1, b'1'),
-(5, 'VISA', '899889898989', '2017-01-30', '085', 1, b'0');
+(5, 'VISA', '899889898989', '2017-01-30', '085', 1, b'0'),
+(6, 'visa', '889899889', '2017-01-31', '098', 1, b'0'),
+(7, 'visa', '123456789', '2017-01-04', '987', 1, b'1');
 
 -- --------------------------------------------------------
 
@@ -132,7 +134,8 @@ INSERT INTO `tbclient` (`idClient`, `nameClient`, `surname1Client`, `surname2Cli
 (1, 'Gustavo', 'Najera', 'Najera', 'tavo.nn.20@hotmail.es', 'tavin', '1234', 'AltoVaras', b'1'),
 (2, 'Andres', 'Najera', 'Pereira', 'tavinchi.com@gmail.com', 'AndresUser', '12345', 'Cartago3', b'1'),
 (3, 'asd', 'asdx', 'asd', 'asd@gmail', 'asd', 'asd', 'sd', b'0'),
-(4, 'Michael', 'Melendez', 'Mesen', 'michael.melendez@gmail.com', 'mmm', '1234', 'Juan Vinas', b'1');
+(4, 'Michael', 'Melendez', 'Mesen', 'michael.melendez@gmail.com', 'mmm', '1234', 'Juan Vinas', b'1'),
+(5, 'Admin', 'Admin', 'Admin', 'admin@gamil.com', 'admin', 'admin', 'admin', b'1');
 
 -- --------------------------------------------------------
 
@@ -164,7 +167,10 @@ INSERT INTO `tbcomment` (`idComment`, `idProduct`, `commentProduct`, `idClient`,
 (9, 10, 'prueba4', 1, '2017-01-30'),
 (10, 10, 'prueba5', 1, '2017-01-30'),
 (11, 1, 'prueba1', 1, '2017-01-30'),
-(12, 1, 'prueba 2', 1, '2017-01-30');
+(12, 1, 'prueba 2', 1, '2017-01-30'),
+(13, 1, 'prueba 4', 1, '2017-01-31'),
+(14, 0, '', 1, '2017-01-31'),
+(15, 0, 'prueba', 1, '2017-01-31');
 
 -- --------------------------------------------------------
 
@@ -191,7 +197,8 @@ INSERT INTO `tbconcretesales` (`idconcretesales`, `idclient`, `idproduct`, `idSa
 (5, 1, 1, 3),
 (6, 1, 1, 4),
 (7, 1, 1, 5),
-(8, 1, 3, 6);
+(8, 1, 3, 6),
+(9, 1, 4, 7);
 
 -- --------------------------------------------------------
 
@@ -213,11 +220,12 @@ CREATE TABLE `tbcustomershopping` (
 
 INSERT INTO `tbcustomershopping` (`idSale`, `idClient`, `dateSale`, `totalSale`, `active`) VALUES
 (1, 1, '2017-01-27', 1234567, b'0'),
-(2, 2, '2017-01-27', 78787878, b'0'),
+(2, 2, '2017-01-27', 78787878, b'1'),
 (3, 1, '2017-01-27', 44444, b'0'),
 (4, 1, '2017-01-30', 1200, b'1'),
 (5, 1, '2017-01-30', 1200, b'0'),
-(6, 1, '2017-01-30', 1111, b'0');
+(6, 1, '2017-01-30', 1111, b'0'),
+(7, 1, '2017-01-31', 23456, b'0');
 
 -- --------------------------------------------------------
 
@@ -278,7 +286,13 @@ INSERT INTO `tbfrecuency` (`idfrecuency`, `date`, `idClient`, `participationwall
 (7, '2017-01-30', 1, 6, 9, 2),
 (8, '2017-01-30', 1, 2, 2, 2),
 (9, '2017-01-30', 1, 0, 3, 2),
-(10, '2017-01-30', 1, 0, 0, 0);
+(10, '2017-01-30', 1, 3, 3, 3),
+(11, '2017-01-31', 1, 0, 0, 0),
+(12, '2017-02-01', 4, 0, 2, 2),
+(13, '2017-02-01', 1, 0, 0, 0),
+(14, '2017-02-01', 1, 0, 0, 0),
+(15, '2017-02-01', 5, 0, 0, 0),
+(16, '2017-02-01', 5, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -303,18 +317,31 @@ INSERT INTO `tbimageproduct` (`idImage`, `pathImage`, `idProduct`) VALUES
 (9, '../../images/15941007_2023133364389877_1554708251087100836_n.jpg', 13),
 (10, '../../images/pintura.jpg', 14),
 (11, '../../images/1.jpg', 15),
-(12, '../../images/celular1.jpg', 1),
-(13, '../../images/celular1.jpg', 1),
-(14, '../../images/celular1.jpg', 1),
-(17, '../../images/compu.jpg', 10),
-(18, '../../images/compu.jpg', 10),
-(19, '../../images/celular1.jpg', 1),
-(20, '../../images/celular1.jpg', 1),
-(21, '../../images/celular1.jpg', 1),
-(22, '../../images/compu.jpg', 10),
-(23, '../../images/compu.jpg', 10),
-(24, '../../images/compu.jpg', 10),
-(25, '../../images/compu.jpg', 10);
+(26, '../../images/configuracion.PNG', 16),
+(27, '../../images/p8.jpg', 1),
+(28, '../../images/p81.jpg', 1),
+(29, '../../images/p802.jpg', 1),
+(30, '../../images/p803.jpg', 1),
+(31, '../../images/p901.jpg', 5),
+(32, '../../images/p902.jpeg', 5),
+(33, '../../images/p903.jpg', 5),
+(34, '../../images/p904.jpg', 5),
+(35, '../../images/p905.jpg', 5),
+(36, '../../images/iph1.jpg', 3),
+(37, '../../images/iph2.jpg', 3),
+(38, '../../images/iph3.jpg', 3),
+(39, '../../images/iph4.jpg', 3),
+(40, '../../images/lk01.jpg', 4),
+(41, '../../images/lk02.jpg', 4),
+(42, '../../images/lk03.jpg', 4),
+(43, '../../images/lk04.jpg', 4),
+(44, '../../images/s701.jpg', 2),
+(45, '../../images/s702.jpg', 2),
+(46, '../../images/s703.jpg', 2),
+(47, '../../images/s705.jpg', 2),
+(48, '../../images/tsh01.jpg', 10),
+(49, '../../images/tsh02.jpg', 10),
+(50, '../../images/tsh03.jpg', 10);
 
 -- --------------------------------------------------------
 
@@ -365,7 +392,8 @@ INSERT INTO `tbproduct` (`idProduct`, `brand`, `model`, `price`, `description`, 
 (12, 'ooooi', 'ioioioiio', 787878, 'Descripcion6', 1, 1, 'Negro', 'Celular', b'0'),
 (13, 'yuyuyu', 'yuyuyu', 7777, 'jhjhjjh', 1, 1, 'yuyuyu', 'yyuuy', b'0'),
 (14, 'dfgfdg', 'dfgdf', 11111, 'Descripcion1', 1, 1, 'Negro', 'ggdgfd', b'0'),
-(15, 'prueba', 'prueba', 11111, 'Descripcion7', 1, 1, 'prueba', 'prueba', b'0');
+(15, 'prueba', 'prueba', 11111, 'Descripcion7', 1, 1, 'prueba', 'prueba', b'0'),
+(16, 'priueba', 'prueba', 2147483647, 'iuhdufiherifhue', 1, 2, 'ioejfrhuvberb', 'prueba', b'0');
 
 -- --------------------------------------------------------
 
