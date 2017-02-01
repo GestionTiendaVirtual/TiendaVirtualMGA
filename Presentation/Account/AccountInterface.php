@@ -15,36 +15,16 @@
             }
         </script>
 
-        <script>
-            function valida(e){
-                tecla = (document.all) ? e.keyCode : e.which;
-                alert(String.fromCharCode(tecla));
-                var elementoDate = document.getElementById("expirationDate").value;
-
-                var elementoDate = document.getElementById("expirationDate").value;
-
-                //Tecla de retroceso para borrar, siempre la permite
-                if (tecla==8){
-                    if(elementoDate.length == 6 || elementoDate.length == 9){
-                        document.getElementById("expirationDate").value = elementoDate.substring(0, (elementoDate.length-1)); 
-                    }
-                    return true;
-                }//Termina el borrado de una letra
-
-                // Patron de entrada, en este caso solo acepta numeros
-                patron =/[0-9]/;
-                tecla_final = String.fromCharCode(tecla);
-
-                if (patron.test(tecla_final) && elementoDate.length < 10) {
-                    //Insercion de un nuevo numero
-                    if(elementoDate.length == 4 || elementoDate.length == 7){
-                        document.getElementById("expirationDate").value = elementoDate+"-";
-                    }
-
-                    return true;
-                }
-                else{ return false; }
-            }
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+          <link rel="stylesheet" href="/resources/demos/style.css">
+          <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+          <script>
+          $( function() {
+            $( ".datepicker" ).datepicker();
+          } );
         </script>
 
     </head>
@@ -107,7 +87,7 @@
             <input type="text" name="cardNumber" placeholder="Numero de Cuenta">
            
             <br><br><label>Fecha de expiración</label>
-            <input type="date" name="expirationDate" id="expirationDate" onkeypress="return valida(event)" value="<?php echo date('Y-m-d');?>">
+            <input type="text" name="expirationDate" class="datepicker">
             <input type="submit" value="Insertar" >   
 
         </form>
@@ -136,8 +116,8 @@
                             <input type="text" name="cardNumber" value= <?php echo "'".$tem->cardNumber."'"?>>
                             
                             <br><br><label> Fecha de expiración </label>
-                            <input type="date" name="expirationDate" value= <?php echo "'".$tem->expirationDate."'"?>>
-                            
+                            <input type="text" name="expirationDate" class="datepicker" value= <?php echo "'".$tem->expirationDate."'"?>>
+
                             <input type="submit" value="Actualizar" >
                             <a href=<?php echo "../../Business/Account/DeactivateAccount.php?idAccount=".$tem->idAccount; ?> >Desactivar</a>
                                

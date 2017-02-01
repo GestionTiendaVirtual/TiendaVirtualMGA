@@ -31,7 +31,11 @@ class AccountData extends Data {
         mysqli_close($conn);
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-            $myAccount = new  Account($row['CSC'], $row['DateExpiration'], $row['idClient'],
+            /*Se le da formato distinto a la fecha*/
+            $tem = split("-",$row['DateExpiration']);
+            $expirationDate = $tem[1]."/".$tem[2]."/".$tem[0];
+
+            $myAccount = new  Account($row['CSC'], $expirationDate, $row['idClient'],
              $row['idAccount'], $row['numberCard'], $row['typeAccount']);
 
             array_push($array, $myAccount);
@@ -50,7 +54,11 @@ class AccountData extends Data {
 
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-            $myAccount = new  Account($row['CSC'], $row['DateExpiration'], $row['idClient'],
+            /*Se le da formato distinto a la fecha*/
+            $tem = split("-",$row['DateExpiration']);
+            $expirationDate = $tem[2]."/".$tem[0]."/".$tem[1];
+            
+            $myAccount = new  Account($row['CSC'], $expirationDate, $row['idClient'],
              $row['idAccount'], $row['numberCard'], $row['typeAccount']);
             array_push($array, $myAccount);
         }

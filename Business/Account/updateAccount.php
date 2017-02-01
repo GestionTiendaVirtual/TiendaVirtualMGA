@@ -4,7 +4,7 @@ include "./AccountBusiness.php";
 /*$CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount*/
 
 /* Se obtienen los datos */
-
+session_start();
 $idAccount = $_POST['idAccount'];
 $idClient = $_SESSION["idUser"];
 $CSC = $_POST['CSC'];
@@ -16,7 +16,7 @@ $cardNumber = $_POST['cardNumber'];
 $accountBusiness = new AccountBusiness();
 
 /*Validamos*/
-$resultValidation = $accountBusiness->validateEmpty(array($idAccount,$idClient,$CSC,$typeAccount,$expirationDate,$cardNumber));
+$resultValidation = $accountBusiness->validateEmpty(array($idAccount,     $idClient,$CSC,$typeAccount,$expirationDate,$cardNumber));
 #Si existen campos vacios
 if($resultValidation == false){ 
 	header("location: ../../Presentation/Account/AccountInterface.php?msg=Ningun campo debe quedar vacío.");
@@ -25,6 +25,9 @@ elseif ($accountBusiness->validateNumeric(array($idAccount,$idClient)) == false)
 	header("location: ../../Presentation/Account/AccountInterface.php?msg=error de tipo numérico.");
 } #Si los datos son correctos entonces se hace la consulta en la BD
 else{
+	//Ordenamos la fecha;
+	$tem = split("/",$expirationDate);
+	$expirationDate = $tem[2]."-".$tem[0]."-".$tem[1];
 	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount);
 	$result = $accountBusiness->updateAccountBusiness($account);
 
