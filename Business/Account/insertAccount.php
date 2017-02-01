@@ -22,6 +22,9 @@ elseif ($instAccountBusiness->validateNumeric(array($idAccount,$idClient)) === f
 	header("location: ../../Presentation/Account/AccountInterface.php?msg=Error de tipo numérico.");
 } #Si los datos son correctos entonces se hace la consulta en la BD
 else{
+	//Ordenamos la fecha;
+	$tem = split("/",$expirationDate);
+	$expirationDate = $tem[2]."-".$tem[0]."-".$tem[1];
 	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount);
 	$result = $instAccountBusiness->insertAccountBusiness($account);
 	header("location: ../../Presentation/Account/AccountInterface.php?msg=La insercion se realizo con exito.");

@@ -23,14 +23,19 @@ class AccountData extends Data {
 
     /*Optiene todas las filas de la tabla ClientAccount*/
     public function getAllAccountAssetsData() {
+        if(!isset($_SESSION)){session_start();}
     	$conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select * from tbaccount where active = 1";
+        $query = "select * from tbaccount where active = 1 AND idClient = ". $_SESSION["idUser"];
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-            $myAccount = new  Account($row['CSC'], $row['DateExpiration'], $row['idClient'],
+            /*Se le da formato distinto a la fecha*/
+            $tem = split("-",$row['DateExpiration']);
+            $expirationDate = $tem[1]."/".$tem[2]."/".$tem[0];
+
+            $myAccount = new  Account($row['CSC'], $expirationDate, $row['idClient'],
              $row['idAccount'], $row['numberCard'], $row['typeAccount']);
 
             array_push($array, $myAccount);
@@ -42,14 +47,18 @@ class AccountData extends Data {
     public function getAccountByIdData($idAccount) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "select * from tbAccount where idAccount = ". $idAccount . " and active = 1";
+        $query = "select * from tbaccount where idAccount = ". $idAccount . " and active = 1";
         
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
 
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-            $myAccount = new  Account($row['CSC'], $row['DateExpiration'], $row['idClient'],
+            /*Se le da formato distinto a la fecha*/
+            $tem = split("-",$row['DateExpiration']);
+            $expirationDate = $tem[2]."/".$tem[0]."/".$tem[1];
+            
+            $myAccount = new  Account($row['CSC'], $expirationDate, $row['idClient'],
              $row['idAccount'], $row['numberCard'], $row['typeAccount']);
             array_push($array, $myAccount);
         }
@@ -76,7 +85,7 @@ class AccountData extends Data {
     public function deactivateAccountData($idAccount){
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $query = "update tbAccount set active = 0 where idaccount = ".$idAccount;
+        $query = "update tbaccount set active = 0 where idaccount = ".$idAccount;
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
         return $result;
@@ -87,7 +96,7 @@ class AccountData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $query = "update tbAccount set idaccount=".$account->idAccount.", typeaccount= '".$account->typeAccount.
+        $query = "update tbaccount set idaccount=".$account->idAccount.", typeaccount= '".$account->typeAccount.
          "', numbercard= '".$account->cardNumber."', dateexpiration= '".$account->expirationDate.
          "', CSC='".$account->CSC."', idclient= '".$account->idClient.
          "' where idaccount = ".$account->idAccount;

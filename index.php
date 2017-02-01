@@ -9,26 +9,32 @@
         <h1>Inicio</h1>
         <br>
         <hr> 
-        <a href="./Presentation/DirectionClient.php">Dirección cliente</a>
+        <a href="./Presentation/DirectionClient.php">Direcciones</a>
+        <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo producto</a>
         <a href="./Presentation/Product/ProductCreate.php">CRUD Producto</a>
-        <a href="./Presentation/CustomerShopping/testCustomerShopping.php">Compras cliente</a>
-
+        <a href="./Presentation/Client/clientInterface.php">Cliente</a>
+        <a href="./Presentation/CustomerShopping/testCustomerShopping.php">Compras cliente</a>     
 
         <?php
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
                 ?>
-                <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta</a> 
-                <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo</a>
-                <a href="./Presentation/Client/clientInterface.php">Cliente</a>
+                <?php
+                include 'Data/Frecuency.php';
+                $frecuency = new Frecuency();
+                $result = $frecuency->createFrecuency();
+                ?>
+                <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta cliente</a>                                           
+                <a href="./Presentation/Search/Search.php">Búsqueda</a>
                 <a href="./Presentation/WallView/ProductOption.php">Muro de productos</a>
-                <a href="./Presentation/Search/Search.php">Búsqueda.</a>
                 <a href="Business/loginAction.php?logout">Cerrar</a>
                 <hr>
                 <?php
             } else {
                 ?>
-                <hr><br>
+                <hr>
+                <div>Usuario predeterminado: usuario = admin contraseña = admin</div>
+                <br>
                 <form id="frmLogin" method="POST" action="./Business/loginAction.php">
                     <label id="lblUser">Usuario:&emsp;</label>
                     <input type="text" id="txtUser" name="txtUser"/><br><br>

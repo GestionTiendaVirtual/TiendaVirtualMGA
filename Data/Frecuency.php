@@ -12,7 +12,7 @@ class Frecuency extends Data {
         $result = mysqli_query($conn, $query);
         $row = $result->fetch_assoc();
         $valor = $row['max(idfrecuency)'] + 1;
-        session_start();
+        //session_start();
         $idClient = $_SESSION["idUser"];
         $date = date('Y-m-d');
         $contador = 0;
