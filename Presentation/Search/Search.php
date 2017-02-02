@@ -5,12 +5,54 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Busquedas</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+        <script>
+            $(function() {
+                function split( val ) {
+                    return val.split( /,\s*/ );
+                }
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
+                
+                $( "#skills" ).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    minLength: 1,
+                    source: function( request, response ) {
+                        // delegate back to autocomplete, but extract the last term
+                        $.getJSON("../../Business/Search/GetAllBusinessForAJAX.php", { term : extractLast( request.term )},response);
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push( "" );
+                        this.value = terms.join( ", " );
+                        return false;
+                    }
+                });
+            });
+        </script>
     </head>
+
     <body lang="en">
         <?php
         session_start();
@@ -27,7 +69,12 @@
 
         <!--Form para busquedas-->
         <form method="POST" action="./Search.php">
-            <input type="text" id="termSearch" name="termSearch">
+
+            <label for="skills">Tag your skills: </label>
+            <input id="skills" name="termSearch" size="50">
+
+
+            <!-- <input type="text" id="termSearch" name="query"> -->
             <button >buscar</button>
         </form>
         <!-- Fin del form para busqueda -->
@@ -85,40 +132,7 @@
             }
         ?>
 
-        <!-- Script para autocompletado -->
-        <script type="text/javascript">
-           $(document).ready(inicio);
-           function inicio(){
-              
-            /*AJAX*/
-                // De esta forma se obtiene la instancia del objeto XMLHttpRequest
-                if(window.XMLHttpRequest) {
-                    connection = new XMLHttpRequest();
-                }
-                else if(window.ActiveXObject) {
-                    connection = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                // Preparando la función de respuesta
-                connection.onreadystatechange = response;
-                 
-                // Realizando la petición HTTP con método POST
-                connection.open('POST', '../../Business/Search/GetAllBusinessForAJAX.php');
-                connection.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                connection.send();
-
-              /*Se obtienen las opciones por medio de ajax*/
-              
-           }
-
-            function response() {
-                if(connection.readyState == 4) {
-                    var text = String(connection.responseText);
-
-                    var posibilidades = text.split(" ");
-                    $("#termSearch").autocomplete({source:posibilidades});
-                }
-            }
-        </script>
+      
 
     </body>
 </html>
