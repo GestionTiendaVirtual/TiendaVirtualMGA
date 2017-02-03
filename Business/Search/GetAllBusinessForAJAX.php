@@ -1,14 +1,25 @@
 <?php
-include '../Product/ProductBusiness.php';
+/*include '../Product/ProductBusiness.php';
 $instProductBusiness = new ProductBusiness();
 $listProduct = $instProductBusiness->getProducts();
-$result = "";
+*/
+
+include 'SearchProductBusiness.php';
+$inst = new SearchProductBusiness();
+$term = $_GET['term'];
+$typeTerm = $_GET['typeTerm'];
+
+$listProduct = $inst->searchProducAutocomplete($term);
+
 foreach ($listProduct as $productTem) {
-	$nameTem = $instProductBusiness->deleteSpecialCharacters($productTem->getName());
-	$descriptionTem = $instProductBusiness->deleteSpecialCharacters($productTem->getDescription());
-	$modelTem = $instProductBusiness->deleteSpecialCharacters($productTem->getModel());
-	$brandTem = $instProductBusiness->deleteSpecialCharacters($productTem->getBrand());
-	$result .= trim($nameTem) . " " . trim($descriptionTem) . " " . trim($modelTem) . " " . trim($brandTem) . " ";
+	$name=$productTem->getName();
+	$brand = $productTem->getBrand();
+	$typeProduct = $productTem->getTypeProduct();
+	$model = $productTem->getModel();
+
+	$result = array($typeProduct, $brand, $model, $name);
+	$concatena[] = $result[$typeTerm];
 }
-echo trim($result);
+echo json_encode($concatena);
+
 

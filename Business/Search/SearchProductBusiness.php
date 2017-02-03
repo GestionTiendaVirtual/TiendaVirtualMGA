@@ -3,10 +3,18 @@
 	
 	/*La presente clase contiene los metodos referentes a busquedas de productos*/
 
-	class SearchProductBusiness extends SearchData{
+	class SearchProductBusiness{
+		public $inst;
+		function SearchProductBusiness(){
+			$this->inst = new SearchData();
+		}
 
 		public function searchProduc($termSearch){
-			return $this->searchProductData($termSearch);
+			return $this->inst->searchProductData($termSearch);
+		}
+		
+		public function searchProducAutocomplete($termSearch){
+			return $this->inst->searchProductAutompleteData($termSearch);
 		}
 
 	}
