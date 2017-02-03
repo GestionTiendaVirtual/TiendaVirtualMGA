@@ -11,24 +11,28 @@ class Product {
     private $brand;
     private $name;
     private $model;
+    private $serie;
     private $price;
     private $color;
     private $description;
+    private $characteristics;
     private $typeProduct;
     private $pathImages = [];
 
-    public function Product($brand, $model, $price, $color, $description, $name) {
+    public function Product($brand, $model, $price, $color, $description, $name,$characteristics,$serie) {
         $this->brand = $brand;
         $this->model = $model;
         $this->price = $price;
         $this->color = $color;
         $this->description = $description;
         $this->name = $name;
+        $this->serie = $serie;
+        $this->characteristics = $characteristics;
     }
 
     static function ProductInvoice($brand, $model, $price) {
         
-        return new self($brand,$model,$price,"","","");
+        return new self($brand,$model,$price,"","","","","");
        
     }
 
@@ -91,10 +95,27 @@ class Product {
     public function getName() {
         return $this->name;
     }
-
     public function setName($name) {
         $this->name = $name;
     }
+    
+    public function getSerie() {
+        return $this->serie;
+    }
+    public function setSerie($serie) {
+        $this->name = $serie;
+    }
+
+     public function setCharacteristics($characteristics) {
+        $this->characteristics = $characteristics;
+    }
+
+    public function getCharacteristics() {
+        return $this->characteristics;
+    }
+    
+    
+    
 
     public function getPathImages() {
         return $this->pathImages;

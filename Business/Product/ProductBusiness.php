@@ -13,8 +13,8 @@ class ProductBusiness {
         $this->productData = new ProductData();
         
     }    
-    public function insertProduct($product,$arrayImages){
-        return $this->productData->insertProduct($product,$arrayImages);
+    public function insertProduct($product,$arrayImages,$arraySpecifications){
+        return $this->productData->insertProduct($product,$arrayImages,$arraySpecifications);
     }
     public function getProducts(){
         return $this->productData->getProducts();
@@ -28,6 +28,14 @@ class ProductBusiness {
     public function deleteImageProduct($idProduct,$path){
         return $this->productData->deleteImageProduct($idProduct,$path);
     }
+    public function deleteColorProduct($idProduct, $color){
+        return $this->productData->deleteColorProduct($idProduct, $color);
+    }
+    
+    public function insertColorProduct($idProduct, $color){
+        return $this->productData->insertColorProduct($idProduct, $color);
+    }
+    
     public function insertImageProduct($idProduct,$arrayPath){
         return $this->productData->insertImageProduct($idProduct, $arrayPath);
     }

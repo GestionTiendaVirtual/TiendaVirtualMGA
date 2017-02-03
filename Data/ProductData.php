@@ -2,7 +2,7 @@
 
 include_once 'Data.php';
 include_once '../../Domain/Product.php';
-
+include_once '../../Domain/SpecificationProduct.php';
 
 /**
  * Descripcion de ProductData
@@ -15,50 +15,75 @@ class ProductData extends Data {
      * Función que permite el registro de los productos en la base de datos
      */
 
-    function insertProduct($product, $arrayImages) {
+    function insertProduct($product, $arrayImages, $arraySpecifications) {
 
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
+        //------------Se insertan los datos de la tabla tbproduct------------------
         //Se consulta por el ultimo id registrado para generar el consecutivo
-        $resultID = mysqli_query($conn, "select * from tbproduct order by idproduct desc limit 1");
-        $row = mysqli_fetch_array($resultID);
-        if (sizeof($row) >= 1) {
-            $id = $row['idProduct'] + 1;
-        } else {
-            $id = 1;
-        }
+        $resultIDProduct = mysqli_query($conn, "select max(idproduct) from tbproduct");
+        $rowPr = mysqli_fetch_array($resultIDProduct);
+        $idProduct = $rowPr[0] + 1;
         //Se realiza el insert en la base de datos
-        $queryInsert = mysqli_query($conn, "insert into tbproduct values (" . $id . ",'" . $product->getBrand() . "','" .
+        $queryInsert = mysqli_query($conn, "insert into tbproduct values (" . $idProduct . ",'" .
+                $product->getBrand() . "','" .
                 $product->getModel() . "'," .
-                $product->getPrice() . ",'" . $product->getDescription() . "', 1," . $product->getTypeProduct() . " , "
-                . "'" . $product->getColor() . "', '" . $product->getName() . "',1);");
+                $product->getPrice() . ",'" . $product->getDescription() . "', 1," .
+                $product->getTypeProduct() . " , "
+                . "'" . $product->getName() . "','" .
+                $product->getCharacteristics() . "','" . $product->getSerie() . "', 1);");
 
-        $resultIDNew = mysqli_query($conn, "select * from tbproduct order by idproduct desc limit 1");
-        $rowNew = mysqli_fetch_array($resultIDNew);
-        $idNew = $rowNew['idProduct'];
-        
-        $resultID = mysqli_query($conn, "select * from tbimageproduct order by idimage desc limit 1");
-        $row = mysqli_fetch_array($resultID);
-        if (sizeof($row) >= 1) {
-            $id = $row['idImage'] + 1;
-        } else {
-            $id = 1;
+        //-----------------------------------------------------------------------------------
+        //-----------se insertan los colores del producto-----------------------------------
+        $resultIdColor = mysqli_query($conn, "select max(idcolor) from tbproductcolor");
+        $rowColor = mysqli_fetch_array($resultIdColor);
+        $idColor = $rowColor[0] + 1;
+        $colors = split(";", $product->getColor());
+        for ($i = 0; $i < sizeof($colors); $i++) {
+            if ($colors[$i] != "") {
+                $queryColor = mysqli_query($conn, "insert into `tbproductcolor` "
+                        . "(`idcolor`, `idproduct`, `color`) values (" . $idColor . ", "
+                        . "" . $idProduct . ", '" . $colors[$i] . "');");
+                $resultIdColor = mysqli_query($conn, "select max(idcolor) from tbproductcolor");
+                $rowColor = mysqli_fetch_array($resultIdColor);
+                $idColor = $rowColor[0] + 1;
+            }
         }
-        
+        //-----------------------------------------------------------------------------------
+        //-----------se insertan las imagenes del producto-----------------------------------
+        $resultID = mysqli_query($conn, "select max(idimage) from tbimageproduct");
+        $row = mysqli_fetch_array($resultID);
+        $id = $row[0] + 1;
+
         for ($i = 0; $i < sizeof($arrayImages); $i++) {
             $queryInsertImages = mysqli_query($conn, "insert into `tbimageproduct` "
-                    . "(`idImage`, `pathImage`, `idProduct`) values (".$id.", "
-                    . "'" . $arrayImages[$i] . "', " . $idNew . ");");
-             $resultID = mysqli_query($conn, "select * from tbimageproduct order by idimage desc limit 1");
+                    . "(`idImage`, `pathImage`, `idProduct`) values (" . $id . ", "
+                    . "'" . $arrayImages[$i] . "', " . $idProduct . ");");
+            $resultID = mysqli_query($conn, "select max(idimage) from tbimageproduct");
             $rowNew = mysqli_fetch_array($resultID);
-            $id = $rowNew['idImage'] + 1;
+            $id = $rowNew[0] + 1;
         }
+        //-----------------------------------------------------------------------------------
+        //--------------------se insertan las especificaiones del producto--------------------
+        $resultIDSpe = mysqli_query($conn, "select max(idspecification) from tbspecificationproduct");
+        $rowSpe = mysqli_fetch_array($resultIDSpe);
+        $idSpe = $rowSpe[0] + 1;
+        foreach ($arraySpecifications as $currentSpecification) {
+            $queryInsertSpe = mysqli_query($conn, "insert into `tbspecificationproduct` "
+                    . "(`idspecification`, `idproduct`, `namespecification`,`valuespecification`) values (" . $idSpe . "," . $idProduct . ", '" . $currentSpecification->getNameSpecification() . "','" . $currentSpecification->getValueSpecification() . "');");
+            $resultIDSpe = mysqli_query($conn, "select max(idspecification) from tbspecificationproduct");
+            $rowSpe = mysqli_fetch_array($resultIDSpe);
+            $idSpe = $rowSpe[0] + 1;
+        }
+        //--------------------------------------------------------------------------------------
+
         mysqli_close($conn);
 
-        if ($queryInsert == true && $queryInsertImages == true) {
+        if ($queryInsert == true && $queryInsertImages == true &&
+                $queryInsertSpe == true && $queryColor == true) {
             return true;
         } else {
-            return false;
+            return $arraySpecifications;
         }
     }
 
@@ -73,10 +98,10 @@ class ProductData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select  * from `tbproduct` where active != 0 order by brand asc;");        
+        $result = mysqli_query($conn, "select  * from `tbproduct` where active != 0 order by brand asc;");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
-            $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
+            $currentData = new Product($row['brand'], $row['model'], $row['price'], "", $row['description'], $row['nameProduct'], $row['characteristics'], $row['serie']);
             $currentData->setIdProduct($row['idProduct']);
 
             $idProduct = $row['idProduct'];
@@ -84,18 +109,24 @@ class ProductData extends Data {
             while ($rowImage = mysqli_fetch_array($resultImage)) {
                 $currentData->setPathImages($rowImage['pathImage']);
             }
+            $colors = "";
+            $resultColors = mysqli_query($conn, "select * from tbproductcolor where idproduct = " . $idProduct);
+            while ($rowColor = mysqli_fetch_array($resultColors)) {
+                $colors .= $rowColor['color'] . ';';
+            }
+            $currentData->setColor($colors);
+
             array_push($array, $currentData);
         }
         mysqli_close($conn);
         return $array;
     }
-    
-    
+
     function getProductsWall($id) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select  * from `tbproduct` where active != 0 and idTypeProduct = " .$id. " order by brand asc;");        
+        $result = mysqli_query($conn, "select  * from `tbproduct` where active != 0 and idTypeProduct = " . $id . " order by brand asc;");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
@@ -105,7 +136,6 @@ class ProductData extends Data {
         mysqli_close($conn);
         return $array;
     }
-    
 
 //fin función getProducts
 
@@ -120,12 +150,40 @@ class ProductData extends Data {
         //Se realiza la actualizacion en la base de datos
         $queryUpdate = mysqli_query($conn, "update tbproduct set brand = '" . $product->getBrand() . "', model = '" .
                 $product->getModel() . "', price = " .
-                $product->getPrice() . ", color = '" . $product->getColor() . "' , "
+                $product->getPrice() . ","
                 . "description = '" . $product->getDescription()
-                . "', nameproduct = '" . $product->getName() . "' where tbproduct.idproduct = " . $product->getIdProduct() . ";");
+                . "', nameproduct = '" . $product->getName() . "', "
+                . "characteristics = '" . $product->getCharacteristics() . "', serie = '" . $product->getSerie() . "' where tbproduct.idproduct = " . $product->getIdProduct() . ";");
         mysqli_close($conn);
 
-        if ($queryUpdate) {
+        if ($queryUpdate == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function insertColorProduct($idProduct, $color) {
+
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+
+        $resultIdColor = mysqli_query($conn, "select max(idcolor) from tbproductcolor");
+        $rowColor = mysqli_fetch_array($resultIdColor);
+        $idColor = $rowColor[0] + 1;
+        $colors = split(";", $color);
+        for ($i = 0; $i < sizeof($colors); $i++) {
+            if ($colors[$i] != "") {
+                $queryColor = mysqli_query($conn, "insert into `tbproductcolor` "
+                        . "(`idcolor`, `idproduct`, `color`) values (" . $idColor . ", "
+                        . "" . $idProduct . ", '" . $colors[$i] . "');");
+                $resultIdColor = mysqli_query($conn, "select max(idcolor) from tbproductcolor");
+                $rowColor = mysqli_fetch_array($resultIdColor);
+                $idColor = $rowColor[0] + 1;
+            }
+        }
+        mysqli_close($conn);
+        if ($queryColor == true) {
             return true;
         } else {
             return false;
@@ -171,6 +229,22 @@ class ProductData extends Data {
         }
     }
 
+    function deleteColorProduct($idProduct, $color) {
+
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        //Se realiza la eliminación en la base de datos
+        $queryDeleteColor = mysqli_query($conn, "delete from tbproductcolor where idproduct = " . $idProduct . " and color = '" . $color . "';");
+
+        mysqli_close($conn);
+
+        if ($queryDeleteColor == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 //fin función deleteProduct
 
     function insertImageProduct($idProduct, $arrayPath) {
@@ -199,10 +273,7 @@ class ProductData extends Data {
         }
     }
 
-//fin función deleteProduct
-
-
-    public function getProductByID($idProduct){
+    public function getProductByID($idProduct) {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');

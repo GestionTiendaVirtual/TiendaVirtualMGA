@@ -32,38 +32,44 @@
             <th>Nombre</th>
             <th>Marca</th>            
             <th>Modelo</th>
+            <th>Serie</th>
             <th>Precio</th>
-            <th>Color</th>           
-            <th>Descripción</th>           
+            <th>Descripción</th>
+            <th>Color</th>            
+            <th>Imagen</th>            
+
+            <th></th> 
             <?php
             foreach ($products as $currentProducts) {
                 $count = sizeof($currentProducts->getPathImages());
                 ?>
-            <form id="updateproduct" method="POST" action="../../Business/Product/ProductAction.php">
+                <form class="updateproduct" method="POST" action="../../Business/Product/ProductAction.php">
                     <tr>
                     <input type="hidden" id="idProduct" name='idProduct' 
                            value=<?php echo '"' . $currentProducts->getIdProduct() . '"'; ?>/>
                     <td><input type="text" id="txtName" name="txtName" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
+                               data-validation="custom" data-validation-regexp="^[a-zA-Z_áéíóúñ\s]*$"
                                value= <?php echo '"' . $currentProducts->getName() . '"'; ?>></td>
                     <td><input type="text" id="txtBrand" name="txtBrand" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
+                               data-validation="custom" data-validation-regexp="^[a-zA-Z_áéíóúñ\s]*$"
                                value= <?php echo '"' . $currentProducts->getBrand() . '"'; ?>></td>
                     <td><input type="text" id="txtModel" name="txtModel"
                                data-validation="alphanumeric" data-validation-allowing="-_"
                                value= <?php echo '"' . $currentProducts->getModel() . '"'; ?>/></td>
+                    <td><input type="text" id="txtSerie" name="txtSerie"
+                               data-validation="alphanumeric" data-validation-allowing="-_"
+                               value= <?php echo '"' . $currentProducts->getSerie() . '"'; ?>/></td>
                     <td><input type="text" id="txtPrice" name="txtPrice" onkeypress="mascara(this, cpf)"  
                                value= <?php
                                $price = number_format($currentProducts->getPrice());
                                echo '"₡' . $price . '"';
                                ?>/></td>
-                    <td><input type="text" id="txtColor" name="txtColor" 
-                               data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
-                               value= <?php echo '"' . $currentProducts->getColor() . '"'; ?>/></td>
                     <td><input type="text" id="txtDescription" name="txtDescription"                                
-                               value= <?php echo '"' . $currentProducts->getDescription() . '"'; ?>/></td> 
-                    <input type="hidden" id="optionUpdate" name="optionUpdate" value="update">
-                    <td><input type="submit" id="btnAccept" name="btnAccept" value="Actualizar" /></td>  
+                                  value="<?php echo $currentProducts->getDescription(); ?>" /></td>
+
+                    <td><a href="./ProductInsertColor.php?nameProduct=<?php echo $currentProducts->getName();
+                               ?>&idProduct=<?php echo $currentProducts->getIdProduct(); ?>">Agregar colores</a></td>
+
                     <?php
                     if ($count <= 5) {
                         ?>
@@ -72,14 +78,42 @@
                             <?php
                         }
                         ?>
-
-                    </tr>   
+                    <input type="hidden" id="optionUpdate" name="optionUpdate" value="update">
+                    <td><input type="submit" id="btnAccept" name="btnAccept" value="Actualizar" /></td> 
+                    </tr>  
+                    <tr>
+                        <td>Características:<input type="text" id="txtCharacteristics" name="txtCharacteristics"                                
+                                                   value="<?php echo $currentProducts->getCharacteristics(); ?>"/></td>
+                        <td><a href="./ProductSpecification.php?idProduct=<?php echo $currentProducts->getIdProduct(); ?>">Especificaciones</a></td>
+                    </tr>
                 </form>
+                <tr>
+                    <?php
+                    $colors = split(";", $currentProducts->getColor());
+                    for ($i = 0; $i < sizeof($colors); $i++) {
+                        if ($colors[$i] != "") {
+                            ?>
+
+                        <form method="POST" action="../../Business/Product/ProductAction.php">
+
+                            <td><input type="submit" value="Eliminar color" style="background:
+                                       <?php echo $colors[$i]; ?>;
+                                       border: none;  width: 160px; height: 30px;"/></td>                            
+                            <input type="hidden" id="color" name="color" value="<?php echo $colors[$i]; ?>"/>
+                            <input type="hidden" id="optionColor" name="optionColor"/>
+                            <input type="hidden" id="idProduct" name="idProduct" value="<?php echo $currentProducts->getIdProduct(); ?>"/>
+                        </form>
+
+                        <?php
+                    }
+                }
+                ?>
+                </tr>
                 <tr>
                     <?php
                     foreach ($currentProducts->getPathImages() as $path) {
                         ?>
-                <form method="POST" action="../../Business/Product/ProductAction.php">
+                    <form method="POST" action="../../Business/Product/ProductAction.php">
                         <td><img style="width: 150px; height: 100px;"src="<?php echo $path; ?>">&emsp;&emsp;<br>
                             <input type="submit" value="Eliminar"></td>
                         <input type="hidden" id="idProduct" name='idProduct' 
@@ -90,10 +124,10 @@
                     <?php
                 }
                 ?>
-                </tr> 
+                </tr>
                 <?php
             }
-            ?>
+            ?>  
         </table>
         <label id="txtMessage"></label>
 
@@ -118,5 +152,12 @@ if (isset($_GET['success'])) {
     $.validate({
         lang: 'es'
     });
+    $(document).ready(function () {
+        $("#txtColor").change(function () {
+            document.getElementById('cont').value = 1;
+        });
+    });
+
+
 </script>
 </html>

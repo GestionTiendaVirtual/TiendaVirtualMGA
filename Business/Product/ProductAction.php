@@ -1,6 +1,7 @@
 <?php
 
 include_once '../../Domain/Product.php';
+include_once '../../Domain/SpecificationProduct.php';
 include_once './ProductBusiness.php';
 
 if (isset($_POST['optionCreate'])) {
@@ -9,13 +10,16 @@ if (isset($_POST['optionCreate'])) {
     $name = $_POST['txtName'];
     $model = $_POST['txtModel'];
     $price = $_POST['txtPrice'];
-    $color = $_POST['txtColor'];
+    $color = $_POST['colors'];
     $count = $_POST['count'];
+    $countSpe = $_POST['countSpe'];
     $typeProduct = $_POST['cbTypeProduct'];
     $description = $_POST['txtDescription'];
+    $characteristics = $_POST['txtCharacteristics'];
+    $serie = $_POST['txtSerie'];
     $price = str_replace(",", "", $price);
     $price = str_replace("₡", "", $price);
-    
+
     $arrayImages = [];
     $flag = false;
     for ($i = 0; $i <= $count; $i++) {
@@ -49,13 +53,23 @@ if (isset($_POST['optionCreate'])) {
             }
         }
     }
+    $arraySpecifications = [];
+    for ($j = 0; $j < $countSpe; $j++) {
+        $nameSpecification = $_POST['txtNameSpe' . $j];
+        $valueSpecification = $_POST['txtValueSpe' . $j];
+
+        if (strlen($nameSpecification) > 2 && strlen($valueSpecification) > 2) {
+            $specification = new SpecificationProduct($nameSpecification, $valueSpecification);
+            array_push($arraySpecifications, $specification);
+        }
+    }
     if (strlen($name) >= 2 && strlen($description) >= 2 && strlen($brand) >= 2 &&
             strlen($model) >= 2 && strlen($color) >= 2 && is_numeric($price) && $flag == true) {
 
-        $product = new Product($brand, $model, $price, $color, $description, $name);
+        $product = new Product($brand, $model, $price, $color, $description, $name, $characteristics, $serie);
         $product->setTypeProduct($typeProduct);
         $productBusiness = new ProductBusiness();
-        $result = $productBusiness->insertProduct($product, $arrayImages);
+        $result = $productBusiness->insertProduct($product, $arrayImages, $arraySpecifications);
         echo $result;
         if ($result == true) {
             header('location: ../../Presentation/Product/ProductCreate.php?success=success');
@@ -65,21 +79,21 @@ if (isset($_POST['optionCreate'])) {
     } else {
         header('location: ../../Presentation/Product/ProductCreate.php?error=errorData');
     }
-    
 } else if (isset($_POST['optionUpdate'])) {
     $idProduct = $_POST['idProduct'];
     $brand = $_POST['txtBrand'];
     $name = $_POST['txtName'];
     $model = $_POST['txtModel'];
+    $serie = $_POST['txtSerie'];
     $price = $_POST['txtPrice'];
-    $color = $_POST['txtColor'];
     $description = $_POST['txtDescription'];
+    $characteristics = $_POST['txtCharacteristics'];
     $price = str_replace(",", "", $price);
     $price = str_replace("₡", "", $price);
 
-    if (strlen($brand) >= 2 && strlen($model) >= 2 && strlen($color) >= 2 && is_numeric($price) && strlen($description) >= 2) {
+    if (strlen($brand) >= 2 && strlen($model) >= 2 && is_numeric($price) && strlen($description) >= 2 && strlen($serie) > 2 && strlen($characteristics) > 2) {
 
-        $product = new Product($brand, $model, $price, $color, $description, $name);
+        $product = new Product($brand, $model, $price, "", $description, $name, $characteristics, $serie);
         $product->setIdProduct($idProduct);
         $productBusiness = new ProductBusiness();
         $result = $productBusiness->updateProduct($product);
@@ -170,5 +184,28 @@ if (isset($_POST['optionCreate'])) {
             header('location: ../../Presentation/Product/ProductUpdate.php?errorUpdate=error');
         }
     }
-}
+} else if (isset($_POST['optionColor'])) {
+    $idProduct = $_POST['idProduct'];
+    $color = $_POST['color'];
 
+    $productBusiness = new ProductBusiness();
+    $result = $productBusiness->deleteColorProduct($idProduct, $color);
+    if ($result == true) {
+        header('location: ../../Presentation/Product/ProductUpdate.php?success=success');
+    } else {
+        header('location: ../../Presentation/Product/ProductUpdate.php?errorUpdate=error');
+    }
+} else if (isset($_POST['optionInsertColor'])) {
+
+    $colors = $_POST['colors'];
+    $idProduct = $_POST['idProduct'];
+
+    $productBusiness = new ProductBusiness();
+    $result = $productBusiness->insertColorProduct($idProduct, $colors);
+
+    if ($result == true) {
+        header('location: ../../Presentation/Product/ProductUpdate.php?success=success');
+    } else {
+        header('location: ../../Presentation/Product/ProductUpdate.php?errorUpdate=errorUpdate');
+    }
+} 

@@ -22,9 +22,6 @@ function addInput(input) {
     return false;
 }//fin addInput
 
-
-
-
 function mascara(o, f) {
     v_obj = o;
     v_fun = f;

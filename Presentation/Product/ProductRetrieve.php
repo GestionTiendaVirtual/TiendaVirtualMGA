@@ -29,9 +29,12 @@
             <th>Nombre</th>
             <th>Marca</th>
             <th>Modelo</th>
+            <th>Serie</th>            
             <th>Precio</th>
             <th>Color</th>           
-            <th>Descripción</th>           
+            <th>Descripción</th>
+            <th>Características</th>
+
             <?php
             foreach ($products as $currentProducts) {
                 ?>                
@@ -39,11 +42,28 @@
                     <td><label><?php echo $currentProducts->getName(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getBrand(); ?>&emsp;&emsp;&emsp;</label></td>
                     <td><label><?php echo $currentProducts->getModel(); ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php $price = number_format($currentProducts->getPrice());
-            echo '₡ ' . $price
-                ?>&emsp;&emsp;&emsp;</label></td>
-                    <td><label><?php echo $currentProducts->getColor(); ?>&emsp;&emsp;&emsp;</label></td>           
+                    <td><label><?php echo $currentProducts->getSerie(); ?>&emsp;&emsp;&emsp;</label></td>
+                    <td><label><?php
+                            $price = number_format($currentProducts->getPrice());
+                            echo '₡ ' . $price
+                            ?>&emsp;&emsp;&emsp;</label></td>
+                    <td>
+                        <?php
+                        $colors = split(";", $currentProducts->getColor());
+                        for ($i = 0; $i < sizeof($colors); $i++) {
+                            if($colors[$i] != ""){
+                            ?>
+                            <input type="text" disabled="true" style="background:
+                                   <?php echo $colors[$i]; ?>;
+                                   border: none;  width: 30px; height: 30px;"/>                            
+                            <?php
+                            }
+                        }
+                        ?>
+
+                    </td>           
                     <td><label><?php echo $currentProducts->getDescription(); ?>&emsp;&emsp;&emsp;</label></td>           
+                    <td><label><?php echo $currentProducts->getCharacteristics(); ?>&emsp;&emsp;&emsp;</label></td>           
                 </tr>
                 <tr>
                     <?php
