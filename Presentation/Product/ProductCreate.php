@@ -148,7 +148,7 @@ if (isset($_GET['success'])) {
 
 </script>
 <script language="JavaScript">
-    $("#txtColor").focus(function () {
+    $("#txtPrice").blur(function () {
         var price = document.getElementById('txtPrice').value;
         document.getElementById('txtPrice').value = '₡ ' + price;
     });
