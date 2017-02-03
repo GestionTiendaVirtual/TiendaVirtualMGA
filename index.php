@@ -19,6 +19,11 @@
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
                 ?>
+                <?php
+                include 'Data/Frecuency.php';
+                $frecuency = new Frecuency();
+                $result = $frecuency->createFrecuency();
+                ?>
                 <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta cliente</a>                                           
                 <a href="./Presentation/Search/Search.php">Búsqueda</a>
                 <a href="./Presentation/WallView/ProductOption.php">Muro de productos</a>

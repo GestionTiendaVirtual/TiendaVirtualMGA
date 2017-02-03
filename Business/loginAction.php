@@ -2,9 +2,9 @@
 
 include '../Business/ClientLoginBusiness.php';
 
-include '../Data/Frecuency.php';
-$frecuency = new Frecuency();
-$result = $frecuency->createFrecuency();
+//include '../Data/Frecuency.php';
+//$frecuency = new Frecuency();
+//$result = $frecuency->createFrecuency();
 
 //include './FrecuencyBusiness/FrecuencyBusiness.php';
 //$frecuency = new FrecuencyBusiness();
