@@ -280,14 +280,21 @@ class ProductData extends Data {
         $result = mysqli_query($conn, "select * from tbproduct where idproduct = " . $idProduct);
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
-            $currentData = new Product($row['brand'], $row['model'], $row['price'], $row['color'], $row['description'], $row['nameProduct']);
+            $currentData = new Product($row['brand'], $row['model'], $row['price'], "", $row['description'], $row['nameProduct'], $row['characteristics'], $row['serie']);
             $currentData->setIdProduct($row['idProduct']);
 
             $idProduct = $row['idProduct'];
-            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idproduct = " . $idProduct);
+            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idProduct = " . $idProduct);
             while ($rowImage = mysqli_fetch_array($resultImage)) {
                 $currentData->setPathImages($rowImage['pathImage']);
             }
+            $colors = "";
+            $resultColors = mysqli_query($conn, "select * from tbproductcolor where idproduct = " . $idProduct);
+            while ($rowColor = mysqli_fetch_array($resultColors)) {
+                $colors .= $rowColor['color'] . ';';
+            }
+            $currentData->setColor($colors);
+
             array_push($array, $currentData);
         }
         return $array;

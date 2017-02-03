@@ -9,12 +9,14 @@ class SearchData extends Data{
     public function searchProductAutompleteData($termSearch) {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
+
         $result = mysqli_query($conn, "select * from tbproduct  JOIN tbtypeproduct  ON tbproduct.idtypeproduct = tbtypeproduct.idtypeproduct where ( model like '%" . $termSearch . "%' or brand like '%" . $termSearch . "%'  or nameProduct like '%" . $termSearch . "%' or nameTypeProduct like '%" . $termSearch . "%') && tbproduct.active = 1");
         $arrayProduct = array();
 
         while ($row = mysqli_fetch_array($result)) {
             /*Se crean los objetos de los productos y se agregan al array $arrayProduct */
-            $currentData = new Product($row['brand'], $row['model'],$row['price'], $row['color'], $row['description'], $row['nameProduct']);
+
+            $currentData = new Product($row['brand'], $row['model'], $row['price'], "", $row['description'], $row['nameProduct'], $row['characteristics'], $row['serie']);
             $idProduct = $row['idProduct'];
             $currentData->setIdProduct($idProduct);
             $currentData->setTypeProduct($row['nameTypeProduct']);
@@ -62,7 +64,7 @@ class SearchData extends Data{
 
         while ($row = mysqli_fetch_array($result)) {
             /*Se crean los objetos de los productos y se agregan al array $arrayProduct */
-            $currentData = new Product($row['brand'], $row['model'],$row['price'], $row['color'], $row['description'], $row['nameProduct']);
+            $currentData = new Product($row['brand'], $row['model'], $row['price'], "", $row['description'], $row['nameProduct'], $row['characteristics'], $row['serie']);
             $idProduct = $row['idProduct'];
             $currentData->setIdProduct($idProduct);
             $currentData->setTypeProduct($row['nameTypeProduct']);
