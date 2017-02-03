@@ -14,11 +14,14 @@
 
         <script>
             $(function() {
+                var typeTermNum = 0;
                 function split( val ) {
-                    return val.split( /,\s*/ );
+                    return val.split(" ");
                 }
                 function extractLast( term ) {
-                    return split( term ).pop();
+                    var resultSplit = split( term );
+                    typeTermNum = (resultSplit.length)-1;
+                    return resultSplit.pop();
                 }
                 
                 $( "#skills" ).bind( "keydown", function( event ) {
@@ -31,7 +34,7 @@
                     minLength: 1,
                     source: function( request, response ) {
                         // delegate back to autocomplete, but extract the last term
-                        $.getJSON("../../Business/Search/GetAllBusinessForAJAX.php", { term : extractLast( request.term )},response);
+                        $.getJSON("../../Business/Search/GetAllBusinessForAJAX.php", { term : extractLast( request.term ), typeTerm : typeTermNum},response);
                     },
                     focus: function() {
                         // prevent value inserted on focus
@@ -45,7 +48,7 @@
                         terms.push( ui.item.value );
                         // add placeholder to get the comma-and-space at the end
                         terms.push( "" );
-                        this.value = terms.join( ", " );
+                        this.value = terms.join( " " );
                         return false;
                     }
                 });
