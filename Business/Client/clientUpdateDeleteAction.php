@@ -6,7 +6,7 @@ $lastNameSClient = $_POST['lastNameSClient'];
 $emailClient = $_POST['emailClient'];
 $userClient = $_POST['userClient'];
 $passwordClient = $_POST['passwordClient'];
-$addressClient = $_POST['addressClient'];
+$addressClient1 = $_POST['addressClient'];
 $delete = $_POST['delete'];
 $update = $_POST['update'];
 
@@ -37,14 +37,14 @@ elseif ($update) {
             && strlen($emailClient) >= 2
             && strlen($userClient) >= 2
             && strlen($passwordClient) >= 2
-            && strlen($addressClient) >= 2) {
+            && strlen($addressClient1) >= 2) {
         $client = new client($nameClient,
                 $lastNameFClient,
                 $lastNameSClient,
                 $emailClient,
                 $userClient,
                 $passwordClient,
-                $addressClient);
+                $addressClient1);
         $client->setIdClient($idClient);
         $clientBusiness = new clientBusiness();
         $result = $clientBusiness->updateClient($client);

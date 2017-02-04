@@ -37,9 +37,28 @@ class TypeProductData extends Data {
         } else {
             return false;
         }
+    }//fin function insertProduct
+    /**
+     * metodo para consultar si existe el dato ya registrado en la base de datos
+     * @param type $nameTypeProduct nombre del nuevo tipo de producto
+     * @return type regresa
+     */
+    function isExist($nameTypeProduct) {
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $total = mysqli_num_rows(mysqli_query($conn, "select count(idTypeProduct) as total from tbtypeproduct where nameTypeProduct=" .
+                $nameTypeProduct));
+        
+        if($total == 0){
+          $exist= 'NoExiste';
+        } else {
+            $exist= 'Existe'; 
+        }
+        return $exist;
+        
+       
     }
-
-//fin function insertProduct
+    
     
     /***
      * Función que permite la obtención de todos los registro de 

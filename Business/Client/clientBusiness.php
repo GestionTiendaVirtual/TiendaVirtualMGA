@@ -15,19 +15,30 @@ class clientBusiness
     }
     public function deleteClient($idClient) {
         return $this->clientData->deleteClient($idClient);
-    }
-
+    }    
     public function getClient() {
         return $this->clientData->getClient();
     }
-
     public function insertClient($client) {
         return $this->clientData->insertClient($client);
     }
-
     public function updateClient($client) {
         return $this->clientData->updateClient($client);
     }
+    public function getProvince() {
+        return $this->clientData->getProvince();
+    }
+    public function getCanton($id) {
+        return $this->clientData->getCanton($id);
+    }
+    public function getDistrict($idCanton) {
+        return $this->clientData->getDistrict($idCanton);
+    }
+    public function getSexualPreferences() {
+        return $this->clientData->getSexualPreferences();
+    }
+    
+    
 
 
 

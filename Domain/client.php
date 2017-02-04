@@ -7,25 +7,40 @@
  */
 
 class client {
-
+    
     public $idClient;
-    public $nameClient;
-    public $lastNameFClient;
-    public $lastNameSClient;
     public $emailClient;
     public $userClient;
     public $passwordClient;
-    public $addressClient;
+    public $nameClient;
+    public $lastNameFClient;
+    public $lastNameSClient;
+    public $bornClient;
+    public $sexClient;
+    public $telephoneClient;
+    public $provinceClient;
+    public $cantonClient;
+    public $districtClient;
+    public $addressClient1;
+    public $addressClient2;
 
-    function client($nameClient, $lastNameFClient, $lastNameSClient, $emailClient, $userClient, $passwordClient, $addressClient) {
-        $this->nameClient = $nameClient;
-        $this->lastNameFClient = $lastNameFClient;
-        $this->lastNameSClient = $lastNameSClient;
+    public function Client($emailClient, $userClient, $passwordClient, $nameClient, $lastNameFClient, $lastNameSClient, $bornClient, $sexClient, $telephoneClient, $provinceClient, $cantonClient, $districtClient, $addressClient1, $addressClient2) {
         $this->emailClient = $emailClient;
         $this->userClient = $userClient;
         $this->passwordClient = $passwordClient;
-        $this->addressClient = $addressClient;
+        $this->nameClient = $nameClient;
+        $this->lastNameFClient = $lastNameFClient;
+        $this->lastNameSClient = $lastNameSClient;
+        $this->bornClient = $bornClient;
+        $this->sexClient = $sexClient;
+        $this->telephoneClient = $telephoneClient;
+        $this->provinceClient = $provinceClient;
+        $this->cantonClient = $cantonClient;
+        $this->districtClient = $districtClient;
+        $this->addressClient1 = $addressClient1;
+        $this->addressClient2 = $addressClient2;
     }
+
     
      static function ClientInvoice($name,$surname1,$surname2) {
         
@@ -34,68 +49,126 @@ class client {
     }
     
 
-    function getIdClient() {
+    public function getIdClient() {
         return $this->idClient;
     }
 
-    function getNameClient() {
-        return $this->nameClient;
-    }
-
-    function getLastNameFClient() {
-        return $this->lastNameFClient;
-    }
-
-    function getLastNameSClient() {
-        return $this->lastNameSClient;
-    }
-
-    function getEmailClient() {
+    public function getEmailClient() {
         return $this->emailClient;
     }
 
-    function getUserClient() {
+    public function getUserClient() {
         return $this->userClient;
     }
 
-    function getPasswordClient() {
+    public function getPasswordClient() {
         return $this->passwordClient;
     }
 
-    function getAddressClient() {
-        return $this->addressClient;
+    public function getNameClient() {
+        return $this->nameClient;
     }
 
-    function setIdClient($idClient) {
+    public function getLastNameFClient() {
+        return $this->lastNameFClient;
+    }
+
+    public function getLastNameSClient() {
+        return $this->lastNameSClient;
+    }
+
+    public function getBornClient() {
+        return $this->bornClient;
+    }
+
+    public function getSexClient() {
+        return $this->sexClient;
+    }
+
+    public function getTelephoneClient() {
+        return $this->telephoneClient;
+    }
+
+    public function getProvinceClient() {
+        return $this->provinceClient;
+    }
+
+    public function getCantonClient() {
+        return $this->cantonClient;
+    }
+
+    public function getDistrictClient() {
+        return $this->districtClient;
+    }
+
+    public function getAddressClient1() {
+        return $this->addressClient1;
+    }
+
+    public function getAddressClient2() {
+        return $this->addressClient2;
+    }
+
+    public function setIdClient($idClient) {
         $this->idClient = $idClient;
     }
 
-    function setNameClient($nameClient) {
-        $this->nameClient = $nameClient;
-    }
-
-    function setLastNameFClient($lastNameFClient) {
-        $this->lastNameFClient = $lastNameFClient;
-    }
-
-    function setLastNameSClient($lastNameSClient) {
-        $this->lastNameSClient = $lastNameSClient;
-    }
-
-    function setEmailClient($emailClient) {
+    public function setEmailClient($emailClient) {
         $this->emailClient = $emailClient;
     }
 
-    function setUserClient($userClient) {
+    public function setUserClient($userClient) {
         $this->userClient = $userClient;
     }
 
-    function setPasswordClient($passwordClient) {
+    public function setPasswordClient($passwordClient) {
         $this->passwordClient = $passwordClient;
     }
 
-    function setAddressClient($addressClient) {
-        $this->addressClient = $addressClient;
+    public function setNameClient($nameClient) {
+        $this->nameClient = $nameClient;
     }
+
+    public function setLastNameFClient($lastNameFClient) {
+        $this->lastNameFClient = $lastNameFClient;
+    }
+
+    public function setLastNameSClient($lastNameSClient) {
+        $this->lastNameSClient = $lastNameSClient;
+    }
+
+    public function setBornClient($bornClient) {
+        $this->bornClient = $bornClient;
+    }
+
+    public function setSexClient($sexClient) {
+        $this->sexClient = $sexClient;
+    }
+
+    public function setTelephoneClient($telephoneClient) {
+        $this->telephoneClient = $telephoneClient;
+    }
+
+    public function setProvinceClient($provinceClient) {
+        $this->provinceClient = $provinceClient;
+    }
+
+    public function setCantonClient($cantonClient) {
+        $this->cantonClient = $cantonClient;
+    }
+
+    public function setDistrictClient($districtClient) {
+        $this->districtClient = $districtClient;
+    }
+
+    public function setAddressClient1($addressClient1) {
+        $this->addressClient1 = $addressClient1;
+    }
+
+    public function setAddressClient2($addressClient2) {
+        $this->addressClient2 = $addressClient2;
+    }
+
+
 
 }

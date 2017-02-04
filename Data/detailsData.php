@@ -26,57 +26,42 @@ class detailsData extends Data {
         } else {
             $id = 1;
         }
-        $consulting = mysqli_query($conn, 
-                "select count(iddesired) as total from tbproductdesired where idclient =" .
+        $consulting = mysqli_query($conn, "select count(iddesired) as total from tbproductdesired where idclient =" .
                 $idclientWish . " and idproduct = " . $idProductWish);
-        $data=mysqli_fetch_assoc($consulting);
-        if ($data['total']>=1) {
+        $data = mysqli_fetch_assoc($consulting);
+        if ($data['total'] >= 1) {
 
             $queryDelete = mysqli_query($conn, "update tbproductdesired set active= 1, dateactive=NOW() where idclient='"
-                . $idclientWish . "' and idproduct= '" . $idProductWish . "';");
-        mysqli_close($conn);
+                    . $idclientWish . "' and idproduct= '" . $idProductWish . "';");
+            mysqli_close($conn);
 
-        if ($queryDelete) {
-            return true;
+            return($queryDelete);
         } else {
-            return false;
+
+
+            //Se realiza el insert en la base de datos
+
+            $queryInsert = mysqli_query($conn, "insert into tbproductdesired values ('"
+                    . $id . "','" . $idclientWish . "','" . $idProductWish . "', b'1' ,NOW());");
+
+            mysqli_close($conn);
+
+            return($queryInsert);
         }
-            
-            
-        } else {
-            
-        
-        //Se realiza el insert en la base de datos
-
-        $queryInsert = mysqli_query($conn, "insert into tbproductdesired values ('"
-                . $id . "','" . $idclientWish ."','" . $idProductWish . "', b'1' ,NOW());");
-
-        mysqli_close($conn);
-
-        if ($queryInsert) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     }
 
 //fin function insertDeseo
-   /*
+    /*
      * Funcion que permite comprobar si ya existe el producto en la lista de deseos o no.
      */
     function isDesired($idProductWish, $idclientWish) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $consulting = mysqli_query($conn, 
-                "select count(iddesired) as total from tbproductdesired where idclient =" .
-                $idclientWish . " and idproduct = " . $idProductWish. " and active = 1 ");
-        $data=mysqli_fetch_assoc($consulting);
-        if ($data['total']>=1) {
-            return true;
-        } else {
-            return false;
-        }
+        $consulting = mysqli_query($conn, "select count(iddesired) as total from tbproductdesired where idclient =" .
+                $idclientWish . " and idproduct = " . $idProductWish . " and active = 1 ");        
+        $data = mysqli_fetch_assoc($consulting);
+        
+        return($data['total'] >= 1);
     }
 
     //fin del metodo isDesire

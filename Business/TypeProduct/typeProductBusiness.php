@@ -29,5 +29,9 @@ class typeProductBusiness {
 
     public function updateTypeProduct($typeProduct) {
         return $this->typeProductData->updateTypeProduct($typeProduct);
-    }    
+    }
+    public function isExist($nameTypeProduct) {
+        return $this->typeProductData->isExist($nameTypeProduct);
+    }
+    
 }
