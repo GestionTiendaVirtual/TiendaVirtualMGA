@@ -7,9 +7,9 @@
 
     <body>
         <?php
-        include_once '../Data/DirectionClientData.php';
-        $direction = new DirectionClientData();
-        $result = $direction->getProvince();
+        include_once '../Business/Location/LocationBusiness.php';
+        $direction = new LocationBusiness();
+        $result = $direction->getProvinceBusiness();
         ?>
 
         <h1>Direccion</h1>
@@ -62,7 +62,7 @@
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 /*Se obtiene el Canton*/
-                $result = $direction->getCanton($id);
+                $result = $direction->getCantonBusiness($id);
             ?>
             <br></br>
             <h3>Seleccione el canton:</h3>
@@ -99,7 +99,7 @@
                 $id2 = $_GET['id2'];
                 
                 /*Se obtiene el distrito*/
-                $result = $direction->getDistrict($id2);
+                $result = $direction->getDistrictBusiness($id2);
                 ?>
                  <br></br>
                  <h3>Seleccione el distrito:</h3>
