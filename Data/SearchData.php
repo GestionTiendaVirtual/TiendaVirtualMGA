@@ -1,8 +1,8 @@
 <?php
 include_once 'Data.php';
-include '../../Domain/Product.php';
+//include '../../Domain/Product.php';
 class SearchData extends Data{
-	
+
     /*
     * Busca coincidencias para autocompletar
     */
