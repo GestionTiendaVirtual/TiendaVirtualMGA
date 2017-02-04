@@ -121,6 +121,34 @@ class ProductData extends Data {
         mysqli_close($conn);
         return $array;
     }
+    
+    function getProductsTypeProduct($idTypeProduct){
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "select  * from `tbproduct` where active != 0 and idtypeproduct = ".$idTypeProduct." order by brand asc;");
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $currentData = new Product($row['brand'], $row['model'], $row['price'], "", $row['description'], $row['nameProduct'], $row['characteristics'], $row['serie']);
+            $currentData->setIdProduct($row['idProduct']);
+
+            $idProduct = $row['idProduct'];
+            $resultImage = mysqli_query($conn, "select * from tbimageproduct where idProduct = " . $idProduct);
+            while ($rowImage = mysqli_fetch_array($resultImage)) {
+                $currentData->setPathImages($rowImage['pathImage']);
+            }
+            $colors = "";
+            $resultColors = mysqli_query($conn, "select * from tbproductcolor where idproduct = " . $idProduct);
+            while ($rowColor = mysqli_fetch_array($resultColors)) {
+                $colors .= $rowColor['color'] . ';';
+            }
+            $currentData->setColor($colors);
+
+            array_push($array, $currentData);
+        }
+        mysqli_close($conn);
+        return $array;
+    }
+            
 
     function getProductsWall($id) {
 

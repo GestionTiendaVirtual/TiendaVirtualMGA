@@ -22,14 +22,14 @@ if (isset($_POST['option']) == 'login') {
         if ($result != -1) {
             session_start();
             $_SESSION['idUser'] = $result;
-            header('location: ../index.php');
+            header('location: ../Presentation/Modules/ClientView.php');
         } else {
             header('location: ../index.php?errorUser=error');
         }
     } else {
         header('location: ../index.php?errorData=error');
     }
-    header('location: ../index.php');
+    header('location: ../Presentation/Modules/ClientView.php');
 } else if (isset($_GET['logout'])) {
     $_SESSION['idUser'] = 0;
     session_start();

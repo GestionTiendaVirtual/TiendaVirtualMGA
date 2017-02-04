@@ -15,7 +15,7 @@
             <tr>
                 <td><a href="../../index.php">Inicio</a></td>
                 <td><a href="ProductCreate.php">Registrar</a></td>
-                <td><a href="ProductRetrieve.php">Visualizar</a><td>
+                <!--<td><a href="ProductRetrieve.php">Visualizar</a><td>-->
                 <td><a href="ProductUpdate.php">Actualizar</a><td>
                 <td><a href="ProductState.php">Estado</a><td>
             </tr>

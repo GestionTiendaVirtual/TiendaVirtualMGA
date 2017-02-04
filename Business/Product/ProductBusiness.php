@@ -19,6 +19,10 @@ class ProductBusiness {
     public function getProducts(){
         return $this->productData->getProducts();
     }
+    public function getProductsTypeProduct($idTypeProduct){
+        return $this->productData->getProductsTypeProduct($idTypeProduct);
+    }
+
     public function updateProduct($product){
         return $this->productData->updateProduct($product);
     }

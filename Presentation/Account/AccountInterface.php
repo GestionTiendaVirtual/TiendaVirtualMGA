@@ -56,7 +56,7 @@
         ?>
 
 
-        <a href="../../index.php"><h3>Inicio</h3></a>
+        <a href="../../Presentation/Modules/ClientView.php"><h3>Atrás</h3></a>
         <h2>Cuentas &rarr;listado</h2>
         <?php
             $result = $accountBusiness->getAllAccountAssetsBusiness();

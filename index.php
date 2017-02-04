@@ -13,8 +13,6 @@
         <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo producto</a>
         <a href="./Presentation/Product/ProductCreate.php">Producto</a>
         <a href="./Presentation/Client/clientInterface.php">Cliente</a>
-        <a href="./Presentation/CustomerShopping/testCustomerShopping.php">Compras cliente</a>     
-
         <?php
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
@@ -24,11 +22,6 @@
                 $frecuency = new Frecuency();
                 $result = $frecuency->createFrecuency();
                 ?>
-                <a href="./Presentation/Account/AccountInterface.php">CRUD cuenta cliente</a>                                           
-                <a href="./Presentation/Search/Search.php">Búsqueda</a>
-                <a href="./Presentation/WallView/ProductOption.php">Muro de productos</a>
-                <a href="Business/loginAction.php?logout">Cerrar</a>
-                <hr>
                 <?php
             } else {
                 ?>

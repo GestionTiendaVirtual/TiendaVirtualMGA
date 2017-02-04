@@ -110,7 +110,7 @@
                             <td><label><?php $price = number_format($currentProducts->getPrice());
                         echo '₡ ' . $price
                         ?>&emsp;&emsp;&emsp;</label></td>
-                            <td><a href="../Product/ProductDetails.php?idProduct=<?php echo $currentProducts->getIdProduct() ?>">Ver producto</a><td>           
+                            <td><a href="../Product/ProductDetail.php?idProduct=<?php echo $currentProducts->getIdProduct() ?>">Ver producto</a><td>           
                         </tr>
                         <tr>
                             <?php
