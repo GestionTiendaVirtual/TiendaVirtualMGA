@@ -6,13 +6,15 @@
         <title></title>
     </head>
     <body>
-        <h1>Inicio</h1>
-        <br>
+        <h1>Administrar</h1>
         <hr> 
         <a href="./Presentation/DirectionClient.php">Direcciones</a>
         <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo producto</a>
         <a href="./Presentation/Product/ProductCreate.php">Producto</a>
         <a href="./Presentation/Client/clientInterface.php">Cliente</a>
+        <br><br>
+        <hr>
+        <h1>Iniciar sesión</h1>
         <?php
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
@@ -25,7 +27,7 @@
                 <?php
             } else {
                 ?>
-                <hr>
+                
                 <div>Usuario predeterminado: usuario = admin contraseña = admin</div>
                 <br>
                 <form id="frmLogin" method="POST" action="./Business/loginAction.php">
