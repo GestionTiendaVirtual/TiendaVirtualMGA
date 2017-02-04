@@ -7,14 +7,14 @@
     </head>
     <body>
         <h1>Administrar</h1>
-        <hr> 
+        <hr>  
         <a href="./Presentation/DirectionClient.php">Direcciones</a>
         <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo producto</a>
         <a href="./Presentation/Product/ProductCreate.php">Producto</a>
         <a href="./Presentation/Client/clientInterface.php">Cliente</a>
-        <br><br>
         <hr>
         <h1>Iniciar sesión</h1>
+        
         <?php
         if (@session_start() == true) {
             if (isset($_SESSION["idUser"])) {
@@ -24,6 +24,7 @@
                 $frecuency = new Frecuency();
                 $result = $frecuency->createFrecuency();
                 ?>
+               
                 <?php
             } else {
                 ?>
