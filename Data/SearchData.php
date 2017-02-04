@@ -1,8 +1,7 @@
 <?php
 include_once 'Data.php';
-//include '../../Domain/Product.php';
 class SearchData extends Data{
-
+    
     /*
     * Busca coincidencias para autocompletar
     */
@@ -59,7 +58,7 @@ class SearchData extends Data{
     }
 
 
-	/* Busca todos los productos en relacion a un producto */
+    /* Busca todos los productos en relacion a un producto */
     public function searchProductData($termSearch) {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
@@ -104,7 +103,7 @@ class SearchData extends Data{
         $cont = $row[0]+1; 
         
         foreach ($arraySearch as $tem) {
-        	$query = "insert into tbsearch (`idsearch`,`idproduct`, `idclient`) values (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
+            $query = "insert into tbsearch (`idsearch`,`idproduct`, `idclient`) values (".$cont."," . $tem->getidProduct() . "," . $_SESSION["idUser"] . ");";
             $result = mysqli_query($conn, $query);
             $cont ++;
         }

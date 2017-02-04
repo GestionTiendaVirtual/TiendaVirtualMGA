@@ -3,7 +3,7 @@
 $instProductBusiness = new ProductBusiness();
 $listProduct = $instProductBusiness->getProducts();
 */
-
+include '../../Domain/Product.php';
 include 'SearchProductBusiness.php';
 $inst = new SearchProductBusiness();
 $term = $_GET['term'];

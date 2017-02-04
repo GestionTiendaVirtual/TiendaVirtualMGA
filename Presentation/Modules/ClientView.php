@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../CSS/menu.css" rel="stylesheet" type="text/css"/>
         <title></title>
 
@@ -59,18 +60,22 @@
         <!-- ************* Fin para Busquedas *************** -->
 
     </head>
-    <body>
+    <body lang="en">
         <?php
-       // session_start();
+        if (@session_start() == false) {
+            header("location: ../../index.php");
+        }
+        ?>
+        <?php
         include_once '../../Business/Product/ProductBusiness.php';
         include_once '../../Business/TypeProduct/typeProductBusiness.php';
-       //require_once '../../Data/Frecuency.php';
-        //include_once "../../Business/Search/SearchProductBusiness.php";
+        require_once '../../Data/Frecuency.php';
+        require_once "../../Business/Search/SearchProductBusiness.php";
 
         $productBusiness = new ProductBusiness();
         $typeProduct = new typeProductBusiness();
-       // $frecuency = new Frecuency();
-        //$instSearchBusiness = new SearchProductBusiness();
+        $frecuency = new Frecuency();
+        $instSearchBusiness = new SearchProductBusiness();
 
         $result = $typeProduct->getTypeProduct();
         ?>
@@ -132,10 +137,10 @@
                 $products = $productBusiness->getProductsTypeProduct($_GET['idTypeProduct']);
             } else if(isset($_POST["termSearch"])){
                 /*Consulta frecuencia*/
-                //$result = $frecuency->updateSearch();
+                $result = $frecuency->updateSearch();
 
                 /* Consulta busqueda */
-                //$products = $instSearchBusiness->searchProduc($_POST["termSearch"]);
+                $products = $instSearchBusiness->searchProduc($_POST["termSearch"]);
 
                }else{ 
                 $products = $productBusiness->getProducts();
