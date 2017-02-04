@@ -36,7 +36,7 @@ class AccountData extends Data {
             $expirationDate = $tem[1]."/".$tem[2]."/".$tem[0];
 
             $myAccount = new  Account($row['CSC'], $expirationDate, $row['idClient'],
-             $row['idAccount'], $row['numberCard'], $row['typeAccount']);
+             $row['idAccount'], $row['numberCard'], $row['typeAccount'], $row['direction']);
 
             array_push($array, $myAccount);
         }
@@ -59,7 +59,7 @@ class AccountData extends Data {
             $expirationDate = $tem[2]."/".$tem[0]."/".$tem[1];
             
             $myAccount = new  Account($row['CSC'], $expirationDate, $row['idClient'],
-             $row['idAccount'], $row['numberCard'], $row['typeAccount']);
+             $row['idAccount'], $row['numberCard'], $row['typeAccount'], $row['direction']);
             array_push($array, $myAccount);
         }
         return $array;#si no hay resultados en la BD entonces devuelve nulo
@@ -72,7 +72,7 @@ class AccountData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
 
-        $query = "insert into `mgasoluciones`.`tbaccount` (`idaccount`, `typeaccount`, `numbercard`, `dateexpiration`, `csc`, `idclient`, `active`) values ('". $account->idAccount ."', '". $account->typeAccount. "', '".  $account->cardNumber ."', '". $account->expirationDate."', '". $account->CSC."', '". $account->idClient."', 1);";
+        $query = "insert into `mgasoluciones`.`tbaccount` (`idaccount`, `typeaccount`, `numbercard`, `dateexpiration`, `csc`, `idclient` , `direction`, `active`) values ('". $account->idAccount ."', '". $account->typeAccount. "', '".  $account->cardNumber ."', '". $account->expirationDate."', '". $account->CSC."', '". $account->idClient.  "','" . $account->direction . "', 1);";
         
 
         $result = mysqli_query($conn, $query);

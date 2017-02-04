@@ -11,6 +11,7 @@ if (@session_start() == true) {
                 <title></title>
             </head>
             <body>
+            <h3> <a href="../../index.php">Inicio</a> <a href="../Search/Search.php">Busquedas</a></h3>
                 <?php
                 require_once '../../Data/Frecuency.php';
                 $frecuency = new Frecuency();

@@ -9,11 +9,12 @@ $CSC = $_POST['CSC'];
 $typeAccount = $_POST['typeAccount'];
 $expirationDate = $_POST['expirationDate'];
 $cardNumber = $_POST['cardNumber'];
+$direction  = "Direccion de prueba";
 
 $instAccountBusiness = new AccountBusiness();
 
 /*Validamos*/
-$resultValidation = $instAccountBusiness->validateEmpty(array($idAccount,$idClient,$typeAccount,$expirationDate,$cardNumber,$CSC));
+$resultValidation = $instAccountBusiness->validateEmpty(array($idAccount,$idClient,$typeAccount,$expirationDate,$cardNumber,$CSC, $direction));
 #Si existen campos vacios
 if($resultValidation == false){ 
 	header("location: ../../Presentation/Account/AccountInterface.php?msg=Ningun campo debe quedar vacío.");
@@ -25,7 +26,7 @@ else{
 	//Ordenamos la fecha;
 	$tem = split("/",$expirationDate);
 	$expirationDate = $tem[2]."-".$tem[0]."-".$tem[1];
-	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount);
+	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount, $direction);
 	$result = $instAccountBusiness->insertAccountBusiness($account);
 	header("location: ../../Presentation/Account/AccountInterface.php?msg=La insercion se realizo con exito.");
 }

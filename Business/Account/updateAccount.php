@@ -28,7 +28,7 @@ else{
 	//Ordenamos la fecha;
 	$tem = split("/",$expirationDate);
 	$expirationDate = $tem[2]."-".$tem[0]."-".$tem[1];
-	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount);
+	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount, "");
 	$result = $accountBusiness->updateAccountBusiness($account);
 
 	/*Se retorna el resultado a la pagina de actualizacion*/

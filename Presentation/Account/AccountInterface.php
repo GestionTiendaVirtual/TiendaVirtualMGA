@@ -65,6 +65,7 @@
                         " CSC: ".$tem->CSC.
                         " Fecha de expiración: ". $tem->expirationDate.
                         " Número de Tarjeta: ". $tem->cardNumber.
+                        " Dirección: ". $tem->direction.
                     "<br><br>";
             }
         ?>
