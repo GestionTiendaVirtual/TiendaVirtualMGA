@@ -4,14 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductState.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/JS/AddColors.js</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/SpecificationproductData.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/Product/ProductBusiness.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/Product/ProductAction.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductUpdate.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/CustomerShopping/testCustomerShopping.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/JS/GenerateFieldsImages.js</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/JS/GenerateFields.js</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/SpecificationProduct/SpecificationproductBusiness.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/JS/GenerateFieldsSpecification.js</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/AccountData.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/Client/clientBusiness.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/SpecificationProduct/SpecificationProductAction.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/loginAction.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/typeProductData.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/ClientLoginBusiness.php</file>
@@ -23,6 +28,8 @@
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/ProductData.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/WallView/ProductOption.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductRetrieve.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Domain/SpecificationProduct.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductSpecification.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/TypeProduct/typeProductInterface.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/detailsData.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/WallData.php</file>
@@ -36,10 +43,13 @@
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductDetails.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/CustomerShoppingBusiness/CustomerShoppingBusiness.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/WallView/Wall.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductSpecificationDelete.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductSpecificationCreate.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Domain/CustomerShopping.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Data/Data.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Business/TypeProduct/typeProductBusiness.php</file>
             <file>file:/C:/xampp/htdocs/TiendaVirtual/Domain/client.php</file>
+            <file>file:/C:/xampp/htdocs/TiendaVirtual/Presentation/Product/ProductInsertColor.php</file>
         </group>
     </open-files>
 </project-private>
