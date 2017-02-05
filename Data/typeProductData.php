@@ -43,23 +43,20 @@ class TypeProductData extends Data {
      * @param type $nameTypeProduct nombre del nuevo tipo de producto
      * @return type regresa
      */
+
     function isExist($nameTypeProduct) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $total = mysqli_num_rows(mysqli_query($conn, "select count(idTypeProduct) as total from tbtypeproduct where nameTypeProduct=" .
-                $nameTypeProduct));
-        
-        if($total == 0){
-          $exist= 'NoExiste';
+        $result =mysqli_query($conn, "select count(nameTypeProduct) as total from tbtypeproduct where nameTypeProduct='" . $nameTypeProduct."';");
+        $total = mysqli_fetch_assoc($result);
+        if ($total['total'] >= 1) {
+            $exist = 'Existe';
         } else {
-            $exist= 'Existe'; 
+            $exist = 'NoExiste';
         }
         return $exist;
-        
-       
     }
-    
-    
+
     /***
      * Función que permite la obtención de todos los registro de 
      * producto de la base de datos

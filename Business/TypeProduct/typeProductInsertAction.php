@@ -10,16 +10,16 @@ if (strlen($nameTypeProduct) >= 2) {
     $typeProduct = new TypeProduct($nameTypeProduct);
     $typeProductBusiness = new TypeProductBusiness();
     $exist = $typeProductBusiness->isExist($nameTypeProduct);
-    if ($exist == "NoExiste") {
-        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorInsert=errorExist');
+    if ($exist == 'Existe') {
+        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorExist');
     } else {
         $result = $typeProductBusiness->insertTypeProduct($typeProduct);
         if ($result == true) {
-            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?' . $exist);
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?insert');
         } else {
-            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorInsert=errorInsert');
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorInsert');
         }
     }
 } else {
-    header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=errorSize');
+    header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorSize');
 }

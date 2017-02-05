@@ -11,30 +11,35 @@ if ($delete) {
         $typeProductBusiness = new TypeProductBusiness();
         $result = $typeProductBusiness->deleteTypeProduct($idTypeProduct);
         if ($result == true) {
-            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?success=success');
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?delete');
         } else {
             header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorDelete=errorDelete');
         }
     } else {
-        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=Valor no numerico');
+        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=ValorNoNumerico');
     }
-}
-elseif ($update) {
+} elseif ($update) {
     include './typeProductBusiness.php';
-    include_once ''; '../../Domain/typeProduct.php';
+    include_once '../../Domain/typeProduct.php';
     if (is_numeric($idTypeProduct) && strlen($nameTypeProduct) >= 2) {
         $typeProduct = new typeProduct($nameTypeProduct);
         $typeProduct->setIdTypeProduct($idTypeProduct);
         $typeProductBusiness = new TypeProductBusiness();
-        $result = $typeProductBusiness->updateTypeProduct($typeProduct);
-        if ($result == true) {
-            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?success=success');
+        $exist = $typeProductBusiness->isExist($nameTypeProduct);
+        if ($exist == 'Existe') {
+            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorExist');
         } else {
-            header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorUpdate=errorUpdate');
+
+            $result = $typeProductBusiness->updateTypeProduct($typeProduct);
+            if ($result == true) {
+                header('location: ../../Presentation/TypeProduct/typeProductInterface.php?update');
+            } else {
+                header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorUpdate=errorUpdate');
+            }
         }
     } else {
         header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=errorData');
     }
 } else {
-        header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=errorChange');
-    }
+    header('location: ../../Presentation/TypeProduct/typeProductInterface.php?error=errorChange');
+}
