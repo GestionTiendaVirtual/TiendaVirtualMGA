@@ -62,18 +62,6 @@
 
 
         <a href="../../Presentation/Modules/ClientView.php"><h3>Atrás</h3></a>
-        <h2>Cuentas &rarr;listado</h2>
-        <?php
-            $result = $accountBusiness->getAllAccountAssetsBusiness();
-            foreach ($result as $tem) {
-                echo    "Tipo cuenta: ". $tem->typeAccount.
-                        " CSC: ".$tem->CSC.
-                        " Fecha de expiración: ". $tem->expirationDate.
-                        " Número de Tarjeta: ". $tem->cardNumber.
-                        " Dirección: ". $tem->direction.
-                    "<br><br>";
-            }
-        ?>
 
 
         <!--========================================================================================-->
@@ -91,7 +79,7 @@
                 <?php
                     foreach ($listTypeAccount as $tem2) {
                 ?>
-                    <option> <?php echo $tem2->nameTypeAccount ?> </option>
+                    <option value="<?php echo $tem2->idTypeAccount ?>"> <?php echo $tem2->nameTypeAccount ?> </option>
                 <?php    
                 }
 
@@ -126,9 +114,28 @@
                             <label> CSC </label>
                             <input type="text" name="CSC" value= <?php echo "'".$tem->CSC."'"?>>
                             
-                            <label> Tipo Cuenta </label>
-                            <input type="text" name="typeAccount" value= <?php echo "'".$tem->typeAccount."'"?>>
-                            
+                            <label> Tipo Cuenta </label>                            
+                            <select name="typeAccount">
+                                <?php
+                                    foreach ($listTypeAccount as $tem2) {
+                                ?>
+                                    <option 
+                                        value="<?php echo $tem2->idTypeAccount ?>"
+                                        <?php
+                                            if ($tem2->idTypeAccount == $tem->typeAccount) {
+                                                echo "selected";
+                                            }
+                                        ?>
+                                    > <!-- Cierre del <option> -->
+                                        <?php echo $tem2->nameTypeAccount ?> 
+                                    </option> <!-- Fin de una opcion -->
+                                <?php    
+                                }
+
+                                ?>
+                            </select>
+
+
                             <label> Numero de Cuenta </label>
                             <input type="text" name="cardNumber" value= <?php echo "'".$tem->cardNumber."'"?>>
                             
