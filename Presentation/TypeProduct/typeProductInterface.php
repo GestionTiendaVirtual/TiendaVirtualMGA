@@ -35,34 +35,22 @@
             </form>';
         }
         ?>
-
-
-
         <!-- Form -->
         <form id="createTypeProduct" method="POST" action="../../Business/TypeProduct/typeProductInsertAction.php">
-            <table>
-                <tr>
-                    <td>
-                        <blockquote>
-                            <label> Nuevo Tipo: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" id="txtNameTypeProductInsert" name="txtNameTypeProductInsert" 
-                                   data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
-                                   placeholder="Digite el nombre aqui">*&nbsp;&nbsp;                       
+            <label> Nuevo Tipo: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" id="txtNameTypeProductInsert" name="txtNameTypeProductInsert" 
+                   data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$"
+                   placeholder="Digite el nombre aqui">*&nbsp;&nbsp;
+            <input  type="submit" id="btnAccept" name="btnAccept" value="Insertar" ><br>
+            <br><label id="txtMessage">* campo obligatorio</label>
 
-                            <input  type="submit" id="btnAccept" name="btnAccept" value="Insertar" >
-                            <br><label id="txtMessage">* campo obligatorio</label>
-                        </blockquote>
-
-                    </td>
-                </tr>    
-            </table>
         </form>
 
 
 
     </body>
     <?php
-if (isset($_GET['success'])) {
+if (isset($_GET['insert'])) {
     echo '<script>                        
              document.getElementById("txtMessage").innerHTML = "Registro con éxito";
           </script>';
@@ -70,9 +58,25 @@ if (isset($_GET['success'])) {
     echo '<script>                
               document.getElementById("txtMessage").innerHTML = "Registro fallido";
           </script>';
+} else if (isset($_GET['delete'])) {
+    echo '<script>                
+              document.getElementById("txtMessage").innerHTML = "Eliminado con exito";
+          </script>';
+} else if (isset($_GET['update'])) {
+    echo '<script>                
+              document.getElementById("txtMessage").innerHTML = "Actualizado con exito";
+          </script>';
 } else if (isset($_GET['errorData'])) {
     echo ' <script>                
                document.getElementById("txtMessage").innerHTML = "Error con los datos ingresados";
+           </script>';
+} else if (isset($_GET['errorUpdate'])) {
+    echo ' <script>                
+               document.getElementById("txtMessage").innerHTML = "Error con los datos ingresados";
+           </script>';
+} else if (isset($_GET['errorDelete'])) {
+    echo ' <script>                
+               document.getElementById("txtMessage").innerHTML = "Error de Borrado";
            </script>';
 } else if (isset($_GET['errorExist'])) {
     echo ' <script>                
