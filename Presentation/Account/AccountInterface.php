@@ -29,10 +29,15 @@
 
     </head>
     <body>
-
         <?php
             include_once '../../Business/Account/AccountBusiness.php';
             $accountBusiness = new AccountBusiness();
+            
+            /*Obtiene todos los tipos de cuenta*/
+            include_once '../../Business/TypeAccount/TypeAccountBusiness.php';
+            $instTypeAccount = new TypeAccountBusiness();
+            $listTypeAccount = $instTypeAccount->getTypeAccountBusiness();
+
             #Obtiene el id para la nueva cuenta
             $idAccount = $accountBusiness->getIDBusiness();
 
@@ -82,7 +87,18 @@
             <input type="text" name="CSC" placeholder="CSC">
             
             <label>Tipo Cuenta</label>
-            <input type="text" name="typeAccount" placeholder="Tipo de cuenta">
+            <select name="typeAccount">
+                <?php
+                    foreach ($listTypeAccount as $tem2) {
+                ?>
+                    <option> <?php echo $tem2->nameTypeAccount ?> </option>
+                <?php    
+                }
+
+                ?>
+            </select>
+
+            <!-- <input type="text" name="typeAccount" placeholder="Tipo de cuenta"> -->
             
             <label>Numero de Tarjeta</label>
             <input type="text" name="cardNumber" placeholder="Numero de Cuenta">

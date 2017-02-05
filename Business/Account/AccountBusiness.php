@@ -3,7 +3,6 @@ include "../../Data/AccountData.php";
 
 class AccountBusiness extends AccountData{
 
-
 	public function getAllAccountAssetsBusiness(){
 		return $this->getAllAccountAssetsData();
 	}
