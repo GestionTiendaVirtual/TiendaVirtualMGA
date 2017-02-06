@@ -28,6 +28,6 @@ else{
 	$expirationDate = $tem[2]."-".$tem[0]."-".$tem[1];
 	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount, $direction);
 	$result = $instAccountBusiness->insertAccountBusiness($account);
-	header("location: ../../Presentation/Account/AccountInterface.php?msg=La insercion se realizo con exito.");
+	header("location: ../../Presentation/Account/AccountInterface.php?msg=La inserción se realizó con exito.");
 }
 

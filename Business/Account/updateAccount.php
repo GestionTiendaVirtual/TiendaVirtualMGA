@@ -32,5 +32,5 @@ else{
 	$result = $accountBusiness->updateAccountBusiness($account);
 
 	/*Se retorna el resultado a la pagina de actualizacion*/
-	header("location: ../../Presentation/Account/AccountInterface.php?msg=success");
+	header("location: ../../Presentation/Account/AccountInterface.php?msg=Se realizó la actualización con éxito.");
 }

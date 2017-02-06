@@ -23,7 +23,7 @@ class AccountData extends Data {
 
     /*Optiene todas las filas de la tabla ClientAccount*/
     public function getAllAccountAssetsData() {
-        if(!isset($_SESSION)){session_start();}
+        if(!isset($_SESSION)){@ session_start();}
     	$conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $query = "select * from tbaccount where active = 1 AND idClient = ". $_SESSION["idUser"];
