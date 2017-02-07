@@ -1,7 +1,7 @@
 <?php 
 include_once 'Data.php';
-include '../../Domain/Comment.php';
-
+include_once '../../Domain/Comment.php';
+include_once '../../Domain/Like.php';
 class WallData extends Data {
 
 	function getAllComments($idTypeProduct){
@@ -12,8 +12,6 @@ class WallData extends Data {
         mysqli_close($conn);
         $array = [];
         while ($row = mysqli_fetch_array($result)) {
-        	echo $row['commentProduct'];
-        	echo '<br></>';
             $comment = new  Comment($row['idComment'], $row['idProduct'], $row['commentProduct']);
             array_push($array, $comment);
         }
@@ -32,13 +30,51 @@ class WallData extends Data {
         $valor= $row['max(idcomment)']+1;
         $date= date('Y-m-d');
         $query2="insert into tbcomment values($valor,$idProduct,'$commentProduct',$idClient,'$date')";
-        //$query2 = "INSERT into tbcomment (idComment,idProduct,commentProduct) VALUES ($valor,comment->idProduct,comment->commentProduct)";
+        $state="";
+        $query3="insert into tblike (iduser,state,idcomment) values($idClient,'$state',$valor)";
+        $result3 = mysqli_query($conn, $query3);
         $result2 = mysqli_query($conn, $query2);
         mysqli_close($conn);
 
 	
 
 	}
+    function getState($idClient,$idComment){ 
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $query= "select state from tblike where iduser=$idClient and idcomment=$idComment";
+        $result = mysqli_query($conn, $query);
+        $data=mysqli_fetch_all($result);
+        return $data;
+    }
+
+     function updateLIke($idComment,$user){ 
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $query= "update tblike set state='checked' where idcomment=$idComment and iduser=$user";
+        $result = mysqli_query($conn, $query);
+        mysqli_close($conn);
+    }
+
+    function updateLIkeChecked($idComment,$user){ 
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $query= "update tblike set state='' where idcomment=$idComment and iduser=$user";
+        $result = mysqli_query($conn, $query);
+        mysqli_close($conn);
+    }
+
+
+
+    function insertNewLIke($idComment,$idClient){
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $state="checked";
+        $query3="insert into tblike (iduser,state,idcomment) values($idClient,'$state',$idComment)";
+        $result3 = mysqli_query($conn, $query3);
+        mysqli_close($conn);
+
+    }
 }
 
 	

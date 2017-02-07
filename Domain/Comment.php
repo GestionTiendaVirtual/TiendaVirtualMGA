@@ -13,4 +13,11 @@ class Comment{
 	function getIdProduct(){
 		 return $this->idProduct;
 	}
+
+	function getCommentProduct(){
+		 return $this->commentProduct;
+	}
+	function getIdComment(){
+		 return $this->idComment;
+	}
 }

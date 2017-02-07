@@ -26,12 +26,52 @@ if (isset($_GET['idProduct'])) {
         </form>
         <h2>Comentarios</h2>
         <?php
-        include '../../Business/Wall/WallBusiness.php';
+        session_start();
+        $idClient = $_SESSION["idUser"];
+        include_once '../../Business/Wall/WallBusiness.php';
         $wallBusiness = new WallBusiness();
         $result = $wallBusiness->getAllCommentBusiness($idTypeProduct);
+
+        foreach ($result as $current) {
+            echo $current->getCommentProduct();
+            $idComment=$current->getIdComment();
+            $resultado=$wallBusiness->getStateBusiness($idClient,$idComment);
+            
+            $size=count($resultado);
+            if($size==1){
+                foreach ($resultado as $value) {
+                    $state=$value[0];
+                 }
+            }
+            else{
+                $state="";
+            }     
+          
+         if($state=="checked"){
+
+                echo '<input type="checkbox"  checked="checked"
+                  onclick="checkeed(id,name);" name="'. $idClient.'"   id="'.$idComment.'">';
+           }
+           else{
+             echo '<input type="checkbox" 
+                  onclick="unchecked(id,name);" name="'. $idClient.'"   id="'.$idComment.'">';
+           }
+          
+          
+            echo '<br></br>';
+        }
         ?>
 
 
+        <script>
+            function unchecked(id,name){
+              window.location = "../../Business/Wall/updateLike.php?id="+id+"&user="+name+"&idProduct="+<?php echo $idTypeProduct ?>;
+            }
+
+            function checkeed(id,name){
+                window.location = "../../Business/Wall/updateLikeChecked.php?id="+id+"&user="+name+"&idProduct="+<?php echo $idTypeProduct ?>;
+            }
+        </script>
 
     </body>
 </html>
