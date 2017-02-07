@@ -39,61 +39,62 @@ if ($insert) {
 
                                                 if (is_numeric($provinceClient)) {
                                                     if (is_numeric($cantonClient)) {
-                                                        if (is_numeric($districtClient)) {
 
-                                                            $client = new client($emailClient, $userClient, $passwordClient,
-                                                                    $nameClient, $lastNameFClient, $lastNameSClient,$bornClient,
-                                                                    $sexClient,$telClient,$provinceClient,$cantonClient,
-                                                                    $districtClient, $addressClient1,
-                                                                    $addressClient2);
-                                                            $clientBusiness = new clientBusiness();
-                                                            $answer = $clientBusiness->insertClient($client);
-                                                            if ($answer == true) {
-                                                                header('location: ../../Presentation/Client/clientInterface.php?InsertClientComplete');
+                                                        if (is_numeric($districtClient)) {
+                                                            if ($exist == 'Existe') {
+                                                                header('location: ../../Presentation/Client/clientInterface.php?error15');
                                                             } else {
-                                                                header('location: ../../Presentation/Client/clientInterface.php?errorSQL');
+
+                                                                $client = new client($emailClient, $userClient, $passwordClient, $nameClient, $lastNameFClient, $lastNameSClient, $bornClient, $sexClient, $telClient, $provinceClient, $cantonClient, $districtClient, $addressClient1, $addressClient2);
+                                                                $clientBusiness = new clientBusiness();
+                                                                $answer = $clientBusiness->insertClient($client);
+                                                                if ($answer == true) {
+                                                                    header('location: ../../Presentation/Client/clientInterface.php?InsertClientComplete');
+                                                                } else {
+                                                                    header('location: ../../Presentation/Client/clientInterface.php?error16');
+                                                                }
                                                             }
                                                         } else {
-                                                            header('location: ../../Presentation/Client/clientInterface.php?dis');
+                                                            header('location: ../../Presentation/Client/clientInterface.php?error12');
                                                         }
                                                     } else {
-                                                        header('location: ../../Presentation/Client/clientInterface.php?can');
+                                                        header('location: ../../Presentation/Client/clientInterface.php?error11');
                                                     }
                                                 } else {
-                                                    header('location: ../../Presentation/Client/clientInterface.php?pro='.$provinceClient.'.');
+                                                    header('location: ../../Presentation/Client/clientInterface.php?error10');
                                                 }
                                             } else {
-                                                header('location: ../../Presentation/Client/clientInterface.php?ad2');
+                                                header('location: ../../Presentation/Client/clientInterface.php?error14');
                                             }
                                         } else {
-                                            header('location: ../../Presentation/Client/clientInterface.php?ad1');
+                                            header('location: ../../Presentation/Client/clientInterface.php?error13');
                                         }
                                     } else {
-                                        header('location: ../../Presentation/Client/clientInterface.php?tel');
+                                        header('location: ../../Presentation/Client/clientInterface.php?error9');
                                     }
                                 } else {
-                                    header('location: ../../Presentation/Client/clientInterface.php?sex');
+                                    header('location: ../../Presentation/Client/clientInterface.php?error8');
                                 }
                             } else {
-                                header('location: ../../Presentation/Client/clientInterface.php?born');
+                                header('location: ../../Presentation/Client/clientInterface.php?error7');
                             }
                         } else {
-                            header('location: ../../Presentation/Client/clientInterface.php?ln2');
+                            header('location: ../../Presentation/Client/clientInterface.php?error6');
                         }
                     } else {
-                        header('location: ../../Presentation/Client/clientInterface.php?ln1');
+                        header('location: ../../Presentation/Client/clientInterface.php?error5');
                     }
                 } else {
-                    header('location: ../../Presentation/Client/clientInterface.php?name');
+                    header('location: ../../Presentation/Client/clientInterface.php?error4');
                 }
             } else {
-                header('location: ../../Presentation/Client/clientInterface.php?pass');
+                header('location: ../../Presentation/Client/clientInterface.php?error3');
             }
         } else {
-            header('location: ../../Presentation/Client/clientInterface.php?user');
+            header('location: ../../Presentation/Client/clientInterface.php?error2');
         }
     } else {
-        header('location: ../../Presentation/Client/clientInterface.php?email');
+        header('location: ../../Presentation/Client/clientInterface.php?error1');
     }
 }
 

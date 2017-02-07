@@ -52,6 +52,9 @@ class clientBusiness
     public function num_rows($consulta) {
         return $this->clientData->num_rows($consulta);
     }
+    public function  clientExist($email){
+        return $this->clientData->clientExist($email);
+    }
 
     
 

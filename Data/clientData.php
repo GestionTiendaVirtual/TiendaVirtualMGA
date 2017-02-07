@@ -122,6 +122,20 @@ class clientData extends Data {
         }
         return $array;
     }//fin función getClient
+    
+    function clientExist($email) {
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result =mysqli_query($conn, "select count(nameClient) as total from tbclient where emailClient='" . $email."';");
+        $total = mysqli_fetch_assoc($result);
+        if ($total['total'] >= 1) {
+            $exist = 'Existe';
+        } else {
+            $exist = 'NoExiste';
+        }
+        return $exist;
+    }
+    
 
     /*
      * Función que permite la obtención de todos los registros de 
@@ -162,11 +176,6 @@ class clientData extends Data {
                 . "', `addressClient1` = '". str_replace(' ','+',$client->getAddressClient1()) 
                 . "', `addressClient2` = '". str_replace(' ','+',$client->getAddressClient2()) 
                 . "', `active` = 1 where tbclient.idClient = ". $client->getIdClient() . ";");
-        
-     
-        
-        
-        
         
         mysqli_close($conn);
 

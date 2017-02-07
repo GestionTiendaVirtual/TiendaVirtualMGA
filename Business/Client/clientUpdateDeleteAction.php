@@ -31,10 +31,10 @@ if ($delete) {
         if ($result == true) {
             header('location: ../../Presentation/Client/clientInterface.php?delete');
         } else {
-            header('location: ../../Presentation/Client/clientInterface.php?errorDelete=errorDelete');
+            header('location: ../../Presentation/Client/clientInterface.php?errorDelete=error17');
         }
     } else {
-        header('location: ../../Presentation/Client/clientInterface.php?error=Valor no numerico');
+        header('location: ../../Presentation/Client/clientInterface.php?error=error18');
     }
 }
 elseif ($update) {
@@ -62,13 +62,13 @@ elseif ($update) {
         if ($result == true) {
             header('location: ../../Presentation/Client/clientInterface.php?update');
         } else {
-            header('location: ../../Presentation/Client/clientInterface.php?errorUpdate=errorUpdate');
+            header('location: ../../Presentation/Client/clientInterface.php?error20');
         }
     } else {
-        header('location: ../../Presentation/Client/clientInterface.php?id='.$idClient.'&email='.$emailClient.'.');
+        header('location: ../../Presentation/Client/clientInterface.php?error19');
     }
 } else {
-        header('location: ../../Presentation/Client/clientInterface.php?error=errorChange');
+        header('location: ../../Presentation/Client/clientInterface.php?error18');
     }
 
 
