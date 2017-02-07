@@ -8,16 +8,16 @@ $detailsBusiness = new detailsBusiness();
 if ($detailsBusiness->isDesired($idProductDesire, $idClientDesire)) {
     $result = $detailsBusiness->deleteDesire($idProductDesire, $idClientDesire);
     if ($result) {
-        header('location: ../../Presentation/Product/ProductDetails.php?idProduct=' . $idProductDesire . "####");
+        header('location: ../../Presentation/Product/ProductDetail.php?idProduct=' . $idProductDesire . "");
     } else {
-        header('location: ../../Presentation/Product/ProductDetails.php?idProduct=' . $idProductDesire . "###");
+        header('location: ../../Presentation/Product/ProductDetail.php?idProduct=' . $idProductDesire . "");
     }
 } else {
     $result = $detailsBusiness->insertDesire($idProductDesire, $idClientDesire);
     if ($result) {
-        header('location: ../../Presentation/Product/ProductDetails.php?idProduct=' . $idProductDesire . "##");
+        header('location: ../../Presentation/Product/ProductDetail.php?idProduct=' . $idProductDesire . "");
     } else {
-        header('location: ../../Presentation/Product/ProductDetails.php?idProduct=' . $idProductDesire . "#");
+        header('location: ../../Presentation/Product/ProductDetail.php?idProduct=' . $idProductDesire . "");
     }
 }
 ?>

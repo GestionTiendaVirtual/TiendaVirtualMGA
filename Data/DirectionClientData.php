@@ -1,8 +1,8 @@
 <?php
 
-include_once '../Domain/Province.php';
-include_once '../Domain/Canton.php';
-include_once '../Domain/District.php';
+include_once '../../Domain/Province.php';
+include_once '../../Domain/Canton.php';
+include_once '../../Domain/District.php';
 include_once 'Data.php';
 
 class DirectionClientData extends Data{

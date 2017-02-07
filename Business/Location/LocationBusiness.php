@@ -1,5 +1,5 @@
 <?php
-include "../Data/DirectionClientData.php";
+include "../../Data/DirectionClientData.php";
 
 class LocationBusiness extends DirectionClientData{
 	function getProvinceBusiness(){     
