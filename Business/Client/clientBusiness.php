@@ -6,7 +6,7 @@ include '../../Data/clientData.php';
  * para llevar a cabo el CRUD que corresponde a client
  * @author Alberth Calderon Alvarado
  */
-class clientBusiness
+class clientBusiness 
 {
     public $clientData;
     
@@ -37,7 +37,22 @@ class clientBusiness
     public function getSexualPreferences() {
         return $this->clientData->getSexualPreferences();
     }
-    
+    public function consulta($consulta) {
+        return $this->clientData->consulta($consulta);
+    }
+    public function fetch_array($consulta) {
+        return $this->clientData->fetch_array($consulta);
+    }
+    public function getEmailExist($emailNew) {
+        return $this->clientData->getEmailExist($emailNew);
+    }
+    public function getTotalConsultas() {
+        return $this->clientData->getTotalConsultas();
+    }
+    public function num_rows($consulta) {
+        return $this->clientData->num_rows($consulta);
+    }
+
     
 
 

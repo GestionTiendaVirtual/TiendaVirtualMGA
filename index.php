@@ -8,7 +8,7 @@
     <body>
         <h1>Administrar</h1>
         <hr>  
-        <a href="./Presentation/DirectionClient.php">Direcciones</a>
+        <a href="./Presentation/Location/DirectionClient.php">Direcciones</a>
         <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo producto</a>
         <a href="./Presentation/Product/ProductCreate.php">Producto</a>
         <a href="./Presentation/Client/clientInterface.php">Cliente</a>

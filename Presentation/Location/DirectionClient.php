@@ -2,18 +2,18 @@
 <html>
     <head>
         <title>Direccion de clientes</title>
-        <script src="../JS/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="../../JS/jquery-3.1.1.min.js" type="text/javascript"></script>
     </head>
 
     <body>
         <?php
-        include_once '../Business/Location/LocationBusiness.php';
+        include_once '../../Business/Location/LocationBusiness.php';
         $direction = new LocationBusiness();
         $result = $direction->getProvinceBusiness();
         ?>
 
         <h1>Direccion</h1>
-        <a href="../index.php">Inicio</a>
+        <a href="../../index.php">Inicio</a>
         <br>
 
 
@@ -21,7 +21,7 @@
         /*El caso de que se haya seleccionado toda la hubicacion*/
         if (isset($_GET['district'])) {
         ?>
-        <h1>La hubicacion es: <br>
+        <h1>La ubicacion es: <br>
             <?php echo "Provincia: " . $_GET['province'] . "<br>
                         Canton: " . $_GET['canton'] . "<br>
                         Distrito: " . $_GET['district'];
@@ -117,7 +117,7 @@
                 </select>
             <?php
             }
-        }//Fin de la ajecucion para obtner hubicacion.
+        }//Fin de la ajecucion para obtner ubicacion.
             ?>      
 
             <!-- ***************************************

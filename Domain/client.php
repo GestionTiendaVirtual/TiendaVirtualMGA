@@ -168,6 +168,7 @@ class client {
     public function setAddressClient2($addressClient2) {
         $this->addressClient2 = $addressClient2;
     }
+  
 
 
 

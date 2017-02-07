@@ -29,7 +29,6 @@ if ($delete) {
         if ($exist == 'Existe') {
             header('location: ../../Presentation/TypeProduct/typeProductInterface.php?errorExist');
         } else {
-
             $result = $typeProductBusiness->updateTypeProduct($typeProduct);
             if ($result == true) {
                 header('location: ../../Presentation/TypeProduct/typeProductInterface.php?update');
