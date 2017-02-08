@@ -25,5 +25,24 @@ class detailsBusiness
     public function isDesired($idProductWish, $idclientWish) {
         return $this->detailsData->isDesired($idProductWish, $idclientWish);
     }
+    public function deleteLike($idProductliked, $idclientLiked) {
+        return $this->detailsData->deleteLike($idProductliked, $idclientLiked);
+    }
+
+    public function getCalification($idUser, $idProduct) {
+        return $this->detailsData->getCalification($idUser, $idProduct);
+    }
+
+    public function insertCalification($star) {
+        return $this->detailsData->insertCalification($star);
+    }
+
+    public function insertLike($idProductLiked, $idUserLiked) {
+        return $this->detailsData->insertLike($idProductLiked, $idUserLiked);
+    }
+
+    public function isLike($idProductLike, $idclientLike) {
+        return $this->detailsData->isLike($idProductLike, $idclientLike);
+    }
 
 }

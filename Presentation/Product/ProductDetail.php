@@ -4,12 +4,21 @@
         <meta charset="UTF-8">
         <title></title>
         <script src="../../JS/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/bootstrap.min.js"></script>
+
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+        <link href="../../CSS/starrr.css" rel=stylesheet/>
+        <script src="../../JS/starrr.js"></script>
     </head>
     <body>
-    <br><br><hr>
-    <?php
-    if (@session_start() == true) {
-        if (isset($_SESSION["idUser"])) {
+        <br><br><hr>
+        <?php
+        if (@session_start() == true) {
+            if (isset($_SESSION["idUser"])) {
             include_once '../../Business/Product/ProductBusiness.php';
             include_once '../../Business/SpecificationProduct/SpecificationproductBusiness.php';
             include_once '../../Data/Frecuency.php';
@@ -100,6 +109,11 @@
                     
     
                                         </td></tr>
+                                    
+                                    <tr><td>
+                                        Calificar: <span id="Estrellas"></span>
+                                         
+                                    </td></tr>
                     </table>
                 </div >
                 <div style="position: relative; bottom: 1255px; margin-left: 800px;">
@@ -141,5 +155,34 @@
 
 
 </script>
+<script>
+   $('#Estrellas').starrr({
+       rating:<?php    echo ''.getCalification().'';?>,
+       change:function(e,valor){
+           var calificacion = valor;           
+           alert(calificacion);           
+       }
+       
+   });
+    
+    </script>
 
 </html>
+<?php
+function getCalification() {
+$detail= new detailsBusiness();
+return $detail->getCalification($_SESSION["idUser"], $_GET['idProduct']);
+}
+
+
+function insertCalification($value) {
+    include '../../Domain/star.php';
+    $detail = new detailsBusiness();
+    $ranking = new star($_GET['idProduct'],$_SESSION["idUser"], $value);
+    return $detail->insertCalification($ranking);
+}
+?>
+
+
+
+

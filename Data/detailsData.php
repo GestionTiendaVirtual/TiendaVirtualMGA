@@ -87,4 +87,133 @@ class detailsData extends Data {
     }
 
 //fin función deletedesire
+    function insertLike($idProductLiked, $idUserLiked) {
+
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        //Se consulta por el ultimo id registrado para generar el consecutivo
+        $resultID = mysqli_query($conn, "select * from tbproductliked order by idLiked desc limit 1;");
+        $row = mysqli_fetch_array($resultID);
+        if (sizeof($row) >= 1) {
+            $id = $row['idLiked'] + 1;
+        } else {
+            $id = 1;
+        }
+        $consulting = mysqli_query($conn, "select count(idLiked) as total from tbproductliked where idUser =" .
+                $idUserLiked . " and idProduct = " . $idProductLiked);
+        $data = mysqli_fetch_assoc($consulting);
+        if ($data['total'] >= 1) {
+
+            $queryDelete = mysqli_query($conn, "update tbproductliked set liked= 1, where idUser='"
+                    . $idUserLiked . "' and idProduct= '" . $idProductLiked . "';");
+            mysqli_close($conn);
+
+            return($queryDelete);
+        } else {
+
+
+            //Se realiza el insert en la base de datos
+
+            $queryInsert = mysqli_query($conn, "insert into tbproductliked values ('"
+                    . $id ."','" . $idProductLiked. "','" . $idUserLiked  . "', b'1');");
+
+            mysqli_close($conn);
+
+            return($queryInsert);
+        }
+    }
+
+//fin function insertDeseo
+    /*
+     * Funcion que permite comprobar si ya existe el producto en la lista de deseos o no.
+     */
+    function isLike($idProductLike, $idclientLike) {
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $consulting = mysqli_query($conn, "select count(idliked) as total from tbproductliked where idUser =" .
+                $idclientLike . " and idProduct = " . $idProductLike . " and liked = 1 ");        
+        $data = mysqli_fetch_assoc($consulting);
+        
+        return($data['total'] >= 1);
+    }
+
+    //fin del metodo isDesire
+
+    /*
+     * Función que permite realizar la eliminación de algun registro en la base de datos
+     */
+
+    function deleteLike($idProductliked, $idclientLiked) {
+
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        //Se realiza la eliminación en la base de datos
+        $queryDelete = mysqli_query($conn, "update tbproductliked set liked= 0,  where idUser='"
+                . $idclientLiked . "' and idproduct= '" . $idProductliked . "';");
+        mysqli_close($conn);
+
+        return ($queryDelete); 
+    }
+
+//fin función deletedesire
+    
+    /**
+     * funcion para registrar una calificacion nueva
+     * @param type $star
+     * @return type
+     */
+     function insertCalification($star) {
+
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        //Se consulta por el ultimo id registrado para generar el consecutivo
+        $resultID = mysqli_query($conn, "select * from tbproductcalification order by idCalifiction desc limit 1;");
+        $row = mysqli_fetch_array($resultID);
+        if (sizeof($row) >= 1) {
+            $id = $row['iddesired'] + 1;
+        } else {
+            $id = 1;
+        }
+        $consulting = mysqli_query($conn, "select count(idCalification) as total from tbproductcalification where idUser =" .
+               $star->getIdUser() . " and idProduct = " . $star->getIdProduct().";");
+        $data = mysqli_fetch_assoc($consulting);
+        if ($data['total'] >= 1) {
+
+            $queryDelete = mysqli_query($conn, "update tbproductcalification set calification='".$star->getCalification()."' where idUser='"
+                    .$star->getIdUser() . " and idProduct = " . $star->getIdProduct().";");
+            mysqli_close($conn);
+
+            return($queryDelete);
+        } else {
+
+
+            //Se realiza el insert en la base de datos
+
+            $queryInsert = mysqli_query($conn, "insert into tbproductcalification values ('"
+                    . $id .  "," . $star->getIdProduct()."," . $star->getIdUser() . ",".$star->getCalification().";");
+
+            mysqli_close($conn);
+
+            return($queryInsert);
+        }
+    }
+
+//fin function inscalificacion
+    
+    
+    function getCalification($idUser,$idProduct){
+        
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        //Se consulta por el ultimo id registrado para generar el consecutivo
+        $consulting = mysqli_query($conn, "select * from tbproductcalification where idUser =" .
+               $idUser . " and idProduct = " . $idProduct.";");
+        while($data = mysqli_fetch_array($consulting)){
+        
+            return $data['calification'];
+       
+        }
+        return 0;
+    }
+
 }
