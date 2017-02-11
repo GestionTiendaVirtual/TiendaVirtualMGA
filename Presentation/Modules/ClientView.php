@@ -16,45 +16,45 @@
 
 
         <script>
-            $(function() {
+            $(function () {
                 var typeTermNum = 0;
-                function split( val ) {
+                function split(val) {
                     return val.split(" ");
                 }
-                function extractLast( term ) {
-                    var resultSplit = split( term );
-                    typeTermNum = (resultSplit.length)-1;
+                function extractLast(term) {
+                    var resultSplit = split(term);
+                    typeTermNum = (resultSplit.length) - 1;
                     return resultSplit.pop();
                 }
-                
-                $( "#skills" ).bind( "keydown", function( event ) {
-                    if ( event.keyCode === $.ui.keyCode.TAB &&
-                        $( this ).autocomplete( "instance" ).menu.active ) {
+
+                $("#skills").bind("keydown", function (event) {
+                    if (event.keyCode === $.ui.keyCode.TAB &&
+                            $(this).autocomplete("instance").menu.active) {
                         event.preventDefault();
                     }
                 })
-                .autocomplete({
-                    minLength: 1,
-                    source: function( request, response ) {
-                        // delegate back to autocomplete, but extract the last term
-                        $.getJSON("../../Business/Search/GetAllBusinessForAJAX.php", { term : extractLast( request.term ), typeTerm : typeTermNum},response);
-                    },
-                    focus: function() {
-                        // prevent value inserted on focus
-                        return false;
-                    },
-                    select: function( event, ui ) {
-                        var terms = split( this.value );
-                        // remove the current input
-                        terms.pop();
-                        // add the selected item
-                        terms.push( ui.item.value );
-                        // add placeholder to get the comma-and-space at the end
-                        terms.push( "" );
-                        this.value = terms.join( " " );
-                        return false;
-                    }
-                });
+                        .autocomplete({
+                            minLength: 1,
+                            source: function (request, response) {
+                                // delegate back to autocomplete, but extract the last term
+                                $.getJSON("../../Business/Search/GetAllBusinessForAJAX.php", {term: extractLast(request.term), typeTerm: typeTermNum}, response);
+                            },
+                            focus: function () {
+                                // prevent value inserted on focus
+                                return false;
+                            },
+                            select: function (event, ui) {
+                                var terms = split(this.value);
+                                // remove the current input
+                                terms.pop();
+                                // add the selected item
+                                terms.push(ui.item.value);
+                                // add placeholder to get the comma-and-space at the end
+                                terms.push("");
+                                this.value = terms.join(" ");
+                                return false;
+                            }
+                        });
             });
         </script>
         <!-- ************* Fin para Busquedas *************** -->
@@ -99,22 +99,22 @@
                                     <?php
                                     foreach ($result as $cuurentType) {
                                         ?>
-                                    <li><a href="ClientView.php?idTypeProduct=<?php echo $cuurentType->getIdTypeProduct(); ?>">
-                                        <?php echo $cuurentType->getNameTypeProduct();?></a>
-<!--                                        <ul>
+                                        <li><a href="ClientView.php?idTypeProduct=<?php echo $cuurentType->getIdTypeProduct(); ?>">
+                                                <?php echo $cuurentType->getNameTypeProduct(); ?></a>
+                                        <!--<ul>
                                             <li><a href="">Submenu1</a></li>
                                             <li><a href="">Submenu2</a></li>
                                             <li><a href="">Submenu3</a></li>
                                             <li><a href="">Submenu4</a></li>
                                         </ul>-->
-                                    </li>
-                                    <?php 
+                                        </li>
+                                        <?php
                                     }
                                     ?>
                                 </ul>
                             </li>
                             <li><a href="../../Presentation/Account/AccountInterface.php">Cuenta</a>
-                            <li><a href="#">Carrito compras</a>
+                            <li><a href="../ShoppingCar/ShoppingCar.php">Carrito compras</a>
                             <li><a href="../../Business/loginAction.php?logout">Cerrar</a>
                             </li>
                         </ul>
@@ -135,14 +135,13 @@
             <?php
             if (isset($_GET['idTypeProduct'])) {
                 $products = $productBusiness->getProductsTypeProduct($_GET['idTypeProduct']);
-            } else if(isset($_POST["termSearch"])){
-                /*Consulta frecuencia*/
+            } else if (isset($_POST["termSearch"])) {
+                /* Consulta frecuencia */
                 $result = $frecuency->updateSearch();
 
                 /* Consulta busqueda */
                 $products = $instSearchBusiness->searchProduc($_POST["termSearch"]);
-
-               }else{ 
+            } else {
                 $products = $productBusiness->getProducts();
             }
             foreach ($products as $currentProducts) {

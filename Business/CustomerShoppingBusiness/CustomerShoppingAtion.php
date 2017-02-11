@@ -2,18 +2,22 @@
 
 include_once '../../Domain/CustomerShopping.php';
 include_once './CustomerShoppingBusiness.php';
-
+session_start();
 
 if (isset($_POST['create'])) {
-
-    $idClient = $_POST['client'];
-    $product1 = $_POST['product1'];
-    $product2 = $_POST['product2'];
-    $product3 = $_POST['product3'];
-    $total = $_POST['total'];
     
-    $products = array($product1, $product2, $product3);
-
+    $total = $_POST['total'];
+    $idClient = $_SESSION['idUser'];
+    
+    $products = [];
+    
+     for ($i = 0; $i < sizeof($_SESSION['carrito']); $i++){
+        
+        $product = $_SESSION['carrito'][$i];
+        $infoProduct = split(";",$product);
+        
+        array_push($products, $infoProduct[0]);        
+    }  
     $customerShopping = new CustomerShopping($idClient, date('Y-m-d'), $total);
 
     $customerBusiness = new CustomerShoppingBusiness();
@@ -21,10 +25,12 @@ if (isset($_POST['create'])) {
     $result = $customerBusiness->insertCustomerInvoice($customerShopping, $products);
 
     if ($result != false) {
-        header('location: ../../Presentation/CustomerShopping/testCustomerShopping.php?success=' . $result);
+        $_SESSION['carrito'] = [];
+        header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?success=success');
     } else {
-        header('location: ../../Presentation/CustomerShopping/testCustomerShopping.php?error=error');
+        header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?error=error');
     }
+    
 } else if (isset($_POST['optionState'])) {
 
     $idSale = $_POST['idSale'];

@@ -14,6 +14,7 @@ if (isset($_POST['option']) == 'login') {
         if ($result != -1) {
             session_start();
             $_SESSION['idUser'] = $result;
+            $_SESSION['carrito'] = array();
             header('location: ../Presentation/Modules/ClientView.php');
         } else {
             header('location: ../index.php?errorUser=error');

@@ -15,152 +15,198 @@
         <script src="../../JS/starrr.js"></script>
     </head>
     <body>
-        <br><br><hr>
-        <?php
-        if (@session_start() == true) {
-            if (isset($_SESSION["idUser"])) {
-                include_once '../../Business/Product/ProductBusiness.php';
-                include_once '../../Business/SpecificationProduct/SpecificationproductBusiness.php';
-                include_once '../../Data/Frecuency.php';
-                $idProduct = $_GET["idProduct"];
-                $frecuency = new Frecuency();
-                $result = $frecuency->updateView();
-                $productBusiness = new ProductBusiness();
-                $product = $productBusiness->getProductByID($idProduct);
-                $specificationBusiness = new SpecificationproductBusiness();
-                $specification = $specificationBusiness->getSpecificationProduct($idProduct);
-                ?>
-                <div>
-                    <center><h1><?php echo $product[0]->getName(); ?></h1></center>
-                    <table>
-                        <?php
-                        $cont = 0;
-                        foreach ($product[0]->getPathImages() as $currentImage) {
-                            $img = $currentImage;
-                            if ($cont < 3) {
-                                ?>
-                                <tr><td><img  src="<?php echo $currentImage; ?>" alt="" style="width: 100px; height: 100px;"/></td></tr>
-
-                                <?php
-                            } else {
-                                ?>
-                                <tr>
-                                    <td><img  src="<?php echo $currentImage; ?>" alt="" style="width: 135px; height: 100px;"/></td>
-
-                                </tr>
-                                <?php
-                            }
-                            $cont++;
-                        }
-                        ?>
-                    </table>
-                    <div style="position: relative; bottom: 420px; margin-left: 110px;">
-                        <img style="width: 300px; height: 300px;"id="imgChange" src="<?php echo $img; ?>" alt=""/></div>
-
-                    <div style="position: relative; bottom: 730px; margin-left: 430px;">
-
-                        <table>
-                            <tr><td><h2>Marca:</h2></td> <td><h4><?php echo $product[0]->getBrand(); ?></h4></td></tr>
-                            <tr><td><h2>Modelo:</h2></td> <td><h4><?php echo $product[0]->getModel(); ?></h4></td></tr>
-                            <tr><td><h2>Serie:</h2></td> <td><h4><?php echo $product[0]->getSerie(); ?></h4></td></tr>
-                            <tr><td><h2>Precio:</h2></td> <td><h4><?php echo '₡' . number_format($product[0]->getPrice()); ?></h3><br></td></tr>
-                                        <tr>
-                                            <td><h2>Colores:</h2></td>
-                                            <td>
-                                                <?php
-                                                $colors = split(";", $product[0]->getColor());
-                                                for ($i = 0; $i < sizeof($colors); $i++) {
-                                                    if ($colors[$i] != "") {
-                                                        ?>
-                                                        <input type="text" disabled="true" style="background:
-                                                               <?php echo $colors[$i]; ?>;
-                                                               border: none;  width: 30px; height: 30px;"/>                            
-                                                               <?php
-                                                           }
-                                                       }
-                                                       ?>
-                                            </td>
-                                        </tr>
-                                        <tr><td><h2>Descripción:</h2></td><td><h4><?php echo $product[0]->getDescription(); ?></h4></td></tr>
-                                        <tr><td><h2>Características:</h2></td><td><h4><?php echo $product[0]->getCharacteristics(); ?></h4></td></tr>
-                                        <tr><td>
-
-                                                <?php
-                                                include_once '../../Business/Details/detailsBusiness.php';
-                                                $detailsBusiness = new detailsBusiness();
-                                                $wish = $detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
-                                                ?>
-                                                <form id="wish" method="POST" action="../../Business/Details/desireAction.php">
-
-                                                    <input type="hidden" id="idProductWish" name="idProductWish" value="<?php echo $_GET['idProduct'] ?>">                    
-                                                    <input type="hidden" id="idclientWish" name="idClientWish" value="<?php echo $_SESSION["idUser"] ?>">                    
-                                                    <input type="checkbox" name="checkWish" <?php
-                                                    if ($wish) {
-                                                        echo 'checked="false"';
-                                                    }
-                                                    ?> disabled/>  <br>
-                                                    <input type="submit" name ="change" id="change" value="Agregar al Carrito" >
-                                                </form>
-
-                                            </td></tr>
-
-                                        <tr>
-                                            <td>
-                                                Calificar: <span id="Estrellas"></span>
-
-                                            </td></tr>
-                        </table>
-                    </div >
-                    <div style="position: relative; bottom: 1320px; margin-left: 800px;">
-                        <table>
-                            <tr>
-                                <td><h2>Especificaciones:</h2><td></td></td><td><a href="../WallView/Wall.php?idProduct=<?php echo $idProduct; ?>">Ver muro</a></td><br>
+        <br>
+    <center>
+        <table>
+            <tr>
+                <td><a href="../Modules/ClientView.php?idProduct=<?php echo $_GET["idProduct"]; ?>">Atrás</a></td>
+            </tr>
+        </table>
+    </center>>
+    <br><hr>
+    <?php
+    if (@session_start() == true) {
+        if (isset($_SESSION["idUser"])) {
+            include_once '../../Business/Product/ProductBusiness.php';
+            include_once '../../Business/SpecificationProduct/SpecificationproductBusiness.php';
+            include_once '../../Data/Frecuency.php';
+            $idProduct = $_GET["idProduct"];
+            $frecuency = new Frecuency();
+            $result = $frecuency->updateView();
+            $productBusiness = new ProductBusiness();
+            $product = $productBusiness->getProductByID($idProduct);
+            $specificationBusiness = new SpecificationproductBusiness();
+            $specification = $specificationBusiness->getSpecificationProduct($idProduct);
+            ?>
+            <div>
+                <center><h1 id="txtName"><?php echo $product[0]->getName(); ?></h1></center>
+                <table>
+                    <?php
+                    $cont = 0;
+                    foreach ($product[0]->getPathImages() as $currentImage) {
+                        $img = $currentImage;
+                        if ($cont < 3) {
+                            ?>
+                            <tr><td><img  src="<?php echo $currentImage; ?>" alt="" style="width: 100px; height: 100px;"/></td></tr>
 
                             <?php
-                            foreach ($specification as $currentSpe) {
-                                ?>
-                                <tr>
-                                    <td><h4><?php echo $currentSpe->getNameSpecification(); ?></h4></td>
-                                    <td><h4><?php echo $currentSpe->getValueSpecification(); ?></h4></td></tr>
-                                <?php
-                            }
+                        } else {
                             ?>
+                            <tr>
+                                <td><img  src="<?php echo $currentImage; ?>" alt="" style="width: 135px; height: 100px;"/></td>
+
                             </tr>
+                            <?php
+                        }
+                        $cont++;
+                    }
+                    ?>
+                </table>
+                <div style="position: relative; bottom: 420px; margin-left: 110px;">
+                    <img style="width: 300px; height: 300px;"id="imgChange" src="<?php echo $img; ?>" alt=""/></div>
 
-                        </table>
-                    </div>
+                <div style="position: relative; bottom: 730px; margin-left: 430px;">
+
+                    <table>
+                        <tr><td><h2>Marca:</h2></td> <td><h4 id="txtBrand"><?php echo $product[0]->getBrand(); ?></h4></td></tr>
+                        <tr><td><h2>Modelo:</h2></td> <td><h4 id="txtModel"><?php echo $product[0]->getModel(); ?></h4></td></tr>
+                        <tr><td><h2>Serie:</h2></td> <td><h4 id="txtSerie"><?php echo $product[0]->getSerie(); ?></h4></td></tr>
+                        <tr><td><h2>Precio:</h2></td> <td><h4><?php echo '₡' . number_format($product[0]->getPrice()); ?></h4><br></td></tr>
+                        <tr>
+                            <td><h2>Colores:</h2></td>
+                            <td>
+                                <?php
+                                $colors = split(";", $product[0]->getColor());
+                                for ($i = 0; $i < sizeof($colors); $i++) {
+                                    if ($colors[$i] != "") {
+                                        ?>
+                                        <input type="text" disabled="true" style="background:
+                                               <?php echo $colors[$i]; ?>;
+                                               border: none;  width: 30px; height: 30px;"/>                            
+                                               <?php
+                                           }
+                                       }
+                                       ?>
+                            </td>
+                        </tr>
+                        <tr><td><h2>Descripción:</h2></td><td><h4><?php echo $product[0]->getDescription(); ?></h4></td></tr>
+                        <tr><td><h2>Características:</h2></td><td><h4><?php echo $product[0]->getCharacteristics(); ?></h4></td></tr>
+                        <tr><td>
+
+                                <?php
+                                include_once '../../Business/Details/detailsBusiness.php';
+                                $detailsBusiness = new detailsBusiness();
+                                $wish = $detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
+                                ?>
+                                <form id="wish" method="POST" action="../../Business/Details/desireAction.php">
+
+                                    <input type="hidden" id="idProductWish" name="idProductWish" value="<?php echo $_GET['idProduct'] ?>">                    
+                                    <input type="hidden" id="idclientWish" name="idClientWish" value="<?php echo $_SESSION["idUser"] ?>">                    
+                                    <input type="checkbox" name="checkWish" <?php
+                                    if ($wish) {
+                                        echo 'checked="false"';
+                                    }
+                                    ?> disabled/>  <br>
+                                    <input type="submit" name ="change" id="change" value="Agregar al Carrito" >
+                                </form>
+
+                            </td></tr>
+
+                        <tr>
+                            <td>
+                                Calificar: <span id="Estrellas"></span>
+
+                            </td></tr>
+                    </table>
+                </div >
+                <div style="position: relative; bottom: 1320px; margin-left: 800px;">
+                    <table>
+                        <tr>
+                            <td><h2>Especificaciones:</h2><td></td></td><td><a href="../WallView/Wall.php?idProduct=<?php echo $idProduct; ?>">Ver muro</a></td><br>
+                        <td><input type="submit" id="btnCar" name="btnCar" value="Agregar carrito" /></td>
+                        <?php
+                        foreach ($specification as $currentSpe) {
+                            ?>
+                            <tr>
+                                <td><h4><?php echo $currentSpe->getNameSpecification(); ?></h4></td>
+                                <td><h4><?php echo $currentSpe->getValueSpecification(); ?></h4></td></tr>
+                            <?php
+                        }
+                        ?>
+                        </tr>
+
+
+                    </table>
+                    <label id="lblMessage"></label>
                 </div>
-                <?php
-            }
+            </div>
+            <input type="hidden" id="idProduct" name="idProduct" value="<?php echo $idProduct; ?>"/>
+            <input type="hidden" id="txtPrice" name="txtPrice" value="<?php echo $product[0]->getPrice(); ?>"/>
+            <?php
         }
-        ?>
-    </body>
+    }
+    ?>
 
-    <script>
-        $(document).ready(function () {
+</body>
 
-            $(document).ready(function () {
-                $("img").click(function () {
-                    var elem = $(this);
-                    var src = elem.attr('src');
-                    $("#imgChange").prop('src', src);
-                });
+<script>
+
+    $(document).ready(function () {
+        $("img").click(function () {
+            var elem = $(this);
+            var src = elem.attr('src');
+            $("#imgChange").prop('src', src);
+        });
+
+        $("#btnCar").click(function () {
+
+            var idProduct = $('#idProduct').val();
+            var name = $('#txtName').text();
+            var brand = $('#txtBrand').text();
+            var model = $('#txtModel').text();
+            var serie = $('#txtSerie').text();
+            var price = $('#txtPrice').val();
+
+
+            var parametros = {
+                "idProduct": idProduct,
+                "name": name,
+                "brand": brand,
+                "model": model,
+                "serie": serie,
+                "price": price
+            };
+            $.ajax({
+                data: parametros,
+                url: '../../Business/ShoppingCar/ShoppingCarAddProduct.php',
+                type: 'post',
+                beforeSend: function () {
+
+                },
+                success: function (response) {
+                    document.getElementById('lblMessage').innerHTML = "Producto Agregado";
+                },
+                error: function () {
+                    document.getElementById('lblMessage').innerHTML = "Error al agregar";
+                }
             });
         });
 
 
-    </script>
-    <script>
-        $('#Estrellas').starrr({
-            rating:<?php echo '' . getCalification() . ''; ?>,
-            change: function (e, valor) {
-                var calificacion = valor;
-                alert(calificacion);
-            }
+    });
 
-        });
+</script>
+<script>
+    $('#Estrellas').starrr({
+        rating:<?php echo '' . getCalification() . ''; ?>,
+        change: function (e, valor) {
+            var calificacion = valor;
+            alert(calificacion);
+        }
 
-    </script>
+    });
+
+</script>
 
 </html>
 <?php

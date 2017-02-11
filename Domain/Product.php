@@ -35,6 +35,12 @@ class Product {
         return new self($brand,$model,$price,"","","","","");
        
     }
+    
+    static function ProductCar($idProduct,$brand, $model, $serie, $price, $name) {
+        
+        return new self($brand,$model,$price,"",$idProduct,$name,"",$serie);
+       
+    }
 
     public function getIdProduct() {
         return $this->idProduct;
