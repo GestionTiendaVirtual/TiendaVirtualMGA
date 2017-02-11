@@ -20,6 +20,7 @@
         <table>
             <tr>
                 <td><a href="../Modules/ClientView.php?idProduct=<?php echo $_GET["idProduct"]; ?>">Atrás</a></td>
+                <td><a href="../ShoppingCar/ShoppingCar.php">Carrito compras</a></td>
             </tr>
         </table>
     </center>>
