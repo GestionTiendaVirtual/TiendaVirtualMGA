@@ -122,7 +122,7 @@
             <input type="hidden" name="idAccount" value= <?php echo "'".$idAccount."'"?> readonly="readonly">
             
             <label>CSC</label>
-            <input type="text" name="CSC" id="CSC" placeholder="CSC" onkeypress="return validaNum(event)" maxlength="3">
+            <input type="password" name="CSC" id="CSC" placeholder="CSC" onkeypress="return validaNum(event)" maxlength="3">
             
             <label>Tipo Cuenta</label>
             <select name="typeAccount">
@@ -162,7 +162,7 @@
                             <input type="hidden" name="idAccount" value= <?php echo "'".$tem->idAccount."'"?>>    
 
                             <label> CSC </label>
-                            <input type="text" name="CSC" id="CSC<?php echo $cont; ?>" value= <?php echo "'".$tem->CSC."'"?> onkeypress="return validaNum(event)" maxlength="3">
+                            <input type="password" name="CSC" id="CSC<?php echo $cont; ?>" value= <?php echo "'".$tem->CSC."'"?> onkeypress="return validaNum(event)" maxlength="3">
                             
                             <label> Tipo Cuenta </label>                            
                             <select name="typeAccount">

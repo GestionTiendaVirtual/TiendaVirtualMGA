@@ -1,5 +1,6 @@
 <?php
 include "./AccountBusiness.php";
+include "../Client/clientBusiness.php";
 
 /* Se obtienen los datos */
 session_start();
@@ -9,15 +10,18 @@ $CSC = $_POST['CSC'];
 $typeAccount = $_POST['typeAccount'];
 $expirationDate = $_POST['expirationDate'];
 $cardNumber = $_POST['cardNumber'];
-$direction  = "Direccion de prueba";
+
 
 $instAccountBusiness = new AccountBusiness();
+$instClientBusiness = new clientBusiness();
+
+$direction  = $instClientBusiness->getLocation($idClient);
 
 /*Validamos*/
 $resultValidation = $instAccountBusiness->validateEmpty(array($idAccount,$idClient,$typeAccount,$expirationDate,$cardNumber,$CSC, $direction));
 #Si existen campos vacios
 if($resultValidation == false){ 
-	header("location: ../../Presentation/Account/AccountInterface.php?msg=Ningun campo debe quedar vacío.");
+	header("location: ../../Presentation/Account/AccountInterface.php?msg=ERROR! Debe ingresar todos los datos solicitados.");
 } # Si es ingresado un dato no numerico en un campo de tipo numerico
 elseif ($instAccountBusiness->validateNumeric(array($idAccount,$idClient)) === false) {
 	header("location: ../../Presentation/Account/AccountInterface.php?msg=Error de tipo numérico.");
@@ -28,6 +32,6 @@ else{
 	$expirationDate = $tem[2]."-".$tem[0]."-".$tem[1];
 	$account = new Account($CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount, $direction);
 	$result = $instAccountBusiness->insertAccountBusiness($account);
-	header("location: ../../Presentation/Account/AccountInterface.php?msg=La inserción se realizó con exito.");
+	header("location: ../../Presentation/Account/AccountInterface.php?msg=Se realizó con éxito.");
 }
 

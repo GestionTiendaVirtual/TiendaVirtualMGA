@@ -293,6 +293,18 @@ class clientData extends Data {
         return($data['total'] >= 1);
     }//fin de la funcion email exist
 
+    /* Retorna la ubicación del cliente */
+    function getLocation($idClient){
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "select provinceClient, cantonClient, districtClient, addressClient1, addressClient2 from tbclient where idclient = ". $idClient);
+        $location = "";
+        if($row = mysqli_fetch_array($result)){
+            $location = $row['provinceClient'] . " " . $row['cantonClient'] . " " . $row['districtClient'] . " " . $row['addressClient1'] . " ". $row['addressClient2'];
+        }
+        return $location;
+    }
+
 }
 
 //fin de la clase

@@ -19,10 +19,10 @@ $accountBusiness = new AccountBusiness();
 $resultValidation = $accountBusiness->validateEmpty(array($idAccount,     $idClient,$CSC,$typeAccount,$expirationDate,$cardNumber));
 #Si existen campos vacios
 if($resultValidation == false){ 
-	header("location: ../../Presentation/Account/AccountInterface.php?msg=Ningun campo debe quedar vacío.");
+	header("location: ../../Presentation/Account/AccountInterface.php?msg=ERROR! Debe ingresar todos los datos solicitados.");
 } # Si es ingresado un dato no numerico en un campo de tipo numerico
 elseif ($accountBusiness->validateNumeric(array($idAccount,$idClient)) == false) {
-	header("location: ../../Presentation/Account/AccountInterface.php?msg=error de tipo numérico.");
+	header("location: ../../Presentation/Account/AccountInterface.php?msg=Error de tipo numérico.");
 } #Si los datos son correctos entonces se hace la consulta en la BD
 else{
 	//Ordenamos la fecha;
@@ -32,5 +32,5 @@ else{
 	$result = $accountBusiness->updateAccountBusiness($account);
 
 	/*Se retorna el resultado a la pagina de actualizacion*/
-	header("location: ../../Presentation/Account/AccountInterface.php?msg=Se realizó la actualización con éxito.");
+	header("location: ../../Presentation/Account/AccountInterface.php?msg=Se realizó con éxito.");
 }

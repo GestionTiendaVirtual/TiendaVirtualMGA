@@ -55,6 +55,9 @@ class clientBusiness
     public function  clientExist($email){
         return $this->clientData->clientExist($email);
     }
+    public function  getLocation($idClient){
+        return $this->clientData->getLocation($idClient);
+    }
 
     
 
