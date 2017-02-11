@@ -5,32 +5,36 @@ include_once './CustomerShoppingBusiness.php';
 session_start();
 
 if (isset($_POST['create'])) {
-    
-    $total = $_POST['total'];
-    $idClient = $_SESSION['idUser'];
-    
-    $products = [];
-    
-     for ($i = 0; $i < sizeof($_SESSION['carrito']); $i++){
-        
-        $product = $_SESSION['carrito'][$i];
-        $infoProduct = split(";",$product);
-        
-        array_push($products, $infoProduct[0]);        
-    }  
-    $customerShopping = new CustomerShopping($idClient, date('Y-m-d'), $total);
 
-    $customerBusiness = new CustomerShoppingBusiness();
+    if (sizeof($_SESSION['carrito']) > 0) {
 
-    $result = $customerBusiness->insertCustomerInvoice($customerShopping, $products);
+        $total = $_POST['total'];
+        $idClient = $_SESSION['idUser'];
 
-    if ($result != false) {
-        $_SESSION['carrito'] = [];
-        header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?success=success');
+        $products = [];
+
+        for ($i = 0; $i < sizeof($_SESSION['carrito']); $i++) {
+
+            $product = $_SESSION['carrito'][$i];
+            $infoProduct = split(";", $product);
+
+            array_push($products, $infoProduct[0]);
+        }
+        $customerShopping = new CustomerShopping($idClient, date('Y-m-d'), $total);
+
+        $customerBusiness = new CustomerShoppingBusiness();
+
+        $result = $customerBusiness->insertCustomerInvoice($customerShopping, $products);
+
+        if ($result != false) {
+            $_SESSION['carrito'] = [];
+            header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?success=success');
+        } else {
+            header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?error=error');
+        }
     } else {
-        header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?error=error');
+        header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?errorData=error');
     }
-    
 } else if (isset($_POST['optionState'])) {
 
     $idSale = $_POST['idSale'];

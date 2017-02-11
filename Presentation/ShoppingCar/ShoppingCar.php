@@ -90,6 +90,10 @@ if (isset($_GET['success'])) {
     echo '<script>                
               document.getElementById("txtMessage").innerHTML = "Compra fallida";
           </script>';
+}else if (isset($_GET['errorData'])) {
+    echo '<script>                
+              document.getElementById("txtMessage").innerHTML = "El carrito está vacío";
+          </script>';
 }
 ?>
 
