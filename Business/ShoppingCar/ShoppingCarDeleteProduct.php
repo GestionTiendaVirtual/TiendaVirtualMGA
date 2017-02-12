@@ -2,6 +2,7 @@
 
 include_once '../CanceledSales/CanceledSalesBusiness.php';
 include_once '../../Domain/CanceledSales.php';
+
 session_start();
 
 

@@ -111,7 +111,7 @@ if (isset($_GET['success'])) {
           </script>';
 }else if (isset($_GET['errorData'])) {
     echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "El carrito está vacío";
+              document.getElementById("txtMessage").innerHTML = "El carrito está vacío, o seleccione una cuenta";
           </script>';
 }
 ?>
