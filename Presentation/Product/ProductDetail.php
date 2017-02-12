@@ -9,7 +9,7 @@
         <script src="js/bootstrap.min.js"></script>
 
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
-
+        <script src="../../JS/ShoppingCar.js" type="text/javascript"></script>
 
         <link href="../../CSS/starrr.css" rel=stylesheet/>
         <script src="../../JS/starrr.js"></script>
@@ -23,7 +23,7 @@
                 <td><a href="../ShoppingCar/ShoppingCar.php">Carrito compras</a></td>
             </tr>
         </table>
-    </center>>
+    </center>
     <br><hr>
     <?php
     if (@session_start() == true) {
@@ -150,53 +150,6 @@
 
 </body>
 
-<script>
-
-    $(document).ready(function () {
-        $("img").click(function () {
-            var elem = $(this);
-            var src = elem.attr('src');
-            $("#imgChange").prop('src', src);
-        });
-
-        $("#btnCar").click(function () {
-
-            var idProduct = $('#idProduct').val();
-            var name = $('#txtName').text();
-            var brand = $('#txtBrand').text();
-            var model = $('#txtModel').text();
-            var serie = $('#txtSerie').text();
-            var price = $('#txtPrice').val();
-
-
-            var parametros = {
-                "idProduct": idProduct,
-                "name": name,
-                "brand": brand,
-                "model": model,
-                "serie": serie,
-                "price": price
-            };
-            $.ajax({
-                data: parametros,
-                url: '../../Business/ShoppingCar/ShoppingCarAddProduct.php',
-                type: 'post',
-                beforeSend: function () {
-
-                },
-                success: function (response) {
-                    document.getElementById('lblMessage').innerHTML = "Producto Agregado";
-                },
-                error: function () {
-                    document.getElementById('lblMessage').innerHTML = "Error al agregar";
-                }
-            });
-        });
-
-
-    });
-
-</script>
 <script>
     $('#Estrellas').starrr({
         rating:<?php echo '' . getCalification() . ''; ?>,
