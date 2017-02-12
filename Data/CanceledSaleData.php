@@ -15,7 +15,7 @@ class CanceledSaleData extends Data{
         
         $result = mysqli_query($conn, $query);
         mysqli_close($conn);
-        return "idClient: " . $canceledSale->idClient . "  idProduct: " . $canceledSale->idProduct;		
+        return true;		
 	}
 }
 

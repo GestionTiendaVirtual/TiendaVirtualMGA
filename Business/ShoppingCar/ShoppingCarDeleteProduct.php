@@ -24,8 +24,7 @@ if(isset($_SESSION['carrito'])){
 
     /* Se registra la eliminacion en la tabla de compras caceladas */    
     $instCanceledSales = new CanceledSalesBusiness();
-    $canceledSale = new CanceledSales($idProduct, $_SESSION['idUser']);
+    $canceledSale = new CanceledSales($_SESSION['idUser'],$idProduct);
     $result = $instCanceledSales->insertCanceledSaleBusiness($canceledSale);
-    echo $result;
 
 }
