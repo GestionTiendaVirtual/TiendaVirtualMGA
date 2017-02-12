@@ -12,8 +12,7 @@
         <a href="./Presentation/TypeProduct/typeProductInterface.php">Tipo producto</a>
         <a href="./Presentation/Product/ProductCreate.php">Producto</a>
         <a href="./Presentation/Client/clientInterface.php">Cliente</a>
-        <hr>
-        <h1>Iniciar sesión</h1>
+        <a href="./Presentation/Client/clientRegisterInterface.php">Registrar</a>
         
         <?php
         if (@session_start() == true) {

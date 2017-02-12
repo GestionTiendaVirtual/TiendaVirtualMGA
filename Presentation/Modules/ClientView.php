@@ -115,6 +115,7 @@
                             </li>
                             <li><a href="../../Presentation/Account/AccountInterface.php">Cuenta</a>
                             <li><a href="../ShoppingCar/ShoppingCar.php">Carrito compras</a>
+                            <li><a href="../Client/clientUpdateInterface.php">Perfil</a>
                             <li><a href="../../Business/loginAction.php?logout">Cerrar</a>
                             </li>
                         </ul>

@@ -1,5 +1,7 @@
 <?php
 
+//clase agregar
+
 $insert = $_POST['btnInsert'];
 //$clean = $_POST['btnCancel'];
 
@@ -40,59 +42,59 @@ if ($insert) {
                                                     if (is_numeric($cantonClient)) {
                                                         if (is_numeric($districtClient)) {
                                                             $client = new client($emailClient, $userClient, $passwordClient, $nameClient, $lastNameFClient, $lastNameSClient, $bornClient, $sexClient, $telClient, $provinceClient, $cantonClient, $districtClient, $addressClient1, $addressClient2);
-                                                            $clientBusiness = new clientBusiness();
-                                                            $exist=$clientBusiness->clientExist($emailClient);
-                                                            if ($exist == 'NoExiste') { 
-                                                                $answer = $clientBusiness->insertClient($client);                                                                
+                                                                $clientBusiness = new clientBusiness();
+                                                                $exist =$clientBusiness->clientExist($emailClient);
+                                                            if ($exist == 'NoExiste') {
+                                                                $answer = $clientBusiness->insertClient($client);
                                                                 if ($answer == true) {
-                                                                    header('location: ../../Presentation/Client/clientInterface.php?InsertClientComplete');
+                                                                    header('location: ../../Presentation/Client/clientRegisterInterface.php?InsertClientComplete');
                                                                 } else {
-                                                                    header('location: ../../Presentation/Client/clientInterface.php?error16');
+                                                                    header('location: ../../Presentation/Client/clientRegisterInterface.php?error16');
                                                                 }
-                                                            } else { 
-                                                                header('location: ../../Presentation/Client/clientInterface.php?error15');                                                                
+                                                            } else {
+                                                                header('location: ../../Presentation/Client/clientRegisterInterface.php?error15');
                                                             }
                                                         } else {
-                                                            header('location: ../../Presentation/Client/clientInterface.php?error12');
+                                                            header('location: ../../Presentation/Client/clientRegisterInterface.php?error12');
                                                         }
                                                     } else {
-                                                        header('location: ../../Presentation/Client/clientInterface.php?error11');
+                                                        header('location: ../../Presentation/Client/clientRegisterInterface.php?error11');
                                                     }
                                                 } else {
-                                                    header('location: ../../Presentation/Client/clientInterface.php?error10');
+                                                    header('location: ../../Presentation/Client/clientRegisterInterface.php?error10');
                                                 }
                                             } else {
-                                                header('location: ../../Presentation/Client/clientInterface.php?error14');
+                                                header('location: ../../Presentation/Client/clientRegisterInterface.php?error14');
                                             }
                                         } else {
-                                            header('location: ../../Presentation/Client/clientInterface.php?error13');
+                                            header('location: ../../Presentation/Client/clientRegisterInterface.php?error13');
                                         }
                                     } else {
-                                        header('location: ../../Presentation/Client/clientInterface.php?error9');
+                                        header('location: ../../Presentation/Client/clientRegisterInterface.php?error9');
                                     }
                                 } else {
-                                    header('location: ../../Presentation/Client/clientInterface.php?error8');
+                                    header('location: ../../Presentation/Client/clientRegisterInterface.php?error8');
                                 }
                             } else {
-                                header('location: ../../Presentation/Client/clientInterface.php?error7');
+                                header('location: ../../Presentation/Client/clientRegisterInterface.php?error7');
                             }
                         } else {
-                            header('location: ../../Presentation/Client/clientInterface.php?error6');
+                            header('location: ../../Presentation/Client/clientRegisterInterface.php?error6');
                         }
                     } else {
-                        header('location: ../../Presentation/Client/clientInterface.php?error5');
+                        header('location: ../../Presentation/Client/clientRegisterInterface.php?error5');
                     }
                 } else {
-                    header('location: ../../Presentation/Client/clientInterface.php?error4');
+                    header('location: ../../Presentation/Client/clientRegisterInterface.php?error4');
                 }
             } else {
-                header('location: ../../Presentation/Client/clientInterface.php?error3');
+                header('location: ../../Presentation/Client/clientRegisterInterface.php?error3');
             }
         } else {
-            header('location: ../../Presentation/Client/clientInterface.php?error2');
+            header('location: ../../Presentation/Client/clientRegisterInterface.php?error2');
         }
     } else {
-        header('location: ../../Presentation/Client/clientInterface.php?error1');
+        header('location: ../../Presentation/Client/clientRegisterInterface.php?error1');
     }
 }
 

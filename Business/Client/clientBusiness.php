@@ -8,7 +8,7 @@ include '../../Data/clientData.php';
  */
 class clientBusiness 
 {
-    public $clientData;
+   public $clientData;
     
     function clientBusiness() {
         $this->clientData = new clientData();
@@ -55,11 +55,22 @@ class clientBusiness
     public function  clientExist($email){
         return $this->clientData->clientExist($email);
     }
-    public function  getLocation($idClient){
-        return $this->clientData->getLocation($idClient);
+    public function fullProvince() {
+        return $this->clientData->fullProvince();
     }
-    public function  getClientById($idClient){
-        return $this->clientData->getClientById($idClient);
+    public function fullCanton() {
+        return $this->clientData->fullCanton();
+    }
+
+    public function fullDistrict() {
+        return $this->clientData->fullDistrict();
+    }
+
+    public function getAClient($idUser) {
+        return $this->clientData->getAClient($idUser);
+    }
+    public function getIdSexualPreferences($namesex) {
+        return $this->clientData->getIdSexualPreferences($namesex);
     }
     
     

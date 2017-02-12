@@ -36,10 +36,7 @@ class clientData extends Data {
         return mysqli_num_rows($consulta);
     }
 
-    public function getTotalConsultas() {
-        return $this->total_consultas;
-    }
-
+  
     /*
      * Función que permite el registro de los clientes en la base de datos
      * primero consulta el id para crear un consecutivo y luego registra el nuevo
@@ -123,6 +120,29 @@ class clientData extends Data {
         return $array;
     }//fin función getClient
     
+    /**
+     * Función que permite la obtención de todos los registros de 
+     * clientes de la base de datos
+     * @return array
+     */
+    function getAClient($idUser) {
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "select * from tbclient where active=1 and idClient=".$idUser." order by idclient asc");
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $currentData = new client($row['emailClient'], $row['userClient'], $row['passwordClient'],
+                    $row['nameClient'], $row['surname1Client'], $row['surname2Client'],
+                    $row['bornClient'], $row['sexClient'], $row['telephoneClient'],
+                    $row['provinceClient'], $row['cantonClient'], $row['districtClient'], 
+                    $row['addressClient1'], $row['addressClient2']);
+            $currentData->setIdClient($row['idClient']);
+            array_push($array, $currentData);
+        }
+        return $array;
+    }//fin función getClient
+    
     function clientExist($email) {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
@@ -147,6 +167,24 @@ class clientData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         $result = mysqli_query($conn, "select * from tbsexualpreferences order by idSex asc");
+        $array = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $currentData = new SexualPreferences($row['idSex'], $row['nameSex']);
+            array_push($array, $currentData);
+        }
+        return $array;
+    }//fin función getsexualPreferences
+    
+    /*
+     * Función que permite la obtención de todos los registros de 
+     * preferencias sexuales de la base de datos 
+     * @return array
+     */
+    function getIdSexualPreferences($namesex) {
+
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "select * from tbsexualpreferences where nameSex='".$namesex."';");              
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new SexualPreferences($row['idSex'], $row['nameSex']);
@@ -217,7 +255,7 @@ class clientData extends Data {
 
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select * from tbprovince;");
+        $result = mysqli_query($conn, "SELECT idProvince, nameProvince FROM tbprovince WHERE idProvince > 0 ORDER BY idProvince ASC;");
         $array = array();
         while ($row = mysqli_fetch_array($result)) {
             $currentData = new Province();
@@ -292,35 +330,40 @@ class clientData extends Data {
         $data = mysqli_fetch_assoc($consulting);
         return($data['total'] >= 1);
     }//fin de la funcion email exist
+    
+    
+    function fullProvince() {
 
-    /* Retorna la ubicación del cliente */
-    function getLocation($idClient){
-        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select provinceClient, cantonClient, districtClient, addressClient1, addressClient2 from tbclient where idclient = ". $idClient);
-        $location = "";
-        if($row = mysqli_fetch_array($result)){
-            $location = $row['provinceClient'] . " " . $row['cantonClient'] . " " . $row['districtClient'] . " " . $row['addressClient1'] . " ". $row['addressClient2'];
+        $consulting = mysqli_query($conn,"SELECT idProvince, nameProvince FROM tbprovince WHERE idProvince > 0 ORDER BY idProvince ASC;");
+        
+        if (!$consulting) {
+            echo 'MySQL Error: ' . mysqli_error();
+            exit;
         }
-        return $location;
+        return $consulting;
     }
+    function fullCanton() {
 
-    function getClientById($idClient){
-        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
-        $result = mysqli_query($conn, "select * from tbclient where active=1 AND idclient = ". $idClient);
-        $array = array();
-        if($row = mysqli_fetch_array($result)) {
-            $currentData = new client($row['emailClient'], $row['userClient'], $row['passwordClient'],
-                    $row['nameClient'], $row['surname1Client'], $row['surname2Client'],
-                    $row['bornClient'], $row['sexClient'], $row['telephoneClient'],
-                    $row['provinceClient'], $row['cantonClient'], $row['districtClient'], 
-                    $row['addressClient1'], $row['addressClient2']);
-            $currentData->setIdClient($row['idClient']);
-            return $currentData;
-        }else{
-            return false;
+        $consulting2 = mysqli_query($conn,"SELECT idCanton,nameCanton, idProvince  FROM tbcanton WHERE idProvince > 0 ORDER BY idCanton ASC;");
+        
+        
+        return $consulting2;
+    }
+    function fullDistrict() {
+
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $consulting = mysqli_query("SELECT idProvince, nameProvince FROM tbprovince WHERE idProvince > 0 ORDER BY idProvince ASC;");
+        
+        if (!$consulting) {
+            echo 'MySQL Error: ' . mysql_error();
+            exit;
         }
+        return $consulting;
     }
 
 }
