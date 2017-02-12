@@ -1,7 +1,7 @@
 <?php
 
 class CanceledSales{
-	public $idCnaceledSale;
+	public $idCanceledSale;
 	public $idClient;
 	public $idProduct;
 
