@@ -2,6 +2,10 @@
 
 include_once '../../Domain/CustomerShopping.php';
 include_once './CustomerShoppingBusiness.php';
+
+/*Web service*/
+include_once '../../lib/libNusoap/nusoap.php';
+
 session_start();
 
 if (isset($_POST['create'])) {
@@ -26,12 +30,47 @@ if (isset($_POST['create'])) {
 
         $result = $customerBusiness->insertCustomerInvoice($customerShopping, $products);
 
-        if ($result != false) {
+
+
+
+
+        /*==================  Web Service ================*/
+            /*Objeto cliente*/
+        $cliente = new nusoap_client('http://localhost/WebService/Servicio.php',false);
+
+        /*Datos a pasar*/
+        /*X*/ $nameClient = "Gustavo Najera";
+        /*X*/ $numAccount = 123456789;
+        /*X*/ $csc = 123;
+              $monto = $total;
+              $nameBusiness = "MGASoluciones";
+        /*X*/ $numSale = 45;
+              $date = date('Y-m-d');
+
+
+        $parametros = array('nameClient' => $nameClient, 'numAccount' => $numAccount,
+                            'csc' => $csc, 'monto' => $monto, 'nameBusiness' => $nameBusiness,
+                            'numSale' => $numSale, 'date' => $date);
+
+        /*
+        * Pide ->
+        * 1) Nombre de la funcion
+        * 2) Parametros
+        */
+        $resultBank = $cliente->call("CompraEnLinea", $parametros);
+        print_r($resultBank);
+
+        /*================  End Web Service ==============*/
+
+
+
+        /*Se agrega la validacion del web service*/
+        /*if ($result != false && $resultBank != false) {
             $_SESSION['carrito'] = [];
             header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?success=success');
         } else {
             header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?error=error');
-        }
+        }*/
     } else {
         header('location: ../../Presentation/ShoppingCar/ShoppingCar.php?errorData=error');
     }
