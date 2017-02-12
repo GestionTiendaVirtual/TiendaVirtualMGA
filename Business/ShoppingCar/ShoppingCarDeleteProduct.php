@@ -1,5 +1,6 @@
 <?php
 
+include_once '../../Business/CanceledSales/CanceledSales.php';
 session_start();
 
 if(isset($_SESSION['carrito'])){
@@ -16,6 +17,9 @@ if(isset($_SESSION['carrito'])){
             break;
         }
         
-    }    
+    }
+
+    /* Se registra la eliminacion en la tabla de compras caceladas */    
     
+
 }

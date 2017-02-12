@@ -1,5 +1,5 @@
 <?php
-include "./AccountBusiness.php";
+include_once "./AccountBusiness.php";
 
 /* Se obtienen los datos */
 $idAccount = $_GET['idAccount'];

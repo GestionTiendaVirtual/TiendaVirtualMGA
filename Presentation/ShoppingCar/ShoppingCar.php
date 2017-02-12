@@ -5,10 +5,17 @@
         <meta charset="UTF-8">
         <title></title>
         <script src="../../JS/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <?php
+            include '../../Business/Account/AccountBusiness.php';
+            $accountBusiness = new AccountBusiness();
+            $result = $accountBusiness->getAllAccountAssetsBusiness();
+        ?>
     </head>
     <body>
         <?php
-        session_start();
+        if(!isset($_SESSION["idUser"])){
+            session_start();
+        }
         ?>
     <center>
         <br>
@@ -71,6 +78,18 @@
                     <form method="POST" action="../../Business/CustomerShoppingBusiness/CustomerShoppingAtion.php">
                         <input type="hidden" value="create" id="create" name="create">
                         <input type="hidden" value="<?php echo $total; ?>" id="total" name="total">
+
+                        <!-- Cuenta -->
+                        <label>Cuenta: </label>
+                        <select name="account">
+                        <?php
+                        foreach ($result as $tem) {
+                            echo "<option value='" .$tem->idAccount ."'>". $tem->cardNumber ."</option>";
+                        }
+                        ?>
+                        </select>
+                        <!-- Fin de cuenta -->
+                        
                         <input type="submit" value="Comprar" id=""/>
                     </form>
 

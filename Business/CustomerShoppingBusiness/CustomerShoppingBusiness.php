@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../Data/CustomerShoppingData.php';
+include '../../Data/CustomerShoppingData.php';
 
 /**
  * Description of CustomerShoppingBusiness

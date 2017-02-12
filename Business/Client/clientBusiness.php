@@ -58,7 +58,10 @@ class clientBusiness
     public function  getLocation($idClient){
         return $this->clientData->getLocation($idClient);
     }
-
+    public function  getClientById($idClient){
+        return $this->clientData->getClientById($idClient);
+    }
+    
     
 
 

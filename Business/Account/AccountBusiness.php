@@ -1,5 +1,5 @@
 <?php 
-include "../../Data/AccountData.php";
+include_once "../../Data/AccountData.php";
 
 class AccountBusiness extends AccountData{
 

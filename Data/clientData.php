@@ -305,6 +305,24 @@ class clientData extends Data {
         return $location;
     }
 
+    function getClientById($idClient){
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        $result = mysqli_query($conn, "select * from tbclient where active=1 AND idclient = ". $idClient);
+        $array = array();
+        if($row = mysqli_fetch_array($result)) {
+            $currentData = new client($row['emailClient'], $row['userClient'], $row['passwordClient'],
+                    $row['nameClient'], $row['surname1Client'], $row['surname2Client'],
+                    $row['bornClient'], $row['sexClient'], $row['telephoneClient'],
+                    $row['provinceClient'], $row['cantonClient'], $row['districtClient'], 
+                    $row['addressClient1'], $row['addressClient2']);
+            $currentData->setIdClient($row['idClient']);
+            return $currentData;
+        }else{
+            return false;
+        }
+    }
+
 }
 
 //fin de la clase

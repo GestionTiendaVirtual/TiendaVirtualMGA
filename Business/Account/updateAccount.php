@@ -1,5 +1,5 @@
 <?php
-include "./AccountBusiness.php";
+include_once "./AccountBusiness.php";
 
 /*$CSC, $expirationDate, $idClient, $idAccount, $cardNumber, $typeAccount*/
 
