@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../Business/CanceledSales/CanceledSales.php';
+//include_once '../../Business/CanceledSales/CanceledSales.php';
 session_start();
 
 if(isset($_SESSION['carrito'])){

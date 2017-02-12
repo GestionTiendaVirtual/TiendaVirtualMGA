@@ -12,7 +12,7 @@ session_start();
 
 if (isset($_POST['create'])) {
 
-    if (sizeof($_SESSION['carrito']) > 0) {
+    if (sizeof($_SESSION['carrito']) > 0 && $_POST['account'] != "" ) {
 
         $total = $_POST['total'];
         $idClient = $_SESSION['idUser'];
