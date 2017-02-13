@@ -174,7 +174,7 @@ buttonImageOnly: true
     
     if (isset($_GET['InsertClientComplete'])) {
         echo '<script>                        
-             document.getElementById("txtMessage").innerHTML = "Registro con éxito";
+             document.getElementById("txtMessage").innerHTML = "Se realizó con éxito";
           </script>';
     } else if (isset($_GET['error1'])) {
         echo '<script>                
@@ -238,7 +238,7 @@ buttonImageOnly: true
           </script>';
     } else if (isset($_GET['update'])) {
         echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Datos Actualizados con Exito";
+               document.getElementById("txtMessage").innerHTML = "Se realizó con éxito";
            </script>';
     } else if (isset($_GET['error15'])) {
         echo ' <script>                
@@ -262,7 +262,7 @@ buttonImageOnly: true
            </script>';
     } else if (isset($_GET['delete'])) {
         echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Elregistro fue desactivado con exito";
+               document.getElementById("txtMessage").innerHTML = "Se realizó con éxito";
            </script>';
     }
    

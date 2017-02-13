@@ -45,14 +45,11 @@
             <br><label id="txtMessage">* campo obligatorio</label>
 
         </form>
-
-
-
     </body>
     <?php
 if (isset($_GET['insert'])) {
     echo '<script>                        
-             document.getElementById("txtMessage").innerHTML = "Registro con éxito";
+             document.getElementById("txtMessage").innerHTML = "Se realizó con éxito.";
           </script>';
 } else if (isset($_GET['errorInsert'])) {
     echo '<script>                
@@ -60,11 +57,11 @@ if (isset($_GET['insert'])) {
           </script>';
 } else if (isset($_GET['delete'])) {
     echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Eliminado con exito";
+              document.getElementById("txtMessage").innerHTML = "Se realizó con éxito.";
           </script>';
 } else if (isset($_GET['update'])) {
     echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Actualizado con exito";
+              document.getElementById("txtMessage").innerHTML = "Se realizó con éxito.";
           </script>';
 } else if (isset($_GET['errorData'])) {
     echo ' <script>                
@@ -81,10 +78,6 @@ if (isset($_GET['insert'])) {
 } else if (isset($_GET['errorExist'])) {
     echo ' <script>                
                document.getElementById("txtMessage").innerHTML = "El tipo de Producto ingresado ya existe";
-           </script>';
-} else if (isset($_GET['errorSize'])) {
-    echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "La imagen supera el tamaño permitido";
            </script>';
 }
 ?>

@@ -192,79 +192,7 @@ if (@session_start() == true) {
 
     </body>
     <?php
-    if (isset($_GET['InsertClientComplete'])) {
-        echo '<script>                        
-             document.getElementById("txtMessage").innerHTML = "Registro con éxito";
-          </script>';
-    } else if (isset($_GET['error1'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Error de E-mail";
-          </script>';
-    } else if (isset($_GET['error2'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Error de Usuario";
-           </script>';
-    } else if (isset($_GET['error3'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Error de Contraseña";
-          </script>';
-    } else if (isset($_GET['error4'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Error con los datos ingresados en Nombre";
-           </script>';
-    } else if (isset($_GET['error5'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Error con el Primer Apellido";
-          </script>';
-    } else if (isset($_GET['error6'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Error con el Segundo Apellido";
-           </script>';
-    } else if (isset($_GET['error7'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Registro fallido, por favor verifique su fecha de nacimiento";
-          </script>';
-    } else if (isset($_GET['error8'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Error en el campo Preferencias Sexuales";
-           </script>';
-    } else if (isset($_GET['error9'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Registro fallido, por favor Verifique su telefono";
-          </script>';
-    } else if (isset($_GET['error10'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Error de selecion de Provincia";
-           </script>';
-    } else if (isset($_GET['erro11'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Error de selecion de Canton";
-          </script>';
-    } else if (isset($_GET['error12'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Error de Selecion de Distrito";
-           </script>';
-    } else if (isset($_GET['error13'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Registro fallido, por favor Verifique el Nombre de su Barrio";
-          </script>';
-    } else if (isset($_GET['error14'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Registro fallido, por favor Verifique su direccion exacta";
-           </script>';
-    } else if (isset($_GET['error16'])) {
-        echo '<script>                
-              document.getElementById("txtMessage").innerHTML = "Registro fallido, por favor Verifique sus datos";
-          </script>';
-    } else if (isset($_GET['update'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Datos Actualizados con Exito";
-           </script>';
-    } else if (isset($_GET['error15'])) {
-        echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "El E-mail que intenta registrar, ya fue registrado en la Base de Datos";
-           </script>';
-    } else if (isset($_GET['error17'])) {
+    if (isset($_GET['error17'])) {
         echo ' <script>                
                document.getElementById("txtMessage").innerHTML = "Fallo el desactivar Cliente, verifique conexion";
            </script>';
@@ -274,7 +202,7 @@ if (@session_start() == true) {
            </script>';
     } else if (isset($_GET['error19'])) {
         echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Por favor verifique los datos del cliente que desea actualizar, Uno o mas campos no cumplenlos requisitos de registro";
+               document.getElementById("txtMessage").innerHTML = "﻿ERROR! Debe ingresar todos los datos solicitados";
            </script>';
     } else if (isset($_GET['error20'])) {
         echo ' <script>                
@@ -282,7 +210,7 @@ if (@session_start() == true) {
            </script>';
     } else if (isset($_GET['delete'])) {
         echo ' <script>                
-               document.getElementById("txtMessage").innerHTML = "Elregistro fue desactivado con exito";
+               document.getElementById("txtMessage").innerHTML = "Se realizó con éxito";
            </script>';
     }
     ?>
