@@ -98,8 +98,10 @@
                                 include_once '../../Business/Details/detailsBusiness.php';
                                 $detailsBusiness = new detailsBusiness();
                                 $wish = $detailsBusiness->isDesired($_GET["idProduct"], $_SESSION["idUser"]);
+                                $like = $detailsBusiness->isLike($_GET["idProduct"], $_SESSION["idUser"]);
+                                
                                 ?>
-                                <form id="wish" method="POST" action="../../Business/Details/desireAction.php">
+                                <form id="details" method="POST" action="../../Business/Details/desireAction.php">
 
                                     <input type="hidden" id="idProductWish" name="idProductWish" value="<?php echo $_GET['idProduct'] ?>">                    
                                     <input type="hidden" id="idclientWish" name="idClientWish" value="<?php echo $_SESSION["idUser"] ?>">                    
@@ -107,15 +109,36 @@
                                     if ($wish) {
                                         echo 'checked="false"';
                                     }
-                                    ?> disabled/>  <br>
-                                    <input type="submit" name ="change" id="change" value="Agregar al Carrito" >
+                                    ?> disabled/>Favoritos  <br>
+                                    <input type="submit" name ="change" id="change" value="Agregar a la lista de favoritos" >
+                                    <br>
+                                    <input type="checkbox" name="checkLike" <?php
+                                            if ($like) {
+                                                echo 'checked="false"';
+                                            }
+                                                ?> disabled> Si me Gusta  
+
+
+                                                    <input type="checkbox" name="checkDislike" <?php
+                                            if (!$like) {
+                                                echo 'checked="false"';
+                                            }
+                                                ?> disabled>No me Gusta <br>
+
+                                                    <input type="submit" name ="btnLike" id="btnLike" value="<?php
+                                                    if ($like) {
+                                                        echo 'No me Gusta';
+                                                    } else {
+                                                        echo 'Me Gusta';
+                                                    }
+                                                    ?>" >
                                 </form>
 
                             </td></tr>
 
                         <tr>
                             <td>
-                                Calificar: <span id="Estrellas"></span>
+                                Calificar: <span id="Estrellas" ></span>
 
                             </td></tr>
                     </table>
@@ -152,10 +175,9 @@
 
 <script>
     $('#Estrellas').starrr({
-        rating:<?php echo '' . getCalification() . ''; ?>,
+        rating:<?php echo '' . $detailsBusiness->getCalification($_SESSION["idUser"], $_GET['idProduct']) . ''; ?>,
         change: function (e, valor) {
-            var calificacion = valor;
-            alert(calificacion);
+            var calificacion = valor;            
         }
 
     });
@@ -165,10 +187,7 @@
 </html>
 <?php
 
-function getCalification() {
-    $detail = new detailsBusiness();
-    return $detail->getCalification($_SESSION["idUser"], $_GET['idProduct']);
-}
+
 
 function insertCalification($value) {
     include '../../Domain/star.php';

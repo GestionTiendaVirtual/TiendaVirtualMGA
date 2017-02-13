@@ -104,18 +104,16 @@ class detailsData extends Data {
         $data = mysqli_fetch_assoc($consulting);
         if ($data['total'] >= 1) {
 
-            $queryDelete = mysqli_query($conn, "update tbproductliked set liked= 1, where idUser='"
+            $queryUpdate = mysqli_query($conn, "update tbproductliked set liked=1 where idUser='"
                     . $idUserLiked . "' and idProduct= '" . $idProductLiked . "';");
             mysqli_close($conn);
 
-            return($queryDelete);
+            return($queryUpdate);
         } else {
-
-
             //Se realiza el insert en la base de datos
 
             $queryInsert = mysqli_query($conn, "insert into tbproductliked values ('"
-                    . $id ."','" . $idProductLiked. "','" . $idUserLiked  . "', b'1');");
+                    . $id ."','" . $idProductLiked. "','" . $idUserLiked  . "', 1);");
 
             mysqli_close($conn);
 
@@ -148,7 +146,7 @@ class detailsData extends Data {
         $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('utf8');
         //Se realiza la eliminación en la base de datos
-        $queryDelete = mysqli_query($conn, "update tbproductliked set liked= 0,  where idUser='"
+        $queryDelete = mysqli_query($conn, "update tbproductliked set liked = 0 where idUser='"
                 . $idclientLiked . "' and idproduct= '" . $idProductliked . "';");
         mysqli_close($conn);
 
