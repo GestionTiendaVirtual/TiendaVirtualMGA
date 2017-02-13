@@ -7,7 +7,7 @@ include '../../Data/detailsData.php';
  * para llevar a cabo el CRUD que corresponde a client
  * @author Alberth Calderon Alvarado
  */
-class detailsBusiness 
+class detailsBusiness
 {
     public $detailsData;
     
@@ -43,6 +43,9 @@ class detailsBusiness
 
     public function isLike($idProductLike, $idclientLike) {
         return $this->detailsData->isLike($idProductLike, $idclientLike);
+    }
+    public function getRanking($idProduct) {
+        return $this->detailsData->getRanking($idProduct);
     }
 
 }

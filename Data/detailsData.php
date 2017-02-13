@@ -213,5 +213,21 @@ class detailsData extends Data {
         }
         return 0;
     }
+    function getRanking($idProduct){
+        
+        $conn = new mysqli($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('utf8');
+        //Se consulta por el ultimo id registrado para generar el consecutivo
+        $consulting = mysqli_query($conn, "select AVG(calification) as ranking from tbproductcalification where idProduct = " . $idProduct.";");
+        while($data = mysqli_fetch_assoc($consulting)){
+        
+            return doubleval($data['ranking']);
+       
+        }
+        return 0;
+    }
 
+    
+    
+    
 }

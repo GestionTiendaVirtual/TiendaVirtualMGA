@@ -138,7 +138,9 @@
 
                         <tr>
                             <td>
-                                Calificar: <span id="Estrellas" ></span>
+                                Calificar: <span id="Estrellas" ></span><br>
+                                Ranking: <span id="Ranking" ></span>
+                                <br> Ranking = <?php echo ''.$detailsBusiness->getRanking($_GET['idProduct']).'';?>
 
                             </td></tr>
                     </table>
@@ -176,6 +178,16 @@
 <script>
     $('#Estrellas').starrr({
         rating:<?php echo '' . $detailsBusiness->getCalification($_SESSION["idUser"], $_GET['idProduct']) . ''; ?>,
+        change: function (e, valor) {
+            var calificacion = valor;            
+        }
+
+    });
+
+</script>
+<script>
+    $('#Ranking').starrr({
+        rating:<?php echo '' . $detailsBusiness->getRanking($_GET['idProduct']) . ''; ?>,
         change: function (e, valor) {
             var calificacion = valor;            
         }
